@@ -174,7 +174,6 @@ public class RetaGr extends Reta {
             c2 = yMaior;
         } 
 
-        //Neste caso, a reta será vertical
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
