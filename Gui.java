@@ -13,10 +13,9 @@ class Gui extends JFrame {
     //botoes
     private JButton jbPontos = new JButton("Pontos");
     private JButton jbReta = new JButton("Reta");
-
-    //USO PARA O FUTURO
-    //private JButton jbCirc = new JButton("Ciculo");
-    //private JButton jbLetras = new JButton("Letras");
+    private JButton jbCirc = new JButton("Ciculo");
+    private JButton jbLetras = new JButton("Letras");
+    private JButton jbLimpar = new JButton("Limpar");
     
 
     // barra de menu
@@ -44,10 +43,9 @@ class Gui extends JFrame {
         Eventos eventos = new Eventos();
         jbPontos.addActionListener(eventos);
         jbReta.addActionListener(eventos);
-        
-        //BOTOES PARA O FUTURO
-        //jbCirc.addActionListener(eventos);
-        //jbLetras.addActionListener(eventos);
+        jbCirc.addActionListener(eventos);
+        jbLetras.addActionListener(eventos);
+        jbLimpar.addActionListener(eventos);
     }
 
     /**
@@ -58,10 +56,9 @@ class Gui extends JFrame {
         //adiciona os botoes na toolbar
         barraComandos.add(jbPontos);
         barraComandos.add(jbReta);
-
-        //COMANDO PARA O FUTURO
-        //barraComandos.add(jbCirc);
-        //barraComandos.add(jbLetras);
+        barraComandos.add(jbCirc);
+        barraComandos.add(jbLetras);
+        barraComandos.add(jbLimpar);
     }
     
     private class Eventos implements ActionListener{
@@ -75,10 +72,21 @@ class Gui extends JFrame {
 
             } else if(event.getSource() == jbReta) {
                 tipo = TiposPrimitivos.RETAS;
-            }            
+            } 
+            else if(event.getSource() == jbCirc) {
+                tipo = TiposPrimitivos.CIRCULOS;
+            } 
+            else if(event.getSource() == jbLetras) {
+                tipo = TiposPrimitivos.LETRAS;
+            } 
+            else if(event.getSource() == jbLimpar) {
+                tipo = TiposPrimitivos.NENHUM;
+            } 
+
 
             // Enviando a Forma a ser desenhada e a cor da linha
-            areaDesenho.setTipo( tipo );
+            areaDesenho.setTipo(tipo);
+            
         }
     } 
 }

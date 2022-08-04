@@ -136,14 +136,14 @@ public class RetaGr extends Reta {
     public void desenharReta(Graphics g){
         g.setColor(getCorReta());
 
-        double Dx=0, Dy=0;
-        double m=0, b=0;
-        boolean test = false; //teste para verificar se o delta x nao é 0
-        double c1, c2, c3; //Variaveis utilizadas para identificar e armazenar qual delta é maior para realizar o loop de criacao de uma reta mais precisa
+        double Dx=0, Dy=0;// Delta x; Delata y
+        double m=0, b=0;// Coeficinete angular; b
+        double c1, c2; //Variaveis utilizadas para identificar e armazenar qual delta é maior para realizar o loop de criacao de uma reta mais precisa
         double xMaior=0, xMenor=0, yMaior=0,yMenor=0;
         double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
         double x, y;
 
+        //Identifica qual ponto tem o eixo x com maior valor e realiza a conta do delta x
         if(x2 > x1){
             Dx = x2 - x1;
             xMaior = x2;
@@ -152,8 +152,9 @@ public class RetaGr extends Reta {
             Dx = x1 - x2;
             xMaior = x1;
             xMenor = x2;
-        }else test = true;// delta x é 0
+        }
 
+        //Identifica qual ponto tem o eixo y com maior valor e realiza a conta do delta y
         if(y2 >= y1){
             Dy = y2 - y1;
             yMaior = y2;
@@ -163,7 +164,8 @@ public class RetaGr extends Reta {
             yMaior = y1;
             yMenor = y2;
         }
-
+        
+        //Identifica qual delta é maior, com intuito de definir qual dos eixos possui maior variação 
         if(Dx > Dy) {
             c1 = xMenor;
             c2 = xMaior;
@@ -172,12 +174,13 @@ public class RetaGr extends Reta {
             c2 = yMaior;
         } 
 
+        //Neste caso, a reta será vertical
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
                 g.fillOval((int)x1 -(getDiametro()/2), (int)i - (getDiametro()/2), getDiametro(), getDiametro());
             }
-        }else if(Dy == 0){
+        }else if(Dy == 0){ //Neste caso, a reta será horizontal
             for(double i = c1; i <= c2; i++){
 
                 g.fillOval((int)i -(getDiametro()/2), (int)y1 - (getDiametro()/2), getDiametro(), getDiametro());
@@ -188,11 +191,11 @@ public class RetaGr extends Reta {
 
             for(double i = c1; i <= c2; i++){
                 if(Dx > Dy){
-                    y = c1*m +b; //equacao reduzida da reta
-                    g.fillOval((int)c1 -(getDiametro()/2), (int)y - (getDiametro()/2), getDiametro(), getDiametro());
+                    y = i*m + b; //equacao reduzida da reta
+                    g.fillOval((int)i -(getDiametro()/2), (int)y - (getDiametro()/2), getDiametro(), getDiametro());
                 }else{
-                    x = (c1 - b)/m;// equacao reduzida da reta com o x isolado
-                    g.fillOval((int)x -(getDiametro()/2), (int)c1 - (getDiametro()/2), getDiametro(), getDiametro());
+                    x = (i - b)/m;// equacao reduzida da reta com o x isolado
+                    g.fillOval((int)x -(getDiametro()/2), (int)i - (getDiametro()/2), getDiametro(), getDiametro());
                 }
             }         
         }

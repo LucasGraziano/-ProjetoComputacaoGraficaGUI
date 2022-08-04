@@ -61,11 +61,11 @@ public class Reta {
     /**
      * Method toString
      *
-     * @return The return value
+     * @return s
      */
     public String toString(){
         String s = "P1: " + getP1().toString() + " P2: " + getP2().toString();
-        s = s + "\nEq. da reta: y = " + calcularM() + "*x + " + calcularB();
+        //s = s + "\nEq. da reta: y = " + calcularM() + "*x + " + calcularB();
         return s;
     }
    

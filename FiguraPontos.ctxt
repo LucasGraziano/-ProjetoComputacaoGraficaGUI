@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=FiguraPontos
-comment0.text=\r\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ FiguraCirculos\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\r\n
-comment1.params=g\ x\ y\ nome\ diametro
-comment1.target=void\ desenharPonto(java.awt.Graphics,\ int,\ int,\ java.lang.String,\ int)
+comment0.text=\r\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ FiguraCirculos\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\r\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\r\n
+comment1.params=g\ x\ y\ nome\ diametro\ tipo
+comment1.target=void\ desenharPonto(java.awt.Graphics,\ int,\ int,\ java.lang.String,\ int,\ TiposPrimitivos)
 comment2.params=g\ qtde\ larg
 comment2.target=void\ desenharPontos(java.awt.Graphics,\ int,\ int)
 numComments=3

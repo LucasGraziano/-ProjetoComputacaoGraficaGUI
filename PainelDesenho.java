@@ -1,18 +1,19 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * Escreva a descrição da classe PainelDesenho aqui.
  * 
- * @author (seu nome) 
+ * @author (seu nome)
  * @version (número de versão ou data)
  */
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
@@ -23,51 +24,73 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     JLabel msg;
     TiposPrimitivos tipo;
     int divisoes;
-    int xMouse, yMouse;//pega as coordenadas quando clicar o botao do mouse
-    int xMouse2, yMouse2; //pega as coordenadas quando soltar o botao do mouse
+    int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
+    int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
     boolean primeiraVez = true;
+    
 
     /**
-     * COnstrutor para objetos da classe PainelDesenho
+     * Construtor do painel desenho
+     * 
+     * @param msg  - mensagem que sera mostrada na interface
+     * @param tipo - Sao os tipos primitivos da funcao
      */
-    public PainelDesenho(JLabel msg, TiposPrimitivos tipo)
-    {
+    public PainelDesenho(JLabel msg, TiposPrimitivos tipo) {
         this.tipo = tipo;
         this.msg = msg;
-        //       this.setBackground(Color.black);
-        this.addMouseListener(this); 
+        this.setBackground(Color.white);
+        this.addMouseListener(this);
         this.addMouseMotionListener(this);
 
     }
-    public void setTipo(TiposPrimitivos tipo){
+
+    /**
+     * 
+     * @param tipo - da o set do tipo primitivo
+     */
+    public void setTipo(TiposPrimitivos tipo) {
         this.tipo = tipo;
     }
 
-    public TiposPrimitivos getTipo(){
+    /**
+     * 
+     * @return tipo primitivo
+     */
+    public TiposPrimitivos getTipo() {
         return this.tipo;
     }
 
-    public void paintComponent(Graphics g) {   
-        if (! primeiraVez) {
-            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", 10);
+    /**
+     * @param g - conteudo grafico
+     */
+    public void paintComponent(Graphics g) {
+        if (!primeiraVez) {
+            desenharPrimitivos(g);
         }
     }
 
     // Capturando os Eventos com o mouse
-    public void mousePressed(MouseEvent e) { 
+  
+    public void mousePressed(MouseEvent e) {
+        // ao clicar com o mouse, pegara o x1 e o y1
         primeiraVez = false;
         xMouse = e.getX();
         yMouse = e.getY();
-        Graphics g = getGraphics();  
-        paint(g);
-    }     
+        Graphics g = getGraphics();
+        paint(g); 
+    }
 
-    public void mouseReleased(MouseEvent e) { 
-
-    }           
+    public void mouseReleased(MouseEvent e) {
+        // quando o botao do mouse for solto, pegara o x2 e o y2
+            //primeiraVez = false;
+            xMouse2 = e.getX();
+            yMouse2 = e.getY();
+            //Graphics g = getGraphics();
+            //paint(g);
+    }
 
     public void mouseClicked(MouseEvent e) {
-        this.msg.setText("CLICOU: "+e.getButton());
+        this.msg.setText("CLICOU: " + e.getButton());
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -77,32 +100,42 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     public void mouseDragged(MouseEvent e) {
-        this.msg.setText("("+e.getX() + ", " + e.getY() + ")");
+        this.msg.setText("(" + e.getX() + ", " + e.getY() + ")");
 
     }
 
     public void mouseMoved(MouseEvent e) {
 
-        this.msg.setText("("+e.getX() + ", " + e.getY() + ")");
-        //System.out.println("("+e.getX() + ", " + e.getY() + ")");
+        this.msg.setText("(" + e.getX() + ", " + e.getY() + ")");
+        // System.out.println("("+e.getX() + ", " + e.getY() + ")");
 
     }
 
-    public void desenharPrimitivos(Graphics g){
-        if (tipo==TiposPrimitivos.PONTOS){
-            // FiguraPontos.desenharPontos(g, 50, 8);
+    /**
+     * Desenha o que for selecionado pelo tipo primitivo
+     * @param g - conteudo grafico
+     */
+    public void desenharPrimitivos(Graphics g) {
+        if (tipo == TiposPrimitivos.PONTOS) {
+            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", 20);
 
         }
 
-        if (tipo==TiposPrimitivos.RETAS){
-
+        else if (tipo == TiposPrimitivos.RETAS) {
+            
+            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, 10);
         }
-        if (tipo==TiposPrimitivos.CIRCULOS){
-
+        else if (tipo == TiposPrimitivos.CIRCULOS) {
+            JOptionPane.showMessageDialog(null, "Em Manutencao", "ERRO", JOptionPane.WARNING_MESSAGE);
         }
-        if (tipo==TiposPrimitivos.LETRAS){
-
+        else if (tipo == TiposPrimitivos.LETRAS) {
+            JOptionPane.showMessageDialog(null, "Em Manutencao", "ERRO", JOptionPane.WARNING_MESSAGE);
+        }
+        else if (tipo == TiposPrimitivos.NENHUM) {
+            repaint();
         }
     }
+
+
 
 }
