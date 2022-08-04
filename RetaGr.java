@@ -172,6 +172,7 @@ public class RetaGr extends Reta {
             c2 = yMaior;
         } 
 
+        //teste
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
