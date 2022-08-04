@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Gui
+comment1.params=larg\ alt
+comment1.target=Gui(int,\ int)
+comment2.params=
+comment2.target=void\ adicionarBotoes()
+comment2.text=\r\n\ adiciona\ os\ botoes\ na\ toolbar\r\n
+numComments=3
