@@ -8,6 +8,15 @@ public class RetaGr extends Reta {
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
 
+
+    /**
+     * Construtor
+     * 
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     */
     RetaGr(int x1, int y1, int x2, int  y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(Color.black);     
@@ -15,6 +24,15 @@ public class RetaGr extends Reta {
         setNomeReta("");     
     }
 
+    /**
+     * Construtor
+     * 
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     * @param cor - cor da Reta 
+     */
     RetaGr(int x1, int y1, int x2, int  y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(cor);     
@@ -23,10 +41,12 @@ public class RetaGr extends Reta {
     }
 
     /**
-     * Constroi um Reta na posicao x, y e com os atributos
+     * Construtor
      * 
-     * @param x coordenada x
-     * @param y coordenada y
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
      * @param corReta corReta do Reta a ser construido
      * @param diametro diametro do Reta
      */
@@ -36,18 +56,31 @@ public class RetaGr extends Reta {
     }
 
     /**
-     * Constroi um Reta na posicao x, y e com os atributos
+     * Construtor
      * 
-     * @param x coordenada x
-     * @param y coordenada y
-     * @param corReta corReta do Reta a ser construido
-     * @param nomeReta nome do Reta
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     * @param corReta - corReta do Reta a ser construido
+     * @param nomeReta - nome dos pontos da reta
      * @param diametro diametro do Reta
      */
     public RetaGr(int x1, int y1, int x2, int  y2, Color corReta, String nomeReta, int diametro){
         this(x1, y1, x2, y2, corReta, diametro);
         setNomeReta(nomeReta);
     }
+
+    /**
+     * Construtor
+     * 
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     * @param cor - cor da reta
+     * @param str - nome dos pontos da reta
+     */
     RetaGr(int x1, int y1, int x2, int  y2, Color cor, String str){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(cor);     
@@ -55,21 +88,18 @@ public class RetaGr extends Reta {
         setNomeReta(str);     
     }
 
+    /**
+     * Construtor
+     * 
+     * @param p2d
+     * @param cor - cor da reta
+     */
     RetaGr(RetaGr p2d, Color cor){
         super(p2d);     
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
         setNomeReta("");     
     }
-
-    /*
-    RetaGr(){
-        super();     
-        setCorReta(Color.black);     
-        setCorNomeReta(Color.black);     
-        setNomeReta("");     
-    }
-    */
 
 
     /**
@@ -174,11 +204,13 @@ public class RetaGr extends Reta {
             c2 = yMaior;
         } 
 
+        //delta x for igual a 0
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
                 g.fillOval((int)x1 -(getDiametro()/2), (int)i - (getDiametro()/2), getDiametro(), getDiametro());
             }
+        //delta y for igual a 0
         }else if(Dy == 0){ //Neste caso, a reta será horizontal
             for(double i = c1; i <= c2; i++){
 
@@ -198,23 +230,5 @@ public class RetaGr extends Reta {
                 }
             }         
         }
-        
-        
-        
-        
-        /*
-        for(double i = c1; i <= c2; i++){
-
-            g.fillOval((int)getX() -(getDiametro()/2), (int)getY() - (getDiametro()/2), getDiametro(), getDiametro());
-        }
-        */
-        
-
-
-        /* 
-        // desenha nome do Reta
-        g.setColor(getCorNomeReta());
-        g.drawString(getNomeReta(), (int)getX() + getDiametro(), (int)getY());
-        */
     }
 }

@@ -24,6 +24,12 @@ class Gui extends JFrame {
     // Painel de desenho
     private PainelDesenho areaDesenho = new PainelDesenho(msg, tipo);
     
+    /**
+     * Construtor da interface grafica
+     * 
+     * @param larg - largura da interface
+     * @param alt - altura da interface
+     */
     public Gui(int larg, int alt) {
         /**
          * Definicoes de janela
@@ -67,20 +73,22 @@ class Gui extends JFrame {
         
         public void actionPerformed(ActionEvent event) {            
 
-            if (event.getSource() == jbPontos){
+            if (event.getSource() == jbPontos){ //fazer pontos 
                 tipo = TiposPrimitivos.PONTOS;
 
-            } else if(event.getSource() == jbReta) {
+            } else if(event.getSource() == jbReta) { //fazer reta
                 tipo = TiposPrimitivos.RETAS;
             } 
-            else if(event.getSource() == jbCirc) {
+            else if(event.getSource() == jbCirc) { //fazer circulo
                 tipo = TiposPrimitivos.CIRCULOS;
             } 
-            else if(event.getSource() == jbLetras) {
+            else if(event.getSource() == jbLetras) { //fazer letras
                 tipo = TiposPrimitivos.LETRAS;
             } 
-            else if(event.getSource() == jbLimpar) {
+            else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;
+                repaint();
+
             } 
 
 

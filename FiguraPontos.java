@@ -65,4 +65,20 @@ public class FiguraPontos {
                 RetaGr p = new RetaGr(x1, y1, x2, y2, cor, diametro);
                 p.desenharReta(g);
         }
+
+        /**
+         * 
+         * @param g - conteudo grafico
+         * @param x - primeiro x da coordenada
+         * @param y - primeiro y da coordenada
+         * @param nome - nome dos pontos da reta
+         * @param diametro - diametro da bolinha
+         */
+        public static void desenharCirc(Graphics g, int x, int y, int diametro) {
+                Color cor = new Color((int) (Math.random() * 256),
+                                (int) (Math.random() * 256),
+                                (int) (Math.random() * 256));
+                CircGr p = new CircGr(x, y,     , diametro);
+                p.desenharCirc(g);
+        }
 }

@@ -122,17 +122,21 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
 
         else if (tipo == TiposPrimitivos.RETAS) {
-            
             FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, 10);
+        
         }
+        
         else if (tipo == TiposPrimitivos.CIRCULOS) {
-            JOptionPane.showMessageDialog(null, "Em Manutencao", "ERRO", JOptionPane.WARNING_MESSAGE);
+            FiguraPontos.desenharCirc(g, xMouse, yMouse, 5);
+        
         }
+        
         else if (tipo == TiposPrimitivos.LETRAS) {
             JOptionPane.showMessageDialog(null, "Em Manutencao", "ERRO", JOptionPane.WARNING_MESSAGE);
+        
         }
+        
         else if (tipo == TiposPrimitivos.NENHUM) {
-            repaint();
         }
     }
 
