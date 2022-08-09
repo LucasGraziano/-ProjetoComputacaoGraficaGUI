@@ -1,16 +1,19 @@
 import java.awt.*;
 
 /**
- * Escreva a descrição da classe FiguraCirculos aqui.
+ * Classe de controle dos pontos
  * 
- * @author (seu nome)
- * @version (número de versão ou data)
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
  */
- 
 public class FiguraPontos {
 
         /**
-         * desenha o primeiro ponto da tela  
+         * Funcao responsavel para o desenho da reta 
          *
          * @param g - conteudo grafico
          * @param x - coordenada x do ponto
@@ -27,7 +30,7 @@ public class FiguraPontos {
         }
 
         /**
-         * desenha os pontos
+         * Funcao responsavel para o desenho do ponto 
          *
          * @param g - conteudo grafico
          * @param qtde - relacionado a cor do ponto
@@ -49,6 +52,7 @@ public class FiguraPontos {
         }
 
         /**
+         * Funcao responsavel para o desenho da reta 
          * 
          * @param g - conteudo grafico
          * @param x1 - primeiro x da coordenada
@@ -67,6 +71,7 @@ public class FiguraPontos {
         }
 
         /**
+         * Funcao responsavel para o desenho do Circulo
          * 
          * @param g - conteudo grafico
          * @param x - primeiro x da coordenada
@@ -74,11 +79,11 @@ public class FiguraPontos {
          * @param nome - nome dos pontos da reta
          * @param diametro - diametro da bolinha
          */
-        public static void desenharCirc(Graphics g, int x, int y, int diametro) {
+        public static void desenharCirc(Graphics g, int x, int y, int x2, int y2, int diametro) {
                 Color cor = new Color((int) (Math.random() * 256),
                                 (int) (Math.random() * 256),
                                 (int) (Math.random() * 256));
-                CircGr p = new CircGr(x, y,     , diametro);
-                p.desenharCirc(g);
+                CircGr p = new CircGr(x, y, cor, diametro);
+                p.desenharCirc(g, x2, y2);
         }
 }

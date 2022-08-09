@@ -2,7 +2,16 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-
+/**
+ * Classe do circulo grafico
+ * 
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
+ */
 public class CircGr extends Circ {
 
     Color corPto = Color.BLACK; // cor do ponto
@@ -156,24 +165,32 @@ public class CircGr extends Circ {
      * Desenha o Circulo
      * 
      * @param g - conteudo gráfico
+     * @param x2 - coordenada do raio
+     * @param y2 - coordenada do raio
      */
-    public void desenharCirc(Graphics g){
+    public void desenharCirc(Graphics g, double x2, double y2){
         g.setColor(getCorPto());
-        double x = getP().getX(), y = getP().getY(); // x e y do click
+        double x = getP().getX(), y = getP().getY(); // x e y do clique
         double ang = 0.0; // angulo a ser encrementado
         double xP = 0, yP = 0; // x e y a serem pintados
         double catAd, catOp; //cateto adjacente e cateto oposto
-        double dim = 50; //diametro do circulo
+        double raio = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2) * 1.0); // raio do circulo (distancia entre os pontos dos cliques)
+        double dim = raio*2.0; //diametro do circulo
         
         //Esse do-while faz o calculo de todos os pontos do circulo e desenhando com o fillOval
         do{
-            catAd = Math.cos(ang) * dim/2; 
-            catOp = Math.sin(ang) * dim/2;
+            //calculo dos pontos angulos do circulo
+            catAd = Math.cos(ang) * dim/2.0; 
+            catOp = Math.sin(ang) * dim/2.0;
+            
+            //sao as coordenadas da borda do circulo
+            xP = x2 + catAd;
+            yP = y2 + catOp;
 
-            xP = x + catAd;
-            yP = y + catOp;
-
+            //printa os pontos ate completar o circulo
             g.fillOval((int)xP -(getDiametro()/2), (int)yP - (getDiametro()/2), getDiametro(), getDiametro());
+
+            //angulo vai aumentando em 5 em 5
             ang = ang + 0.5;  //passo 0.5 
         }while(ang != 360.0);
         

@@ -1,9 +1,18 @@
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Classe Gui
+ * 
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
+ */
 class Gui extends JFrame {
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
 
@@ -13,8 +22,7 @@ class Gui extends JFrame {
     //botoes
     private JButton jbPontos = new JButton("Pontos");
     private JButton jbReta = new JButton("Reta");
-    private JButton jbCirc = new JButton("Ciculo");
-    private JButton jbLetras = new JButton("Letras");
+    private JButton jbCirc = new JButton("Circulo");
     private JButton jbLimpar = new JButton("Limpar");
     
 
@@ -38,6 +46,7 @@ class Gui extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(larg, alt);
         setVisible(true);
+        setResizable(false);
 
         // Adicionando os componentes
         adicionarBotoes();
@@ -50,7 +59,6 @@ class Gui extends JFrame {
         jbPontos.addActionListener(eventos);
         jbReta.addActionListener(eventos);
         jbCirc.addActionListener(eventos);
-        jbLetras.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
     }
 
@@ -63,7 +71,6 @@ class Gui extends JFrame {
         barraComandos.add(jbPontos);
         barraComandos.add(jbReta);
         barraComandos.add(jbCirc);
-        barraComandos.add(jbLetras);
         barraComandos.add(jbLimpar);
     }
     
@@ -81,9 +88,6 @@ class Gui extends JFrame {
             } 
             else if(event.getSource() == jbCirc) { //fazer circulo
                 tipo = TiposPrimitivos.CIRCULOS;
-            } 
-            else if(event.getSource() == jbLetras) { //fazer letras
-                tipo = TiposPrimitivos.LETRAS;
             } 
             else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;

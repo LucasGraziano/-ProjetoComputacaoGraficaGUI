@@ -1,6 +1,16 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * Classe da Reta Grafica 
+ * 
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
+ */
 public class RetaGr extends Reta {
     
     Color corReta = Color.BLACK; // cor do Reta
@@ -103,6 +113,7 @@ public class RetaGr extends Reta {
 
 
     /**
+     * retorna a cor da reta
      * @return the corReta
      */
     public Color getCorReta() {
@@ -110,6 +121,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * define a cor da reta
      * @param corReta the corReta to set
      */
     public void setCorReta(Color corReta) {
@@ -117,6 +129,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * retorna o nome da reta
      * @return the nomeReta
      */
     public String getNomeReta() {
@@ -124,6 +137,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * define o nome da reta
      * @param nomeReta the nomeReta to set
      */
     public void setNomeReta(String nomeReta) {
@@ -131,6 +145,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     *retorna a cor do nome da reta
      * @return the corNomeReta
      */
     public Color getCorNomeReta() {
@@ -138,6 +153,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * define a cor do nome da reta
      * @param corNomeReta the corNomeReta to set
      */
     public void setCorNomeReta(Color corNomeReta) {
@@ -145,6 +161,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * retorna o diametro
      * @return the diametro
      */
     public int getDiametro() {
@@ -152,6 +169,7 @@ public class RetaGr extends Reta {
     }
 
     /**
+     * define o diametro 
      * @param diametro the diametro to set
      */
     public void setDiametro(int diametro) {

@@ -3,12 +3,27 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * Classe do ponto grafico
+ * 
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
+ */
 public class PontoGr extends Ponto {
     Color corPto = Color.BLACK; // cor do ponto
     String nomePto = ""; // nome do ponto
     Color corNomePto  = Color.BLACK; // cor do nome (string) do ponto  
     int diametro = 1; // diametro do ponto, default = 1
 
+    /**
+     * Construtor
+     * @param x - coordenada x
+     * @param y - coordenada y
+     */
     PontoGr(int x, int y){
         super((double)x, (double)y);
         setCorPto(Color.black);     
@@ -16,6 +31,18 @@ public class PontoGr extends Ponto {
         setNomePto("");     
     }
 
+    /**
+     * Construtor
+     * @param x - coordenada x
+     * @param y - coordenada y
+     * @param cor - cor do ponto
+     */
+    /**
+     * Constructor
+     * @param x - coordenada x
+     * @param y - coordenada y
+     * @param cor - cor do ponto
+     */
     PontoGr(int x, int y, Color cor){
         super((double)x, (double)y);
         setCorPto(cor);     
@@ -49,6 +76,16 @@ public class PontoGr extends Ponto {
         this(x, y, corPonto, diametro);
         setNomePto(nomePonto);
     }
+    
+
+    /**
+     * Construtor 
+     * 
+     * @param x - coordenada do x
+     * @param y - c
+     * @param cor- cor do ponto
+     * @param str - nome do ponto
+     */
     PontoGr(int x, int y, Color cor, String str){
         super((double)x, (double)y);
         setCorPto(cor);     
@@ -56,6 +93,12 @@ public class PontoGr extends Ponto {
         setNomePto(str);     
     }
 
+    /**
+     * Construtor 
+     * 
+     * @param cor - cor do ponto
+     * @param p2d - p2d
+     */
     PontoGr(PontoGr p2d, Color cor){
         super(p2d);     
         setCorPto(cor);     
@@ -63,6 +106,9 @@ public class PontoGr extends Ponto {
         setNomePto("");     
     }
 
+    /**
+     * Construtor 
+     */
     PontoGr(){
         super();     
         setCorPto(Color.black);     
@@ -72,13 +118,15 @@ public class PontoGr extends Ponto {
 
 
     /**
-     * @return the corPto
+     * retorna a cor do ponto
+     * @return corPto
      */
     public Color getCorPto() {
         return corPto;
     }
 
     /**
+     * define a cor do ponto
      * @param corPto the corPto to set
      */
     public void setCorPto(Color corPto) {
@@ -86,6 +134,7 @@ public class PontoGr extends Ponto {
     }
 
     /**
+     * retorna o nome do ponto
      * @return the nomePto
      */
     public String getNomePto() {
@@ -93,6 +142,7 @@ public class PontoGr extends Ponto {
     }
 
     /**
+     * define o nome do ponto
      * @param nomePto the nomePto to set
      */
     public void setNomePto(String nomePto) {
@@ -100,6 +150,7 @@ public class PontoGr extends Ponto {
     }
 
     /**
+     * retorna a cor do nome do ponto
      * @return the corNomePto
      */
     public Color getCorNomePto() {
@@ -107,6 +158,7 @@ public class PontoGr extends Ponto {
     }
 
     /**
+     * define a cor do nome do ponto
      * @param corNomePto the corNomePto to set
      */
     public void setCorNomePto(Color corNomePto) {
@@ -114,14 +166,16 @@ public class PontoGr extends Ponto {
     }
 
     /**
-     * @return the diametro
+     * retorna o diametro
+     * @return diametro
      */
     public int getDiametro() {
         return diametro;
     }
 
     /**
-     * @param diametro the diametro to set
+     * define o diametro
+     * @param diametro
      */
     public void setDiametro(int diametro) {
         this.diametro = diametro;

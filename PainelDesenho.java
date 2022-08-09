@@ -8,22 +8,24 @@ import java.awt.event.MouseMotionListener;
 //import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
- * Escreva a descrição da classe PainelDesenho aqui.
+ * Classe do painel de desenhos
  * 
- * @author (seu nome)
- * @version (número de versão ou data)
+ * @author
+ * MA4B
+ * Julio Cesar Barboza - RA00297586
+ * Lucas Costa Pessoa Graziano - RA00297851
+ * Gustavo Scacchetti - RA00301499
+ * @version 09/08/2022
  */
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
-    JLabel msg;
-    TiposPrimitivos tipo;
-    int divisoes;
+    JLabel msg; //mensagem na interface 
+    TiposPrimitivos tipo; //tipos priitivos
     int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
     boolean primeiraVez = true;
@@ -70,25 +72,47 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // Capturando os Eventos com o mouse
-  
+    /**
+     * acao de clicar no botao do mouse 
+     */
     public void mousePressed(MouseEvent e) {
         // ao clicar com o mouse, pegara o x1 e o y1
-        primeiraVez = false;
-        xMouse = e.getX();
-        yMouse = e.getY();
+        if(tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS){
+            if(primeiraVez == true){
+                xMouse = e.getX();
+                yMouse = e.getY();
+                primeiraVez = false;
+            }
+            else{
+                xMouse2 = e.getX();
+                yMouse2 = e.getY();
+                primeiraVez = true;
+            }
+        }else{
+            primeiraVez = false;
+            xMouse = e.getX();
+            yMouse = e.getY();
+            Graphics g = getGraphics();
+            paint(g); 
+        }
+        
+        
+        
         Graphics g = getGraphics();
-        paint(g); 
+        paint(g);
+        
     }
 
+    /**
+     * Acao de soltar o botao do mouse
+     */
     public void mouseReleased(MouseEvent e) {
-        // quando o botao do mouse for solto, pegara o x2 e o y2
-            //primeiraVez = false;
-            xMouse2 = e.getX();
-            yMouse2 = e.getY();
-            //Graphics g = getGraphics();
-            //paint(g);
     }
+    
 
+    /**
+     * Acao de clicar no botao do mouse 
+     */
     public void mouseClicked(MouseEvent e) {
         this.msg.setText("CLICOU: " + e.getButton());
     }
@@ -99,15 +123,20 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     public void mouseExited(MouseEvent e) {
     }
 
+    /**
+     * Acao que segura o botao do mouse
+     */
     public void mouseDragged(MouseEvent e) {
         this.msg.setText("(" + e.getX() + ", " + e.getY() + ")");
 
     }
 
+    /**
+     * Acao do mouse andando
+     */
     public void mouseMoved(MouseEvent e) {
 
         this.msg.setText("(" + e.getX() + ", " + e.getY() + ")");
-        // System.out.println("("+e.getX() + ", " + e.getY() + ")");
 
     }
 
@@ -116,26 +145,25 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      * @param g - conteudo grafico
      */
     public void desenharPrimitivos(Graphics g) {
-        if (tipo == TiposPrimitivos.PONTOS) {
+        //opcao de desenhar um botao
+        if (tipo == TiposPrimitivos.PONTOS) { 
             FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", 20);
 
         }
-
+    
+        //opcao de desenhar retas
         else if (tipo == TiposPrimitivos.RETAS) {
-            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, 10);
+            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, 5);
         
         }
         
+        //opcao de desenhar circulos
         else if (tipo == TiposPrimitivos.CIRCULOS) {
-            FiguraPontos.desenharCirc(g, xMouse, yMouse, 5);
+            FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, 5);
         
         }
         
-        else if (tipo == TiposPrimitivos.LETRAS) {
-            JOptionPane.showMessageDialog(null, "Em Manutencao", "ERRO", JOptionPane.WARNING_MESSAGE);
-        
-        }
-        
+        //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
         }
     }
