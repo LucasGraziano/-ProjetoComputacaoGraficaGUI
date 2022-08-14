@@ -25,6 +25,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      */
     private static final long serialVersionUID = 1L;
     JLabel msg; //mensagem na interface 
+    int valorEsp;
     TiposPrimitivos tipo; //tipos priitivos
     int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
@@ -147,19 +148,19 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     public void desenharPrimitivos(Graphics g) {
         //opcao de desenhar um botao
         if (tipo == TiposPrimitivos.PONTOS) { 
-            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", 20);
+            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", valorEsp);
 
         }
     
         //opcao de desenhar retas
         else if (tipo == TiposPrimitivos.RETAS) {
-            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, 5);
+            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
         
         }
         
         //opcao de desenhar circulos
         else if (tipo == TiposPrimitivos.CIRCULOS) {
-            FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, 5);
+            FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
         
         }
         
@@ -168,6 +169,20 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * 
+     * @param valorEsp - espessura
+     */
+    public void setEspessura(int valorEsp) {
+        this.valorEsp = valorEsp;
+    }
 
+    /**
+     * 
+     * @return espessura
+     */
+    public int getEspessura() {
+        return valorEsp;
+    }
 
 }

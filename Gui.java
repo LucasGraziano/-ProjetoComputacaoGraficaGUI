@@ -1,7 +1,11 @@
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Hashtable;
 
 /**
  * Classe Gui
@@ -15,6 +19,7 @@ import java.awt.event.*;
  */
 class Gui extends JFrame {
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
+    
 
     // mensagens
     private JLabel msg = new JLabel("Msg: ");
@@ -24,6 +29,14 @@ class Gui extends JFrame {
     private JButton jbReta = new JButton("Reta");
     private JButton jbCirc = new JButton("Circulo");
     private JButton jbLimpar = new JButton("Limpar");
+
+    //implementacao da barra de deslize
+    static final int sMin = 0;
+    static final int sMax = 30;
+    static final int sInicial = 15;
+    int valorEsp;
+    private JSlider espessura = new JSlider(JSlider.HORIZONTAL, sMin, sMax, sInicial);
+    
     
 
     // barra de menu
@@ -31,6 +44,9 @@ class Gui extends JFrame {
     
     // Painel de desenho
     private PainelDesenho areaDesenho = new PainelDesenho(msg, tipo);
+    
+
+    
     
     /**
      * Construtor da interface grafica
@@ -55,13 +71,48 @@ class Gui extends JFrame {
         add(msg, BorderLayout.SOUTH);
 
         //eventos dos botoes
+        evento();
+
+        //faz as configuracoes do Jslider
+        configuracaoEspessura();
+        
+    }
+
+    /**
+     * faz as configuracoes do Jslider
+     */
+    public void configuracaoEspessura(){
+
+        //set do tickSpacing
+        espessura.setMinorTickSpacing(1);
+        espessura.setMajorTickSpacing(5);
+        espessura.setPaintTicks(true);
+
+        //comeca com a espessura 15
+        areaDesenho.setEspessura(15);
+
+        //customizacao do jslider
+        Hashtable<Integer, JLabel> labels = new Hashtable<>();
+        labels.put(0, new JLabel("0"));
+        labels.put(15, new JLabel("Espessura"));
+        labels.put(30, new JLabel("30"));
+        espessura.setLabelTable(labels);
+        espessura.setPaintLabels(true);
+
+    }
+
+    /**
+     * adiciona os eventos dos botoes
+     */
+    public void evento(){
+        //eventos dos botoes
         Eventos eventos = new Eventos();
         jbPontos.addActionListener(eventos);
         jbReta.addActionListener(eventos);
         jbCirc.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
+        espessura.addChangeListener((ChangeListener)eventos);
     }
-
     /**
      * adiciona os botoes na toolbar
      */
@@ -72,13 +123,25 @@ class Gui extends JFrame {
         barraComandos.add(jbReta);
         barraComandos.add(jbCirc);
         barraComandos.add(jbLimpar);
+        barraComandos.add(espessura);
     }
-    
-    private class Eventos implements ActionListener{
 
+    
+
+    
+    private class Eventos implements ActionListener, ChangeListener{
+
+        
         TiposPrimitivos tipo;
         
-        public void actionPerformed(ActionEvent event) {            
+        public void stateChanged(ChangeEvent e) {
+            valorEsp = espessura.getValue();
+            areaDesenho.setEspessura(valorEsp);
+        }
+
+        public void actionPerformed(ActionEvent event) {
+            
+            
 
             if (event.getSource() == jbPontos){ //fazer pontos 
                 tipo = TiposPrimitivos.PONTOS;
@@ -99,6 +162,10 @@ class Gui extends JFrame {
             // Enviando a Forma a ser desenhada e a cor da linha
             areaDesenho.setTipo(tipo);
             
+            
         }
+
+        
+        
     } 
 }
