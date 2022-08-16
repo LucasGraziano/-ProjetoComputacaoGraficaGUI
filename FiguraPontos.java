@@ -86,4 +86,24 @@ public class FiguraPontos {
                 CircGr p = new CircGr(x, y, cor, diametro);
                 p.desenharCirc(g, x2, y2);
         }
+
+        /**
+         * Funcao responsavel para o desenho da reta 
+         * 
+         * @param g - conteudo grafico
+         * @param x1 - primeiro x da coordenada
+         * @param y1 - primeiro y da coordenada
+         * @param x2 - segundo x da coordenada
+         * @param y2 - segundo y da coordenada
+         * @param nome - nome dos pontos da reta
+         * @param diametro - diametro da bolinha
+         */
+        public static void desenharRetangulo(Graphics g, int x1, int y1, int x2, int y2, int diametro) {
+                Color cor = new Color((int) (Math.random() * 256),
+                                (int) (Math.random() * 256),
+                                (int) (Math.random() * 256));
+                RetanguloGr p = new RetanguloGr(x1, y1, x2, y2, cor, diametro);
+                p.desenharRetangulo(g);
+        }
+
 }

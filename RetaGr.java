@@ -180,6 +180,11 @@ public class RetaGr extends Reta {
      * desenha um Reta utilizando o oval 
      * 
      * @param g contexto grafico
+     * @param cor
+     * @param y2
+     * @param x2
+     * @param y1
+     * @param x1
      */
     public void desenharReta(Graphics g){
         g.setColor(getCorReta());
@@ -250,3 +255,4 @@ public class RetaGr extends Reta {
         }
     }
 }
+

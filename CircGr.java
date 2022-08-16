@@ -2,16 +2,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-/**
- * Classe do circulo grafico
- * 
- * @author
- * MA4B
- * Julio Cesar Barboza - RA00297586
- * Lucas Costa Pessoa Graziano - RA00297851
- * Gustavo Scacchetti - RA00301499
- * @version 09/08/2022
- */
+
 public class CircGr extends Circ {
 
     Color corPto = Color.BLACK; // cor do ponto

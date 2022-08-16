@@ -8,5 +8,5 @@
  */
 public enum TiposPrimitivos
 {
-    PONTOS, RETAS, CIRCULOS, LETRAS, NENHUM
+    PONTOS, RETAS, CIRCULOS, RETANGULO, POLIGONO, COR, NENHUM
 }

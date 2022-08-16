@@ -78,7 +78,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      */
     public void mousePressed(MouseEvent e) {
         // ao clicar com o mouse, pegara o x1 e o y1
-        if(tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS){
+        if(tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS || tipo == TiposPrimitivos.RETANGULO){
             if(primeiraVez == true){
                 xMouse = e.getX();
                 yMouse = e.getY();
@@ -163,6 +163,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
         
         }
+        //opcao de desenhar Retangulos
+        else if (tipo == TiposPrimitivos.RETANGULO) {
+            FiguraPontos.desenharRetangulo(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+        
+        }
+
         
         //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {

@@ -28,6 +28,9 @@ class Gui extends JFrame {
     private JButton jbPontos = new JButton("Pontos");
     private JButton jbReta = new JButton("Reta");
     private JButton jbCirc = new JButton("Circulo");
+    private JButton jbRetangulo = new JButton("Retangulo");
+    private JButton jbPoligono = new JButton("Poligono");
+    private JButton jbCor = new JButton("Cor");
     private JButton jbLimpar = new JButton("Limpar");
 
     //implementacao da barra de deslize
@@ -110,6 +113,9 @@ class Gui extends JFrame {
         jbPontos.addActionListener(eventos);
         jbReta.addActionListener(eventos);
         jbCirc.addActionListener(eventos);
+        jbRetangulo.addActionListener(eventos);
+        jbPoligono.addActionListener(eventos);
+        jbCor.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
@@ -122,6 +128,9 @@ class Gui extends JFrame {
         barraComandos.add(jbPontos);
         barraComandos.add(jbReta);
         barraComandos.add(jbCirc);
+        barraComandos.add(jbRetangulo);
+        barraComandos.add(jbPoligono);
+        barraComandos.add(jbCor);
         barraComandos.add(jbLimpar);
         barraComandos.add(espessura);
     }
@@ -148,11 +157,15 @@ class Gui extends JFrame {
 
             } else if(event.getSource() == jbReta) { //fazer reta
                 tipo = TiposPrimitivos.RETAS;
-            } 
-            else if(event.getSource() == jbCirc) { //fazer circulo
+            } else if(event.getSource() == jbCirc) { //fazer circulo
                 tipo = TiposPrimitivos.CIRCULOS;
-            } 
-            else if(event.getSource() == jbLimpar) { //limpar a tela
+            }else if(event.getSource() == jbRetangulo) { //fazer circulo
+                tipo = TiposPrimitivos.RETANGULO;
+            }  else if(event.getSource() == jbPoligono) { //fazer circulo
+                tipo = TiposPrimitivos.POLIGONO;
+            } else if(event.getSource() == jbCor) { //fazer circulo
+                tipo = TiposPrimitivos.COR;
+            } else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;
                 repaint();
 
