@@ -105,5 +105,14 @@ public class FiguraPontos {
                 RetanguloGr p = new RetanguloGr(x1, y1, x2, y2, cor, diametro);
                 p.desenharRetangulo(g);
         }
+        
+        public static void desenharPoligono(Graphics g, int x1, int y1, int x2, int y2, int diametro) {
+                Color cor = new Color((int) (Math.random() * 256),
+                                (int) (Math.random() * 256),
+                                (int) (Math.random() * 256));
+                
+                PoligonoGr p = new PoligonoGr(x1, y1, x2, y2, cor, diametro);
+                p.desenharPoligono(g);
+        }
 
 }

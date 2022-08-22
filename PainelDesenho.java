@@ -7,7 +7,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 //import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
+
 
 /**
  * Classe do painel de desenhos
@@ -27,10 +29,13 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     JLabel msg; //mensagem na interface 
     int valorEsp;
     TiposPrimitivos tipo; //tipos priitivos
-    int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
+    int xMouse = 0, yMouse = 0;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
     boolean primeiraVez = true;
-    
+
+    boolean primeiroPonto = true;
+    int xMouseInicial, yMouseInicial;
+
 
     /**
      * Construtor do painel desenho
@@ -78,6 +83,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      */
     public void mousePressed(MouseEvent e) {
         // ao clicar com o mouse, pegara o x1 e o y1
+        
+        
+        
         if(tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS || tipo == TiposPrimitivos.RETANGULO){
             if(primeiraVez == true){
                 xMouse = e.getX();
@@ -89,12 +97,40 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 yMouse2 = e.getY();
                 primeiraVez = true;
             }
+        
+        }else if(tipo == TiposPrimitivos.POLIGONO){
+
+            if(primeiroPonto == true){ 
+                xMouseInicial = e.getX();//coordenada incial
+                yMouseInicial = e.getY();
+                xMouse = e.getX();
+                yMouse = e.getY();
+                xMouse2 = e.getX();
+                yMouse2 = e.getY();
+                primeiroPonto = false;
+            }else if(primeiraVez == true){
+                xMouse = xMouse2;
+                yMouse = yMouse2;
+                xMouse2 = e.getX();
+                yMouse2 = e.getY();
+                primeiraVez = false;
+            }else if(primeiraVez == false){
+                xMouse = xMouse2;
+                yMouse = yMouse2;
+                xMouse2 = e.getX();
+                yMouse2 = e.getY();
+                
+            }
+            
+            if (SwingUtilities.isRightMouseButton(e)){
+                xMouse2 = xMouseInicial;
+                yMouse2 = yMouseInicial;
+                primeiroPonto = true;
+            }
         }else{
             primeiraVez = false;
             xMouse = e.getX();
             yMouse = e.getY();
-            Graphics g = getGraphics();
-            paint(g); 
         }
         
         
@@ -102,9 +138,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         Graphics g = getGraphics();
         paint(g);
         
+        
     }
 
-    /**
+    /** 
      * Acao de soltar o botao do mouse
      */
     public void mouseReleased(MouseEvent e) {
@@ -168,8 +205,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             FiguraPontos.desenharRetangulo(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
         
         }
-
-        
+        //opcao de desenhar Poligono
+        else if (tipo == TiposPrimitivos.POLIGONO){
+            FiguraPontos.desenharPoligono(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+        }
         //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
         }
