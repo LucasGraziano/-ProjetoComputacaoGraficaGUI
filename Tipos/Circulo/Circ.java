@@ -1,3 +1,7 @@
+package Tipos.Circulo;
+
+import Tipos.Ponto.Ponto;
+
 /**
  * classe do circulo matematico 
  * 

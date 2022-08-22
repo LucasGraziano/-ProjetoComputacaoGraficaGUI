@@ -1,3 +1,4 @@
+package Tipos.Retangulo;
 import java.awt.Color;
 import java.awt.Graphics;
 

@@ -1,3 +1,7 @@
+package Tipos.Retangulo;
+
+import Tipos.Ponto.Ponto;
+
 public class Retangulo {
     // Atributos da reta
     private Ponto p1, p2, p3, p4;

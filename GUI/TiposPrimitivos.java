@@ -1,3 +1,4 @@
+package GUI;
 /**
  * Enumeração dos tipos primitivos
  * 

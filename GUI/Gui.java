@@ -1,3 +1,4 @@
+package GUI;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -17,7 +18,7 @@ import java.util.Hashtable;
  * Gustavo Scacchetti - RA00301499
  * @version 09/08/2022
  */
-class Gui extends JFrame {
+public class Gui extends JFrame {
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
     
 

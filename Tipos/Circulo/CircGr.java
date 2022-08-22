@@ -1,3 +1,4 @@
+package Tipos.Circulo;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -181,9 +182,9 @@ public class CircGr extends Circ {
             //printa os pontos ate completar o circulo
             g.fillOval((int)xP -(getDiametro()/2), (int)yP - (getDiametro()/2), getDiametro(), getDiametro());
 
-            //angulo vai aumentando em 5 em 5
-            ang = ang + 0.5;  //passo 0.5 
-        }while(ang != 360.0);
+            //angulo vai aumentando em 0.01 em 0.01
+            ang = ang + 0.01;  //passo 0.01
+        }while(ang <= 360.0);
         
 
     }

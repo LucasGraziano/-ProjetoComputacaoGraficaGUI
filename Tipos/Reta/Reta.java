@@ -1,3 +1,6 @@
+package Tipos.Reta;
+
+import Tipos.Ponto.Ponto;
 
 /**
  * Classe da Reta Matematica

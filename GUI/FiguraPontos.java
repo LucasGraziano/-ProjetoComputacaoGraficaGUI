@@ -1,4 +1,11 @@
+package GUI;
 import java.awt.*;
+
+import Tipos.Circulo.CircGr;
+import Tipos.Poligono.PoligonoGr;
+import Tipos.Ponto.PontoGr;
+import Tipos.Reta.RetaGr;
+import Tipos.Retangulo.RetanguloGr;
 
 /**
  * Classe de controle dos pontos

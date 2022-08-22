@@ -1,3 +1,4 @@
+package Tipos.Ponto;
 /**
  * Classe do ponto matematico
  * 

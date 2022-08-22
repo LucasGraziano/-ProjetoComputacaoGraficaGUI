@@ -1,3 +1,4 @@
+package Tipos.Reta;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -11,7 +12,7 @@ import java.awt.Graphics;
  * Gustavo Scacchetti - RA00301499
  * @version 09/08/2022
  */
-public class PoligonoGr extends Poligono {
+public class RetaGr extends Reta {
     
     Color corReta = Color.BLACK; // cor do Reta
     String nomeReta = ""; // nome do Reta
@@ -27,7 +28,7 @@ public class PoligonoGr extends Poligono {
      * @param x2 - coordenada do x2
      * @param y2 - coordenada do y2
      */
-    PoligonoGr(int x1, int y1, int x2, int  y2){
+    RetaGr(int x1, int y1, int x2, int  y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(Color.black);     
         setCorNomeReta(Color.black);     
@@ -43,7 +44,7 @@ public class PoligonoGr extends Poligono {
      * @param y2 - coordenada do y2
      * @param cor - cor da Reta 
      */
-    PoligonoGr(int x1, int y1, int x2, int  y2, Color cor){
+    RetaGr(int x1, int y1, int x2, int  y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
@@ -60,7 +61,7 @@ public class PoligonoGr extends Poligono {
      * @param corReta corReta do Reta a ser construido
      * @param diametro diametro do Reta
      */
-    public PoligonoGr(int x1, int y1, int x2, int  y2, Color corReta, int diametro){
+    public RetaGr(int x1, int y1, int x2, int  y2, Color corReta, int diametro){
         this(x1, y1, x2, y2, corReta);
         setDiametro(diametro);
     }
@@ -76,7 +77,7 @@ public class PoligonoGr extends Poligono {
      * @param nomeReta - nome dos pontos da reta
      * @param diametro diametro do Reta
      */
-    public PoligonoGr(int x1, int y1, int x2, int  y2, Color corReta, String nomeReta, int diametro){
+    public RetaGr(int x1, int y1, int x2, int  y2, Color corReta, String nomeReta, int diametro){
         this(x1, y1, x2, y2, corReta, diametro);
         setNomeReta(nomeReta);
     }
@@ -91,11 +92,24 @@ public class PoligonoGr extends Poligono {
      * @param cor - cor da reta
      * @param str - nome dos pontos da reta
      */
-    PoligonoGr(int x1, int y1, int x2, int  y2, Color cor, String str){
+    RetaGr(int x1, int y1, int x2, int  y2, Color cor, String str){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
         setNomeReta(str);     
+    }
+
+    /**
+     * Construtor
+     * 
+     * @param p2d
+     * @param cor - cor da reta
+     */
+    RetaGr(RetaGr p2d, Color cor){
+        super(p2d);     
+        setCorReta(cor);     
+        setCorNomeReta(Color.black);     
+        setNomeReta("");     
     }
 
 
@@ -163,15 +177,6 @@ public class PoligonoGr extends Poligono {
         this.diametro = diametro;
     }
 
-
-    public void desenharPoligono(Graphics g){
-        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-        desenharReta(g, x1, y1, x2, y2);
-
-
-    }
-
     /**
      * desenha um Reta utilizando o oval 
      * 
@@ -182,14 +187,14 @@ public class PoligonoGr extends Poligono {
      * @param y1
      * @param x1
      */
-    public void desenharReta(Graphics g, double x1, double y1, double x2, double y2){
+    public void desenharReta(Graphics g){
         g.setColor(getCorReta());
 
-        
         double Dx=0, Dy=0;// Delta x; Delata y
         double m=0, b=0;// Coeficinete angular; b
         double c1, c2; //Variaveis utilizadas para identificar e armazenar qual delta é maior para realizar o loop de criacao de uma reta mais precisa
         double xMaior=0, xMenor=0, yMaior=0,yMenor=0;
+        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
         double x, y;
 
         //Identifica qual ponto tem o eixo x com maior valor e realiza a conta do delta x
@@ -222,8 +227,6 @@ public class PoligonoGr extends Poligono {
             c1 = yMenor;
             c2 = yMaior;
         } 
-
-        
 
         //delta x for igual a 0
         if(Dx == 0){
