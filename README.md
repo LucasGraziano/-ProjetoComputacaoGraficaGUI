@@ -2,9 +2,13 @@
 Projeto de um editor baseado emm tipos primitivos em Java, criado no 4º Semestre de **Ciência da Computação da PUC SP**
 
 Julio Cesar Barboza Filho RA: 00297586  
-Lucas Costa Pessoa Graziano RA: 00297851
-Igor Masson Calille RA: 00297594
-Gustavo Scacchetti de Sousa RA: 00301499
+
+Lucas Costa Pessoa Graziano RA: 00297851  
+
+Igor Masson Calille RA: 00297594  
+
+Gustavo Scacchetti de Sousa RA: 00301499  
+
 
 -Este projeto está sendo confeccionado por meio de programação em Visual Studio, em união com BlueJ, toda a programação é única e exclusivamente em Java.
 
