@@ -61,7 +61,9 @@ public class Armazenamento {
         indexPonto--;
         Ponto valor;
         if(indexPonto >= 0){//Controle para verificar se existem dados no array
+            
             valor =  ArrayPonto.get(indexPonto);
+            ArrayPonto.remove(indexPonto);
         }else valor = PontoNeutro; //(-1,-1);
         
         return valor;
@@ -75,7 +77,8 @@ public class Armazenamento {
         indexReta--;
         DoisPontos valor;
         if(indexReta >= 0){//Controle para verificar se existem dados no array
-            return valor = ArrayReta.get(indexReta);
+            valor = ArrayReta.get(indexReta);
+            ArrayReta.remove(indexReta);
         }else valor = PontosNeutro;
 
         return valor;
@@ -89,7 +92,8 @@ public class Armazenamento {
         indexCirculo--;
         DoisPontos valor;
         if(indexCirculo >= 0){//Controle para verificar se existem dados no array
-            return valor = ArrayCirculo.get(indexCirculo);
+            valor = ArrayCirculo.get(indexCirculo);
+            ArrayCirculo.remove(indexCirculo);
         }else valor = PontosNeutro;
 
         return valor;
@@ -103,7 +107,8 @@ public class Armazenamento {
         indexRetangulo--;
         DoisPontos valor;
         if(indexRetangulo >= 0){//Controle para verificar se existem dados no array
-            return valor = ArrayRetangulo.get(indexRetangulo);
+            valor = ArrayRetangulo.get(indexRetangulo);
+            ArrayRetangulo.remove(indexRetangulo);
         }else valor = PontosNeutro;
 
         return valor;
@@ -117,7 +122,8 @@ public class Armazenamento {
         indexPoligono--;
         DoisPontos valor;
         if(indexPoligono >= 0){//Controle para verificar se existem dados no array
-            return valor = ArrayPoligono.get(indexPoligono);
+            valor = ArrayPoligono.get(indexPoligono);
+            ArrayPoligono.remove(indexPoligono);
         }else valor = PontosNeutro;
 
         return valor;
@@ -131,7 +137,8 @@ public class Armazenamento {
         indexLinhaPoligonal--;
         DoisPontos valor;
         if(indexLinhaPoligonal >= 0){//Controle para verificar se existem dados no array
-            return valor = ArrayLinhaPoligonal.get(indexLinhaPoligonal);
+            valor = ArrayLinhaPoligonal.get(indexLinhaPoligonal);
+            ArrayLinhaPoligonal.remove(indexLinhaPoligonal);
         }else valor = PontosNeutro;
 
         return valor;
