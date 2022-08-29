@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Hashtable;
 
+import ED.Armazenamento;
+
+
+
 /**
  * Classe Gui
  * 
@@ -20,6 +24,9 @@ import java.util.Hashtable;
  */
 public class Gui extends JFrame {
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
+
+    //Local de armazenamento de totas as formas
+    Armazenamento arm = new Armazenamento();
     
 
     // mensagens
@@ -31,7 +38,9 @@ public class Gui extends JFrame {
     private JButton jbCirc = new JButton("Circulo");
     private JButton jbRetangulo = new JButton("Retangulo");
     private JButton jbPoligono = new JButton("Poligono");
+    private JButton jbLinhaPoligonal = new JButton("LinhaPoligonal");
     private JButton jbCor = new JButton("Cor");
+    private JButton jbCarregar = new JButton("Carregar");
     private JButton jbLimpar = new JButton("Limpar");
 
     //implementacao da barra de deslize
@@ -47,7 +56,7 @@ public class Gui extends JFrame {
     private JToolBar barraComandos = new JToolBar();
     
     // Painel de desenho
-    private PainelDesenho areaDesenho = new PainelDesenho(msg, tipo);
+    private PainelDesenho areaDesenho = new PainelDesenho(msg, tipo, arm);
     
 
     
@@ -116,7 +125,9 @@ public class Gui extends JFrame {
         jbCirc.addActionListener(eventos);
         jbRetangulo.addActionListener(eventos);
         jbPoligono.addActionListener(eventos);
+        jbLinhaPoligonal.addActionListener(eventos);
         jbCor.addActionListener(eventos);
+        jbCarregar.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
@@ -131,7 +142,9 @@ public class Gui extends JFrame {
         barraComandos.add(jbCirc);
         barraComandos.add(jbRetangulo);
         barraComandos.add(jbPoligono);
+        barraComandos.add(jbLinhaPoligonal);
         barraComandos.add(jbCor);
+        barraComandos.add(jbCarregar);
         barraComandos.add(jbLimpar);
         barraComandos.add(espessura);
     }
@@ -164,9 +177,14 @@ public class Gui extends JFrame {
                 tipo = TiposPrimitivos.RETANGULO;
             }  else if(event.getSource() == jbPoligono) { //fazer circulo
                 tipo = TiposPrimitivos.POLIGONO;
-            } else if(event.getSource() == jbCor) { //fazer circulo
+            } else if(event.getSource() == jbLinhaPoligonal) { //fazer circulo
+                tipo = TiposPrimitivos.LINHAPOLIGONAL;
+            }else if(event.getSource() == jbCor) { //fazer circulo
                 tipo = TiposPrimitivos.COR;
-            } else if(event.getSource() == jbLimpar) { //limpar a tela
+            } else if(event.getSource() == jbCarregar) { //limpar a tela
+                tipo = TiposPrimitivos.CARREGAR;
+            } 
+            else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;
                 repaint();
 
@@ -182,4 +200,7 @@ public class Gui extends JFrame {
         
         
     } 
+
+
+    
 }

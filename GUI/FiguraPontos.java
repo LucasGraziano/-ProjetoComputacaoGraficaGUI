@@ -2,6 +2,7 @@ package GUI;
 import java.awt.*;
 
 import Tipos.Circulo.CircGr;
+import Tipos.LinhaPoligonal.LinhaPoligonalGr;
 import Tipos.Poligono.PoligonoGr;
 import Tipos.Ponto.PontoGr;
 import Tipos.Reta.RetaGr;
@@ -122,4 +123,12 @@ public class FiguraPontos {
                 p.desenharPoligono(g);
         }
 
+        public static void desenharLinhaPoligonal(Graphics g, int x1, int y1, int x2, int y2, int diametro) {
+                Color cor = new Color((int) (Math.random() * 256),
+                                (int) (Math.random() * 256),
+                                (int) (Math.random() * 256));
+                
+                LinhaPoligonalGr p = new LinhaPoligonalGr(x1, y1, x2, y2, cor, diametro);
+                p.desenharLinhaPoligonal(g);
+        }
 }
