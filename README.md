@@ -44,7 +44,7 @@ Gustavo Scacchetti de Sousa RA: 00301499
     - A terceira reta inicia na coordenada (x2, y2) e termina na coordenada (x1, y2);
     - A quarta reta inicia na coordenada (x1, y2) e termina na coordenada (x1, y1);
     
-  -(video do retângulo aqui)  
+  - (vídeo do retângulo aqui)  
       
 - **Polígonos**:
   - Para realizar a implementação dos polígonos, trabalhamos em cima das bibliotecas do mouse (MouseListener, MouseEvent, etc). O funcionamento se baseia em uma sequência de cliques com o botão esquerdo em vários pontos da tela, cada clique é interligado por retas, ao clicar com o botão direito, a figura é "fechada", ou seja, o primeiro ponto do polígono é ligado ao último.  
