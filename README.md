@@ -57,6 +57,8 @@ Gustavo Scacchetti de Sousa RA: 00301499
   - (vídeo das linhas poligonais aqui)
   
 - Além dos primitivos, o projeto também fornece opções de "cor", "redesenhar" e "limpar":
-  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;
-  - A opção de redesenhar, permite que o usuário caso limpe a tela, possa ver novamente o que estava desenhado na tela; 
-  - A opção de limpar, apaga todos os desenhos que estiverem na tela naquele momento;
+  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;  
+  
+  - A opção de redesenhar, permite que o usuário caso limpe a tela, possa ver novamente o que estava desenhado na tela;  
+  
+  - A opção de limpar, apaga todos os desenhos que estiverem na tela naquele momento;  
