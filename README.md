@@ -18,7 +18,7 @@ Gustavo Scacchetti de Sousa RA: 00301499
   - Círculos;
   - Retângulos;
   - Polígonos;
-  - Linha Poligonal;
+  - Linha Poligonal;  
   
 - **Pontos**:
   - Se tratando do tipo primitivo mais simples, o ponto se baseia na captura de uma coordenada (x, y) após o clique do usuário. Possui em seus atributos uma cor, nome e diâmetro;
