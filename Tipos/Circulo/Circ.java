@@ -14,15 +14,16 @@ import Tipos.Ponto.Ponto;
  */
 public class Circ {
     // Atributos da reta
-    private Ponto p;
+    private Ponto p1, p2;
 
     /**
      * Construtor dos objetos da classe Circ
      * @param x - coordenada do x
      * @param y - coordenada do y
      */
-    public Circ(double x, double y) {
-        setP(new Ponto(x, y));
+    public Circ(double x1, double y1, double x2, double y2) {
+        setP1(new Ponto(x1, y1));
+        setP2(new Ponto(x2, y2));
 
     }
     
@@ -30,8 +31,9 @@ public class Circ {
      * 
      * @param p - ponto
      */
-    public Circ(Ponto p) {
-        setP(p);
+    public Circ(Ponto p1, Ponto p2) {
+        setP1(p1);
+        setP2(p2);
     }
     
     /**
@@ -39,23 +41,42 @@ public class Circ {
      * @param c - seta o ponto do circulo
      */
     public Circ (Circ c){
-        setP(c.getP());
+        setP1(c.getP1());
+        setP2(c.getP2());
     }
+
 
     /**
      * 
      * @param p - ponto
      */
-    public void setP(Ponto p){
-        this.p = p;
+    public void setP1(Ponto p1){
+        this.p1 = p1;
     }
     
     /**
      * 
      * @return ponto
      */
-    public Ponto getP(){
-        return this.p;
+    public Ponto getP1(){
+        return this.p1;
+    }
+
+
+    /**
+     * 
+     * @param p - ponto
+     */
+    public void setP2(Ponto p2){
+        this.p2 = p2;
+    }
+    
+    /**
+     * 
+     * @return ponto
+     */
+    public Ponto getP2(){
+        return this.p2;
     }
 }
     

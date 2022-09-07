@@ -19,8 +19,8 @@ public class CircGr extends Circ {
      * @param x - coordenada do x
      * @param y - coordenada do y
      */
-    public CircGr(int x, int y){
-        super((double)x, (double)y);
+    public CircGr(int x1, int y1, int x2, int y2){
+        super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorPto(Color.black);     
         setCorNomePto(Color.black);     
         setNomePto("");     
@@ -33,8 +33,8 @@ public class CircGr extends Circ {
      * @param y - coordenada do y
      * @param cor - cor do circulo
      */
-    public CircGr(int x, int y, Color cor){
-        super((double)x, (double)y);
+    public CircGr(int x1, int y1, int x2, int y2, Color cor){
+        super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorPto(cor);     
         setCorNomePto(Color.black);     
         setNomePto("");     
@@ -48,8 +48,8 @@ public class CircGr extends Circ {
      * @param corPonto - cor do circulo
      * @param diametro - tamanho das bolinhas
      */
-    public CircGr(int x, int y, Color corPonto, int diametro) {
-        this(x, y, corPonto);
+    public CircGr(int x1, int y1, int x2, int y2, Color corPonto, int diametro) {
+        this(x1, y1, x2, y2, corPonto);
         setDiametro(diametro);
     }
     
@@ -62,8 +62,8 @@ public class CircGr extends Circ {
      * @param nomePonto - nome do circulo
      * @param diametro - tamanho das bolinhas
      */
-    public CircGr(int x, int y, Color corPonto, String nomePonto, int diametro){
-        this(x, y, corPonto, diametro);
+    public CircGr(int x1, int y1, int x2, int y2, Color corPonto, String nomePonto, int diametro){
+        this(x1, y1, x2, y2, corPonto, diametro);
         setNomePto(nomePonto);
     }
     
@@ -75,8 +75,8 @@ public class CircGr extends Circ {
      * @param cor - cor do circulo
      * @param str - nome do circulo
      */
-    public CircGr(int x, int y, Color cor, String str){
-        super((double)x, (double)y);
+    public CircGr(int x1, int y1, int x2, int y2, Color cor, String str){
+        super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorPto(cor);     
         setCorNomePto(Color.black);     
         setNomePto(str);     
@@ -160,9 +160,10 @@ public class CircGr extends Circ {
      * @param x2 - coordenada do raio
      * @param y2 - coordenada do raio
      */
-    public void desenharCirc(Graphics g, double x2, double y2){
+    public void desenharCirc(Graphics g){
         g.setColor(getCorPto());
-        double x = getP().getX(), y = getP().getY(); // x e y do clique
+        double x = getP1().getX(), y = getP1().getY(); // x e y do clique
+        double x2 = getP2().getX(), y2 = getP2().getY(); // x e y do clique
         double ang = 0.0; // angulo a ser encrementado
         double xP = 0, yP = 0; // x e y a serem pintados
         double catAd, catOp; //cateto adjacente e cateto oposto

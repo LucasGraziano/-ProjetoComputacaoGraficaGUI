@@ -15,13 +15,8 @@ import ED.Armazenamento;
 /**
  * Classe Gui
  * 
- * @author
- * MA4B
- * Julio Cesar Barboza - RA00297586
- * Lucas Costa Pessoa Graziano - RA00297851
- * Gustavo Scacchetti - RA00301499
- * @version 09/08/2022
  */
+
 public class Gui extends JFrame {
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
 
@@ -40,7 +35,7 @@ public class Gui extends JFrame {
     private JButton jbPoligono = new JButton("Poligono");
     private JButton jbLinhaPoligonal = new JButton("LinhaPoligonal");
     private JButton jbCor = new JButton("Cor");
-    private JButton jbCarregar = new JButton("Carregar");
+    private JButton jbCarregar = new JButton("Redesenhar");
     private JButton jbLimpar = new JButton("Limpar");
 
     //implementacao da barra de deslize
@@ -157,6 +152,9 @@ public class Gui extends JFrame {
         
         TiposPrimitivos tipo;
         
+        /**
+         * construtor responsavel pela espessura
+         */
         public void stateChanged(ChangeEvent e) {
             valorEsp = espessura.getValue();
             areaDesenho.setEspessura(valorEsp);
@@ -183,6 +181,7 @@ public class Gui extends JFrame {
                 tipo = TiposPrimitivos.COR;
             } else if(event.getSource() == jbCarregar) { //limpar a tela
                 tipo = TiposPrimitivos.CARREGAR;
+                repaint();
             } 
             else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;
@@ -197,7 +196,6 @@ public class Gui extends JFrame {
             
         }
 
-        
         
     } 
 

@@ -1,11 +1,20 @@
 package ED;
-import Tipos.Ponto.Ponto;
+
 
 import java.util.ArrayList;
 
-import Tipos.Ponto.DoisPontos;
+import Tipos.Ponto.*;
+import Tipos.Reta.*;
+import Tipos.Circulo.*;
+import Tipos.Retangulo.*;
+import Tipos.Poligono.*;
+import Tipos.LinhaPoligonal.*;
 
+/**
+ * Classe de estrutura de dados q utiliza lista para armazenar a informaçâo desejada
+ */
 public class Armazenamento {
+    //Indexadores da lista
     int indexPonto;
     int indexReta;
     int indexCirculo;
@@ -13,18 +22,26 @@ public class Armazenamento {
     int indexPoligono;
     int indexLinhaPoligonal;
 
-    Ponto PontoNeutro = new Ponto();
+    //Ponto criado para indentificar o final da lista
+    //PontoGr PontoNeutro = new PontoGr();
     Ponto p = new Ponto();
     DoisPontos PontosNeutro = new DoisPontos();
 
-    ArrayList<Ponto> ArrayPonto;
-    ArrayList<DoisPontos> ArrayReta;
-    ArrayList<DoisPontos> ArrayCirculo;
-    ArrayList<DoisPontos> ArrayRetangulo;
-    ArrayList<DoisPontos> ArrayPoligono;
-    ArrayList<DoisPontos> ArrayLinhaPoligonal;
+   
 
-    public Armazenamento(){//Quando a classe for instanciada os indexadores serão inicializados
+    //Criando uma lista para cada objeto
+    ArrayList<PontoGr> ArrayPonto;
+    ArrayList<RetaGr> ArrayReta;
+    ArrayList<CircGr> ArrayCirculo;
+    ArrayList<RetanguloGr> ArrayRetangulo;
+    ArrayList<PoligonoGr> ArrayPoligono;
+    ArrayList<LinhaPoligonalGr> ArrayLinhaPoligonal;
+    
+    /**
+     * Quando a classe for instanciada os indexadores e as listas serão inicializados
+     */
+    public Armazenamento(){
+        
         indexPonto = 0;
         indexReta = 0;
         indexCirculo = 0;
@@ -32,116 +49,286 @@ public class Armazenamento {
         indexPoligono = 0;
         indexLinhaPoligonal = 0;
 
-        ArrayPonto = new ArrayList<Ponto>();
-        ArrayReta = new ArrayList<DoisPontos>();;
-        ArrayCirculo = new ArrayList<DoisPontos>();;
-        ArrayRetangulo = new ArrayList<DoisPontos>();;
-        ArrayPoligono = new ArrayList<DoisPontos>();;
-        ArrayLinhaPoligonal = new ArrayList<DoisPontos>();;
+        ArrayPonto = new ArrayList<PontoGr>();
+        ArrayReta = new ArrayList<RetaGr>();;
+        ArrayCirculo = new ArrayList<CircGr>();;
+        ArrayRetangulo = new ArrayList<RetanguloGr>();;
+        ArrayPoligono = new ArrayList<PoligonoGr>();;
+        ArrayLinhaPoligonal = new ArrayList<LinhaPoligonalGr>();;
 
         
-        PontoNeutro.setX(-1);
-        PontoNeutro.setY(-1);
+        //PontoNeutro.setX(-1);
+        //PontoNeutro.setY(-1);
 
         PontosNeutro.setX1(-1);
         PontosNeutro.setY1(-1);
         PontosNeutro.setX2(-1);
         PontosNeutro.setY2(-1);
     }
-
     
-
-    
-
-    public void setArrayPonto(double x1, double y1){
-        ArrayPonto.add(new Ponto(x1, y1));
+    /**
+     * set do ponto na lista
+     * @param ponto - ponto
+     */
+    public void setArrayPonto(PontoGr ponto){
+        ArrayPonto.add(ponto);
         indexPonto++;
+        setIndexPonto(indexPonto);
     }
-    public Ponto getArrayPonto(){
+    
+    /**
+     * Busca o conteudo na lista
+     * @return valor - valor referido na lista
+     */
+    public PontoGr getArrayPonto(){
         indexPonto--;
-        Ponto valor;
+        setIndexPonto(indexPonto);
+        PontoGr valor;
         if(indexPonto >= 0){//Controle para verificar se existem dados no array
             
-            valor =  ArrayPonto.get(indexPonto);
+            valor =  ArrayPonto.get(getIndexPonto());
             ArrayPonto.remove(indexPonto);
-        }else valor = PontoNeutro; //(-1,-1);
+        }else valor = null; //(-1,-1);
         
         return valor;
     }
 
-    public void setArrayReta(double x1, double y1, double x2, double y2){
-        ArrayReta.add(new DoisPontos(x1, y1, x2, y2));
+    /**
+     * seta uma reta na lista
+     * @param reta - reta
+     */
+    public void setArrayReta(RetaGr reta){
+        ArrayReta.add(reta);
         indexReta++;
+        setIndexReta(indexReta);
     }
-    public DoisPontos getArrayReta(){
+
+    /**
+     * busta a reta na lista
+     * @return valor - valor referido na lista
+     */
+    public RetaGr getArrayReta(){
         indexReta--;
-        DoisPontos valor;
+        setIndexReta(indexReta);
+        RetaGr valor;
         if(indexReta >= 0){//Controle para verificar se existem dados no array
-            valor = ArrayReta.get(indexReta);
+            valor = ArrayReta.get(getIndexReta());
             ArrayReta.remove(indexReta);
-        }else valor = PontosNeutro;
+        }else valor = null;
 
         return valor;
     }
 
-    public void setArrayCirculo(double x1, double y1, double x2, double y2){
-        ArrayCirculo.add(new DoisPontos(x1, y1, x2, y2));
+    /**
+     * seta um circulo na lista
+     * @param circulo - circulo
+     */
+    public void setArrayCirculo(CircGr circulo){
+        ArrayCirculo.add(circulo);
         indexCirculo++;
+        setIndexCirculo(indexCirculo);
     }
-    public DoisPontos getArrayCirculo(){
+    
+    /**
+     * Busca o circulo na lista
+     * @return valor - valor referido na lista
+     */
+    public CircGr getArrayCirculo(){
         indexCirculo--;
-        DoisPontos valor;
+        setIndexCirculo(indexCirculo);
+        CircGr valor;
         if(indexCirculo >= 0){//Controle para verificar se existem dados no array
-            valor = ArrayCirculo.get(indexCirculo);
+            valor = ArrayCirculo.get(getIndexCirculo());
             ArrayCirculo.remove(indexCirculo);
-        }else valor = PontosNeutro;
+        }else valor = null;
 
         return valor;
     }
 
-    public void setArrayRetangulo(double x1, double y1, double x2, double y2){
-        ArrayRetangulo.add(new DoisPontos(x1, y1, x2, y2));
+    /**
+     * Seta um retangulo na lista
+     * @param retangulo - retangulo
+     */
+    public void setArrayRetangulo(RetanguloGr retangulo){
+        ArrayRetangulo.add(retangulo);
         indexRetangulo++;
+        setIndexRetangulo(indexRetangulo);
     }
-    public DoisPontos getArrayRetangulo(){
+
+    /**
+     * Busca um retangulo na lista
+     * @return valor - valor referido na lista
+     */
+    public RetanguloGr getArrayRetangulo(){
         indexRetangulo--;
-        DoisPontos valor;
+        setIndexRetangulo(indexRetangulo);
+        RetanguloGr valor;
         if(indexRetangulo >= 0){//Controle para verificar se existem dados no array
-            valor = ArrayRetangulo.get(indexRetangulo);
+            valor = ArrayRetangulo.get(getIndexRetangulo());
             ArrayRetangulo.remove(indexRetangulo);
-        }else valor = PontosNeutro;
+        }else valor = null;
 
         return valor;
     }
 
-    public void setArrayPoligono(double x1, double y1, double x2, double y2){
-        ArrayPoligono.add(new DoisPontos(x1, y1, x2, y2));
+    /**
+     * seta um poligono na lista
+     * @param poligono - poligono
+     */
+    public void setArrayPoligono(PoligonoGr poligono){
+        ArrayPoligono.add(poligono);
         indexPoligono++;
+        setIndexPoligono(indexPoligono);
     }
-    public DoisPontos getArrayPoligono(){
+
+    
+    /**
+     * busca um poligono na lista
+     * @return valor - valor referido na lista
+     */
+    public PoligonoGr getArrayPoligono(){
         indexPoligono--;
-        DoisPontos valor;
+        setIndexPoligono(indexPoligono);
+        PoligonoGr valor;
         if(indexPoligono >= 0){//Controle para verificar se existem dados no array
-            valor = ArrayPoligono.get(indexPoligono);
+            valor = ArrayPoligono.get(getIndexPoligono());
             ArrayPoligono.remove(indexPoligono);
-        }else valor = PontosNeutro;
+        }else valor = null;
 
         return valor;
     }
 
-    public void setArrayLinhaPoligonal(double x1, double y1, double x2, double y2){
-        ArrayLinhaPoligonal.add(new DoisPontos(x1, y1, x2, y2));
+    /**
+     * seta uma linhaPoligonal na lista
+     * @param linhaPoligonal - linha Poligonal
+     */
+    public void setArrayLinhaPoligonal(LinhaPoligonalGr linhaPoligonal){
+        ArrayLinhaPoligonal.add(linhaPoligonal);
         indexLinhaPoligonal++;
+        setIndexLinhaPoligonal(indexLinhaPoligonal);
     }
-    public DoisPontos getArrayLinhaPoligonal(){
+
+    /**
+     * busca uma linha poligonal na lista
+     * @return valor - valor referido na lista
+     */
+    public LinhaPoligonalGr getArrayLinhaPoligonal(){
         indexLinhaPoligonal--;
-        DoisPontos valor;
+        setIndexLinhaPoligonal(indexLinhaPoligonal);
+        LinhaPoligonalGr valor;
         if(indexLinhaPoligonal >= 0){//Controle para verificar se existem dados no array
-            valor = ArrayLinhaPoligonal.get(indexLinhaPoligonal);
+            valor = ArrayLinhaPoligonal.get(getIndexLinhaPoligonal());
             ArrayLinhaPoligonal.remove(indexLinhaPoligonal);
-        }else valor = PontosNeutro;
+        }else valor = null;
 
         return valor;
     }
+
+    //setters e getters
+    /**
+    * pega o contador do IndexPonto
+    * @return indexPonto
+    */
+    public int getIndexPonto() {
+        return this.indexPonto;
+    }
+    /**
+     * seta o contador do IndexPonto
+     */
+    public void setIndexPonto(int indexPonto) {
+        this.indexPonto = indexPonto;
+    }
+    /**
+     * seta o contador do IndexReta
+     * @return indexReta
+     */
+    public int getIndexReta() {
+        return this.indexReta;
+    }
+    /**
+    * seta o contador do IndexReta
+    */    
+    public void setIndexReta(int indexReta) {
+        this.indexReta = indexReta;
+    }
+    /**
+    * retorna o contador do IndexCirculo
+    * @return indexCirculo
+    */    
+    public int getIndexCirculo() {
+        return this.indexCirculo;
+    }
+    /**
+    * seta o contador do IndexCirculo
+    */
+    public void setIndexCirculo(int indexCirculo) {
+        this.indexCirculo = indexCirculo;
+    }
+    /**
+    * retorna o contador do IndexRetangulo
+    * @return indexRetangulo
+    */
+    public int getIndexRetangulo() {
+        return this.indexRetangulo;
+    }
+    /**
+    * seta o contador do IndexRetangulo
+    */
+    public void setIndexRetangulo(int indexRetangulo) {
+        this.indexRetangulo = indexRetangulo;
+    }
+    /**
+    * retorna o contador do IndexPoligono
+    * @return indexPoligono
+    */
+    public int getIndexPoligono() {
+        return this.indexPoligono;
+    }
+    /**
+    * seta o contador do Poligono
+    */
+    public void setIndexPoligono(int indexPoligono) {
+        this.indexPoligono = indexPoligono;
+    }
+    
+    /**
+    * retorna o contador da linha poligonal.
+    * @return indexLinhaPoligonal
+    */
+    public int getIndexLinhaPoligonal() {
+        return this.indexLinhaPoligonal;
+    }
+    /**
+    * seta o contador da linha poligonal
+    */
+    public void setIndexLinhaPoligonal(int indexLinhaPoligonal) {
+        this.indexLinhaPoligonal = indexLinhaPoligonal;
+    }
+    /**
+    * retorna o ponto P
+    * @return PontosNeutro
+    */
+    public Ponto getP() {
+        return this.p;
+    }
+    /**
+    * seta os pontos neutros
+    */
+    public void setP(Ponto p) {
+        this.p = p;
+    }
+    /**
+    * pega os pontos neutros
+    * @return PontosNeutro
+    */
+    public DoisPontos getPontosNeutro() {
+        return this.PontosNeutro;
+    }
+    /**
+    * seta os pontos neutros
+    */
+    public void setPontosNeutro(DoisPontos PontosNeutro) {
+        this.PontosNeutro = PontosNeutro;
+    }   
 
 }

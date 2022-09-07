@@ -1,12 +1,16 @@
 package Tipos.Ponto;
+import java.awt.*;
 
 public class DoisPontos {
     private double x1;
     private double y1;
     private double x2;
     private double y2;
+    private Color cor;
+    private String nome;
+    private int espessura;
     /**
-     * seta ps valores x e y como 0 (ponto 0,0)
+     * seta os valores x e y como 0 (ponto 0,0)
      */
     public DoisPontos() {
         setX1(0);
@@ -32,6 +36,22 @@ public class DoisPontos {
         setY1(y1);
         setX2(x2);
         setY2(y2);
+    }
+    /**
+     * @param x1 define o x do primeiro ponto
+     * @param y1 define o y do primeiro ponto
+     * @param x2 define o x do segundo ponto
+     * @param y2 define o y do segundo ponto
+     * @param cor define a cor dos pontos
+     * @param espessura define a espessura dos pontos
+     */
+    public DoisPontos(double x1, double y1, double x2, double y2, Color cor, int espessura) {
+        setX1(x1);
+        setY1(y1);
+        setX2(x2);
+        setY2(y2);
+        setCor(cor);
+        setEspessura(espessura);
     }
     
     
@@ -84,6 +104,41 @@ public class DoisPontos {
     public void setY2(double y2) {
         this.y2 = y2;
     }
-    
-    
+    /**
+     * @param cor seta a cor
+     */
+    public void setCor(Color cor){
+        this.cor = cor;
+    }
+    /**
+     * @param cor retorna a cor
+     */
+    public Color getCor(){
+        return this.cor;
+    }
+    /**
+     * @param nome seta o nome
+     */
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    /**
+     * @param nome retorna o nome
+     */
+    public String getNome(){
+        return nome;
+    }
+    /**
+     * @param espessura seta a espessura
+     */
+    public void setEspessura(int espessura){
+        this.espessura = espessura;
+    }
+    /**
+     * @param espessura retorna a espessura
+     */
+    public int getEspessura(){
+        return espessura;
+    }
+
 }

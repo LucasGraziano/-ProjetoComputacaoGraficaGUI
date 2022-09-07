@@ -9,11 +9,17 @@ import java.awt.event.MouseMotionListener;
 //import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 
 import ED.Armazenamento;
-import Tipos.Ponto.DoisPontos;
-import Tipos.Ponto.Ponto;
+
+import Tipos.Ponto.*;
+import Tipos.Reta.*;
+import Tipos.Circulo.*;
+import Tipos.Retangulo.*;
+import Tipos.Poligono.*;
+import Tipos.LinhaPoligonal.*;
 
 
 /**
@@ -37,11 +43,14 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     int xMouse = 0, yMouse = 0;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
     boolean primeiraVez = true;
+    Color currentColor = Color.BLACK;
 
     boolean primeiroPonto = true;
     int xMouseInicial, yMouseInicial;
+    FiguraPontos fg;
 
     Armazenamento arm;
+    boolean verificar = false;
 
     /**
      * Construtor do painel desenho
@@ -52,7 +61,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     public PainelDesenho(JLabel msg, TiposPrimitivos tipo, Armazenamento arm) {
         this.tipo = tipo;
         this.msg = msg;
-        this.arm = arm;
+        this.arm = FiguraPontos.arm;
         this.setBackground(Color.white);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -89,12 +98,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      * acao de clicar no botao do mouse 
      */
     public void mousePressed(MouseEvent e) {
-        // ao clicar com o mouse, pegara o x1 e o y1
-        
-        
-        
+        //logica da reta, circulo e retangulo. ele captura dois pontos no clique do mouse
         if(tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS || tipo == TiposPrimitivos.RETANGULO){
             if(primeiraVez == true){
+                // ao clicar com o mouse, pegara o x1 e o y1
                 xMouse = e.getX();
                 yMouse = e.getY();
                 primeiraVez = false;
@@ -105,6 +112,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 primeiraVez = true;
             }
         
+        //logica do poligono e linha poligonal
         }else if(tipo == TiposPrimitivos.POLIGONO || tipo == TiposPrimitivos.LINHAPOLIGONAL){
 
             if(primeiroPonto == true){ 
@@ -128,7 +136,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 yMouse2 = e.getY();
                 
             }
-            
+            //acao para clicar com o botao direito atrelado com um tipo primitivo
             if (SwingUtilities.isRightMouseButton(e) && tipo == TiposPrimitivos.POLIGONO){
                 xMouse2 = xMouseInicial;
                 yMouse2 = yMouseInicial;
@@ -139,7 +147,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 yMouse2 = yMouse;
                 primeiroPonto = true;
             }
-        }else if (tipo == TiposPrimitivos.CARREGAR){
+        }else if (tipo == TiposPrimitivos.CARREGAR || tipo == TiposPrimitivos.COR){
             
         }else{
             primeiraVez = false;
@@ -148,7 +156,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
         
         
-        
+        //parte grafica
         Graphics g = getGraphics();
         paint(g);
         
@@ -200,45 +208,53 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         //opcao de desenhar um botao
         if (tipo == TiposPrimitivos.PONTOS) { 
             
-            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", valorEsp);
-            arm.setArrayPonto(xMouse, yMouse);
+            FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", valorEsp, currentColor);
+            //arm.setArrayPonto(xMouse, yMouse);
         }
     
         //opcao de desenhar retas
         else if (tipo == TiposPrimitivos.RETAS) {
            
-            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
-            arm.setArrayReta(xMouse, yMouse, xMouse2, yMouse2);
+            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
+            
         }
         
         //opcao de desenhar circulos
         else if (tipo == TiposPrimitivos.CIRCULOS) {
-            arm.setArrayCirculo(xMouse, yMouse, xMouse2, yMouse2);
-            FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+            
+            FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         
         }
         //opcao de desenhar Retangulos
         else if (tipo == TiposPrimitivos.RETANGULO) {
-            arm.setArrayRetangulo(xMouse, yMouse, xMouse2, yMouse2);
-            FiguraPontos.desenharRetangulo(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+            
+            FiguraPontos.desenharRetangulo(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         
         }
         //opcao de desenhar Poligono
         else if (tipo == TiposPrimitivos.POLIGONO){
-            arm.setArrayPoligono(xMouse, yMouse, xMouse2, yMouse2);
-            FiguraPontos.desenharPoligono(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+            
+            FiguraPontos.desenharPoligono(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
         //opcao de desenhar LinhaPoligonal
         else if (tipo == TiposPrimitivos.LINHAPOLIGONAL){
-            arm.setArrayLinhaPoligonal(xMouse, yMouse, xMouse2, yMouse2);
-            FiguraPontos.desenharLinhaPoligonal(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp);
+            
+            FiguraPontos.desenharLinhaPoligonal(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
 
         else if (tipo == TiposPrimitivos.CARREGAR){
             carregarFormas(g);
         }
+        else if (tipo == TiposPrimitivos.COR){
+            currentColor = JColorChooser.showDialog(null, "Escolha uma cor", currentColor);
+        }
         //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
+            if(verificar == false) verificar = true;
+            else{
+                //FiguraPontos.arm = new Armazenamento();
+                verificar = false;
+            } 
         }
     }
 
@@ -258,80 +274,63 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         return valorEsp;
     }
 
+    /**
+     * Redesenha as formas
+     * @param g - parte grafica
+     */
     public void carregarFormas(Graphics g){
         
-        Ponto p;
-        DoisPontos p2;
+        PontoGr ponto;
+        RetaGr reta;
+        CircGr circulo;
+        RetanguloGr retangulo;
+        PoligonoGr poligono;
+        LinhaPoligonalGr linhaPoligonal;
+
 
         do{//Desenha todos os pontos
-           p = arm.getArrayPonto();
-           if(p.getX() != -1){
-                int x = ((int)p.getX());
-                int y = ((int)p.getY());
-
-                FiguraPontos.desenharPonto(g, x, y, "p", valorEsp);
+           ponto = arm.getArrayPonto();
+           if(ponto != null){
+                ponto.desenharPonto(g);
            }
            
-        }while(p.getX() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(ponto != null);//Ponto neutro(controle para verificar se chegou no final do array)
 
         do{//Desenha todas as retas
-            p2 = arm.getArrayReta();
-           if(p2.getX1() != -1){
-                int x1 = ((int)p2.getX1());
-                int y1 = ((int)p2.getY1());
-                int x2 = ((int)p2.getX2());
-                int y2 = ((int)p2.getY2());
-
-                FiguraPontos.desenharReta(g, x1, y1, x2, y2, valorEsp);
+            reta = arm.getArrayReta();
+           if(reta != null){
+                reta.desenharReta(g);
            }
-        }while(p2.getX1() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(reta != null);//Ponto neutro(controle para verificar se chegou no final do array)
 
         do{//Desenha todos os circulos
-            p2 = arm.getArrayCirculo();
-           if(p2.getX1() != -1){
-                int x1 = ((int)p2.getX1());
-                int y1 = ((int)p2.getY1());
-                int x2 = ((int)p2.getX2());
-                int y2 = ((int)p2.getY2());
-
-                FiguraPontos.desenharCirc(g, x1, y1, x2, y2, valorEsp);
+            circulo = arm.getArrayCirculo();
+           if(circulo != null){
+                circulo.desenharCirc(g);
            }
-        }while(p2.getX1() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(circulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
 
         do{//Desenha todos os retangulos
-            p2 = arm.getArrayRetangulo();
-           if(p2.getX1() != -1){
-                int x1 = ((int)p2.getX1());
-                int y1 = ((int)p2.getY1());
-                int x2 = ((int)p2.getX2());
-                int y2 = ((int)p2.getY2());
-
-                FiguraPontos.desenharRetangulo(g, x1, y1, x2, y2, valorEsp);
+            retangulo = arm.getArrayRetangulo();
+           if(retangulo != null){
+                retangulo.desenharRetangulo(g);
            }
-        }while(p2.getX1() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(retangulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
 
         do{//Desenha todos os poligonos
-            p2 = arm.getArrayPoligono();
-           if(p2.getX1() != -1){
-                int x1 = ((int)p2.getX1());
-                int y1 = ((int)p2.getY1());
-                int x2 = ((int)p2.getX2());
-                int y2 = ((int)p2.getY2());
-
-                FiguraPontos.desenharPoligono(g, x1, y1, x2, y2, valorEsp);
+            poligono = arm.getArrayPoligono();
+           if(poligono != null){
+                poligono.desenharPoligono(g);
            }
-        }while(p2.getX1() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(poligono != null);//Ponto neutro(controle para verificar se chegou no final do array)
 
         do{//Desenha todas as linhas poligonais
-            p2 = arm.getArrayLinhaPoligonal();
-           if(p2.getX1() != -1){
-                int x1 = ((int)p2.getX1());
-                int y1 = ((int)p2.getY1());
-                int x2 = ((int)p2.getX2());
-                int y2 = ((int)p2.getY2());
-
-                FiguraPontos.desenharLinhaPoligonal(g, x1, y1, x2, y2, valorEsp);
+            linhaPoligonal = arm.getArrayLinhaPoligonal();
+           if(linhaPoligonal != null){
+                linhaPoligonal.desenharLinhaPoligonal(g);
             }
-        }while(p2.getX1() != -1);//Ponto neutro(controle para verificar se chegou no final do array)
+        }while(linhaPoligonal != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        FiguraPontos.zerar();
     }
+    
 }
