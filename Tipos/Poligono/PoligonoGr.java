@@ -1,6 +1,7 @@
 package Tipos.Poligono;
 import java.awt.Color;
 import java.awt.Graphics;
+import Tipos.Ponto.Ponto;
 
 /**
  * Classe da Reta Grafica 
@@ -252,6 +253,96 @@ public class PoligonoGr extends Poligono {
                 }
             }         
         }
+    }
+
+    public void poligonoSelect(Ponto p){
+        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
+        
+        retaSelect(p, x1, y1, x2, y2);
+
+
+    }
+
+    public boolean retaSelect(Ponto p, double x1, double y1, double x2, double y2){
+        
+
+        double Dx=0, Dy=0;// Delta x; Delata y
+        double m=0, b=0;// Coeficinete angular; b
+        double c1, c2; //Variaveis utilizadas para identificar e armazenar qual delta é maior para realizar o loop de criacao de uma reta mais precisa
+        double xMaior=0, xMenor=0, yMaior=0,yMenor=0;
+        double x, y;
+        double xP = p.getX(), yP = p.getY();
+
+        //Identifica qual ponto tem o eixo x com maior valor e realiza a conta do delta x
+        if(x2 > x1){
+            Dx = x2 - x1;
+            xMaior = x2;
+            xMenor = x1;
+        }else if(x2 < x1){
+            Dx = x1 - x2;
+            xMaior = x1;
+            xMenor = x2;
+        }
+
+        //Identifica qual ponto tem o eixo y com maior valor e realiza a conta do delta y
+        if(y2 >= y1){
+            Dy = y2 - y1;
+            yMaior = y2;
+            yMenor = y1;
+        }else if(y2 < y1){
+            Dy = y1 - y2;
+            yMaior = y1;
+            yMenor = y2;
+        }
+        
+        //Identifica qual delta é maior, com intuito de definir qual dos eixos possui maior variação 
+        if(Dx > Dy) {
+            c1 = xMenor;
+            c2 = xMaior;
+        }else{
+            c1 = yMenor;
+            c2 = yMaior;
+        } 
+
+        //delta x for igual a 0
+        if(Dx == 0){
+            for(double i = c1; i <= c2; i++){
+
+                var dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
+                if(dist <= 10){
+                    return true;
+                }
+            }
+        //delta y for igual a 0
+        }else if(Dy == 0){ //Neste caso, a reta será horizontal
+            for(double i = c1; i <= c2; i++){
+
+                var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
+                if(dist <= 10){
+                    return true;
+                }
+            }
+        }else{
+            m = calcularM(Dy, Dx);
+            b = calcularB(m);
+
+            for(double i = c1; i <= c2; i++){
+                if(Dx > Dy){
+                    y = i*m + b; //equacao reduzida da reta
+                    var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
+                    if(dist <= 10){
+                        return true;
+                    }
+                }else{
+                    x = (i - b)/m;// equacao reduzida da reta com o x isolado
+                    var dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
+                    if(dist <= 10){
+                        return true;
+                    }
+                }
+            }         
+        }
+        return false;
     }
 }
 

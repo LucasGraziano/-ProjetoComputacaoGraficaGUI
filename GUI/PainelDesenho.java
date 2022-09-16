@@ -149,6 +149,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             }
         }else if (tipo == TiposPrimitivos.CARREGAR || tipo == TiposPrimitivos.COR){
             
+        }else if (tipo == TiposPrimitivos.SELECIONAR){
+            xMouse = e.getX();
+            yMouse = e.getY();
         }else{
             primeiraVez = false;
             xMouse = e.getX();
@@ -175,6 +178,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      */
     public void mouseClicked(MouseEvent e) {
         this.msg.setText("CLICOU: " + e.getButton());
+        
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -247,6 +251,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
         else if (tipo == TiposPrimitivos.COR){
             currentColor = JColorChooser.showDialog(null, "Escolha uma cor", currentColor);
+        }
+        else if (tipo == TiposPrimitivos.SELECIONAR){
+            SelectFormas(g, xMouse, yMouse);
         }
         //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
@@ -332,5 +339,106 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }while(linhaPoligonal != null);//Ponto neutro(controle para verificar se chegou no final do array)
         FiguraPontos.zerar();
     }
+
+    String tipoSelecionado = "";
+    int indiceSelecionado = 0;
+
+    /**
+     * Redesenha as formas
+     * @param g - parte grafica
+     */
+    public void SelectFormas(Graphics g, int x, int y){
+
+        //ponto que foi clicado
+        Ponto aux = new Ponto(x, y);
+
+        //seleção do ponto
+        for(PontoGr ponto : arm.ArrayPonto){
+            System.out.println("Distancia: " + ponto.calcularDistancia(aux));
+            if(ponto.calcularDistancia(aux) < 10){
+                tipoSelecionado = "Ponto";
+                indiceSelecionado = arm.ArrayPonto.indexOf(ponto);
+                ponto.setCorPto(Color.RED);
+                ponto.desenharPonto(g);
+                this.msg.setText("ACHOU UM PONTO");
+                return;
+            }
+        }
+        
+        //seleção da reta
+        for(RetaGr reta : arm.ArrayReta){
+            if(reta.retaSelect(aux)){
+                tipoSelecionado = "Reta";
+                indiceSelecionado = arm.ArrayReta.indexOf(reta);
+                reta.setCorReta(Color.RED);
+                reta.desenharReta(g);
+                this.msg.setText("ACHOU UM PONTO!");
+                return;
+            }
+        }
+
+        //seleção da circulo
+        for(CircGr circulo : arm.ArrayCirculo){
+            if(circulo.circSelect(aux)){
+                tipoSelecionado = "Circulo";
+                indiceSelecionado = arm.ArrayCirculo.indexOf(circulo);
+                circulo.setCorCirc(Color.RED);
+                circulo.desenharCirc(g);
+                this.msg.setText("ACHOU UM PONTO!");
+                return;
+            }
+        }
+
+        //seleção retangulo
+        for(RetanguloGr retangulo : arm.ArrayRetangulo){
+            if(retangulo.retanguloSelect(aux)){
+                tipoSelecionado = "Retangulo";
+                indiceSelecionado = arm.ArrayRetangulo.indexOf(retangulo);
+                retangulo.setCorPto(Color.RED);
+                retangulo.desenharRetangulo(g);
+                this.msg.setText("ACHOU UM PONTO!");
+                return;
+            }
+        }
+
+        /*
+        //seleção poligono
+        for(PoligonoGr poligono : arm.ArrayPoligono){
+            if(poligono.poligonoSelect(aux)){
+                tipoSelecionado = "Poligono";
+                indiceSelecionado = arm.ArrayPoligono.indexOf(poligono);
+                poligono.setCorPoligono(Color.RED);
+                poligono.desenharPoligono(g);
+                this.msg.setText("ACHOU UM PONTO!");
+                return;
+            }
+        }
+
+        //seleção linhaPoligonal
+        for(LinhaPoligonalGr linhaPoligonal : arm.ArrayLinhaPoligonal){
+            if(linhaPoligonal.linhaPoligonalSelect(aux)){
+                tipoSelecionado = "Poligono";
+                indiceSelecionado = arm.ArrayLinhaPoligonal.indexOf(linhaPoligonal);
+                linhaPoligonal.setCorLinhaPoligonal(Color.RED);
+                linhaPoligonal.desenharLinhaPoligonal(g);
+                this.msg.setText("ACHOU UM PONTO!");
+                return;
+            }
+        }
+
+        */
+
+    }
+    
+    //setters e getters para pegar a cor
+    public Color getCurrentColor() {
+        return this.currentColor;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
+    }
+
+    
     
 }

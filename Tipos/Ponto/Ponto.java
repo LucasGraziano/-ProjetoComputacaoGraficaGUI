@@ -11,8 +11,8 @@ import java.awt.*;
  * @version 09/08/2022
  */
 public class Ponto {
-    private double x;
-    private double y;
+    public double x;
+    public double y;
     Color cor;
     String nome;
     int espessura;

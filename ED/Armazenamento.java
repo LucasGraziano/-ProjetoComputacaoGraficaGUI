@@ -30,12 +30,12 @@ public class Armazenamento {
    
 
     //Criando uma lista para cada objeto
-    ArrayList<PontoGr> ArrayPonto;
-    ArrayList<RetaGr> ArrayReta;
-    ArrayList<CircGr> ArrayCirculo;
-    ArrayList<RetanguloGr> ArrayRetangulo;
-    ArrayList<PoligonoGr> ArrayPoligono;
-    ArrayList<LinhaPoligonalGr> ArrayLinhaPoligonal;
+    public ArrayList<PontoGr> ArrayPonto;
+    public ArrayList<RetaGr> ArrayReta;
+    public ArrayList<CircGr> ArrayCirculo;
+    public ArrayList<RetanguloGr> ArrayRetangulo;
+    public ArrayList<PoligonoGr> ArrayPoligono;
+    public ArrayList<LinhaPoligonalGr> ArrayLinhaPoligonal;
     
     /**
      * Quando a classe for instanciada os indexadores e as listas serão inicializados

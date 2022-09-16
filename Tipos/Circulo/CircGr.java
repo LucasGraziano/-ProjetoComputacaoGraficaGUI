@@ -3,12 +3,14 @@ package Tipos.Circulo;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Tipos.Ponto.Ponto;
+
 
 public class CircGr extends Circ {
 
-    Color corPto = Color.BLACK; // cor do ponto
-    String nomePto = ""; // nome do ponto
-    Color corNomePto  = Color.BLACK; // cor do nome (string) do ponto  
+    Color corCirc = Color.BLACK; // cor do ponto
+    String nomeCirc = ""; // nome do ponto
+    Color corNomeCirc  = Color.BLACK; // cor do nome (string) do ponto  
     int diametro = 1; // diametro do ponto, default = 1
 
     
@@ -21,9 +23,9 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorPto(Color.black);     
-        setCorNomePto(Color.black);     
-        setNomePto("");     
+        setCorCirc(Color.black);     
+        setCorNomeCirc(Color.black);     
+        setNomeCirc("");     
     }
 
     /**
@@ -35,9 +37,9 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorPto(cor);     
-        setCorNomePto(Color.black);     
-        setNomePto("");     
+        setCorCirc(cor);     
+        setCorNomeCirc(Color.black);     
+        setNomeCirc("");     
     }
 
     /**
@@ -64,7 +66,7 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2, Color corPonto, String nomePonto, int diametro){
         this(x1, y1, x2, y2, corPonto, diametro);
-        setNomePto(nomePonto);
+        setNomeCirc(nomePonto);
     }
     
     /**
@@ -77,9 +79,9 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2, Color cor, String str){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorPto(cor);     
-        setCorNomePto(Color.black);     
-        setNomePto(str);     
+        setCorCirc(cor);     
+        setCorNomeCirc(Color.black);     
+        setNomeCirc(str);     
     }
 
     /**
@@ -90,53 +92,53 @@ public class CircGr extends Circ {
      */
     public CircGr(CircGr p2d, Color cor){
         super(p2d);     
-        setCorPto(cor);     
-        setCorNomePto(Color.black);     
-        setNomePto("");     
+        setCorCirc(cor);     
+        setCorNomeCirc(Color.black);     
+        setNomeCirc("");     
     }
 
 
 
     /**
-     * @return the corPto
+     * @return the corCirc
      */
-    public Color getCorPto() {
-        return corPto;
+    public Color getCorCirc() {
+        return corCirc;
     }
 
     /**
-     * @param corPto the corPto to set
+     * @param corCirc the corCirc to set
      */
-    public void setCorPto(Color corPto) {
-        this.corPto = corPto;
+    public void setCorCirc(Color corCirc) {
+        this.corCirc = corCirc;
     }
 
     /**
-     * @return the nomePto
+     * @return the nomeCirc
      */
-    public String getNomePto() {
-        return nomePto;
+    public String getNomeCirc() {
+        return nomeCirc;
     }
 
     /**
-     * @param nomePto the nomePto to set
+     * @param nomeCirc the nomeCirc to set
      */
-    public void setNomePto(String nomePto) {
-        this.nomePto = nomePto;
+    public void setNomeCirc(String nomeCirc) {
+        this.nomeCirc = nomeCirc;
     }
 
     /**
-     * @return the corNomePto
+     * @return the corNomeCirc
      */
-    public Color getCorNomePto() {
-        return corNomePto;
+    public Color getCorNomeCirc() {
+        return corNomeCirc;
     }
 
     /**
-     * @param corNomePto the corNomePto to set
+     * @param corNomeCirc the corNomeCirc to set
      */
-    public void setCorNomePto(Color corNomePto) {
-        this.corNomePto = corNomePto;
+    public void setCorNomeCirc(Color corNomeCirc) {
+        this.corNomeCirc = corNomeCirc;
     }
 
     /**
@@ -161,7 +163,7 @@ public class CircGr extends Circ {
      * @param y2 - coordenada do raio
      */
     public void desenharCirc(Graphics g){
-        g.setColor(getCorPto());
+        g.setColor(getCorCirc());
         double x = getP1().getX(), y = getP1().getY(); // x e y do clique
         double x2 = getP2().getX(), y2 = getP2().getY(); // x e y do clique
         double ang = 0.0; // angulo a ser encrementado
@@ -188,5 +190,45 @@ public class CircGr extends Circ {
         }while(ang <= 360.0);
         
 
+    }
+
+    /**
+     * Desenha o Circulo
+     * 
+     * @param g - conteudo gráfico
+     * @param x2 - coordenada do raio
+     * @param y2 - coordenada do raio
+     */
+    public boolean circSelect(Ponto p){
+        double x = getP1().getX(), y = getP1().getY(); // x e y do clique
+        double x2 = getP2().getX(), y2 = getP2().getY(); // x e y do clique
+        double ang = 0.0; // angulo a ser encrementado
+        double xP = 0, yP = 0; // x e y a serem pintados
+        double catAd, catOp; //cateto adjacente e cateto oposto
+        double raio = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2) * 1.0); // raio do circulo (distancia entre os pontos dos cliques)
+        double dim = raio*2.0; //diametro do circulo
+        double xPonto = p.getX(), yPonto = p.getY();
+        
+        //Esse do-while faz o calculo de todos os pontos do circulo e desenhando com o fillOval
+        do{
+            //calculo dos pontos angulos do circulo
+            catAd = Math.cos(ang) * dim/2.0; 
+            catOp = Math.sin(ang) * dim/2.0;
+            
+            //sao as coordenadas da borda do circulo
+            xP = x2 + catAd;
+            yP = y2 + catOp;
+
+
+            var dist = Math.sqrt(((xPonto - xP) * (xPonto - xP)) + ((yPonto - yP) * (yPonto - yP)));
+                if(dist <= 10){
+                    return true;
+                }
+
+            //angulo vai aumentando em 0.01 em 0.01
+            ang = ang + 0.01;  //passo 0.01
+        }while(ang <= 360.0);
+        
+        return false;
     }
 }

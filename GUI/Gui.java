@@ -37,11 +37,13 @@ public class Gui extends JFrame {
     private JButton jbCor = new JButton("Cor");
     private JButton jbCarregar = new JButton("Redesenhar");
     private JButton jbLimpar = new JButton("Limpar");
+    private JButton jbSelecionar = new JButton("Selecionar");
 
     //implementacao da barra de deslize
     static final int sMin = 0;
     static final int sMax = 30;
     static final int sInicial = 15;
+    Color currentColor = Color.BLACK;
     int valorEsp;
     private JSlider espessura = new JSlider(JSlider.HORIZONTAL, sMin, sMax, sInicial);
     
@@ -124,6 +126,7 @@ public class Gui extends JFrame {
         jbCor.addActionListener(eventos);
         jbCarregar.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
+        jbSelecionar.addActionListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
     /**
@@ -140,6 +143,7 @@ public class Gui extends JFrame {
         barraComandos.add(jbLinhaPoligonal);
         barraComandos.add(jbCor);
         barraComandos.add(jbCarregar);
+        barraComandos.add(jbSelecionar);
         barraComandos.add(jbLimpar);
         barraComandos.add(espessura);
     }
@@ -179,6 +183,8 @@ public class Gui extends JFrame {
                 tipo = TiposPrimitivos.LINHAPOLIGONAL;
             }else if(event.getSource() == jbCor) { //fazer circulo
                 tipo = TiposPrimitivos.COR;
+            }else if(event.getSource() == jbSelecionar) { //fazer circulo
+                tipo = TiposPrimitivos.SELECIONAR;
             } else if(event.getSource() == jbCarregar) { //limpar a tela
                 tipo = TiposPrimitivos.CARREGAR;
                 repaint();
