@@ -160,7 +160,7 @@ public class RetanguloGr extends Retangulo {
      * 
      */
     public void desenharRetangulo(Graphics g){
-        g.setColor(setCorNomePto());
+        g.setColor(getCorPto());
         double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
         
             //acho q n vou usar saporra
@@ -184,7 +184,7 @@ public class RetanguloGr extends Retangulo {
     
     
     public void desenharReta(Graphics g, double x1, double y1, double x2, double y2){
-        g.setColor(setCorNomePto());
+        g.setColor(getCorPto());
 
         double Dx=0, Dy=0;// Delta x; Delata y
         double m=0, b=0;// Coeficinete angular; b
@@ -254,7 +254,7 @@ public class RetanguloGr extends Retangulo {
     }
 
     public boolean retanguloSelect(Ponto p){
-        boolean pVeri = false;
+        boolean pVeri = false, pVeri1 = false, pVeri2 = false, pVeri3 = false, pVeri4 = false;
         double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
         
             //acho q n vou usar saporra
@@ -263,16 +263,18 @@ public class RetanguloGr extends Retangulo {
         //Construindo as 4 retas do retangulo. 
         //primeira reta -> (x1,y1), (x2,y1) 
 
-        pVeri = retaSelect(p, x1, y1, x2,y1);
+        pVeri1 = retaSelect(p, x1, y1, x2,y1);
 
         //segunda reta -> (x2,y1), (x2,y2)
-        pVeri = retaSelect(p, x2, y1, x2, y2);
+        pVeri2 = retaSelect(p, x2, y1, x2, y2);
 
         //terceira reta -> (x2,y2), (x1,y2)
-        pVeri = retaSelect(p, x2, y2, x1, y2);
+        pVeri3 = retaSelect(p, x2, y2, x1, y2);
 
         //quarta reta -> (x1,y2), (x1,y1)
-        pVeri = retaSelect(p, x1,y2,x1,y1);
+        pVeri4 = retaSelect(p, x1,y2,x1,y1);
+
+        if(pVeri1 == true || pVeri2 == true|| pVeri3 == true|| pVeri4 == true) pVeri = true;
 
         return pVeri;
     }   

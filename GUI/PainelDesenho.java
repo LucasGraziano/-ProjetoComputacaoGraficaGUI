@@ -140,11 +140,13 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             if (SwingUtilities.isRightMouseButton(e) && tipo == TiposPrimitivos.POLIGONO){
                 xMouse2 = xMouseInicial;
                 yMouse2 = yMouseInicial;
+                FiguraPontos.poligono_fim = true;
                 primeiroPonto = true;
             }
             else if (SwingUtilities.isRightMouseButton(e) && tipo == TiposPrimitivos.LINHAPOLIGONAL){
                 xMouse2 = xMouse;
                 yMouse2 = yMouse;
+                FiguraPontos.poligono_fim = true;
                 primeiroPonto = true;
             }
         }else if (tipo == TiposPrimitivos.CARREGAR || tipo == TiposPrimitivos.COR){
@@ -354,7 +356,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
 
         //seleção do ponto
         for(PontoGr ponto : arm.ArrayPonto){
-            System.out.println("Distancia: " + ponto.calcularDistancia(aux));
+            //System.out.println("Distancia: " + ponto.calcularDistancia(aux));
             if(ponto.calcularDistancia(aux) < 10){
                 tipoSelecionado = "Ponto";
                 indiceSelecionado = arm.ArrayPonto.indexOf(ponto);
@@ -372,7 +374,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 indiceSelecionado = arm.ArrayReta.indexOf(reta);
                 reta.setCorReta(Color.RED);
                 reta.desenharReta(g);
-                this.msg.setText("ACHOU UM PONTO!");
+                this.msg.setText("ACHOU UM RETA!");
                 return;
             }
         }
@@ -384,49 +386,48 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 indiceSelecionado = arm.ArrayCirculo.indexOf(circulo);
                 circulo.setCorCirc(Color.RED);
                 circulo.desenharCirc(g);
-                this.msg.setText("ACHOU UM PONTO!");
+                this.msg.setText("ACHOU UM CIRCULO!");
                 return;
             }
         }
 
         //seleção retangulo
         for(RetanguloGr retangulo : arm.ArrayRetangulo){
+            
             if(retangulo.retanguloSelect(aux)){
                 tipoSelecionado = "Retangulo";
                 indiceSelecionado = arm.ArrayRetangulo.indexOf(retangulo);
                 retangulo.setCorPto(Color.RED);
                 retangulo.desenharRetangulo(g);
-                this.msg.setText("ACHOU UM PONTO!");
+                this.msg.setText("ACHOU UM RETANGULO!");
                 return;
             }
         }
 
-        /*
+        
         //seleção poligono
         for(PoligonoGr poligono : arm.ArrayPoligono){
             if(poligono.poligonoSelect(aux)){
                 tipoSelecionado = "Poligono";
                 indiceSelecionado = arm.ArrayPoligono.indexOf(poligono);
-                poligono.setCorPoligono(Color.RED);
+                poligono.setCorReta(Color.RED);
                 poligono.desenharPoligono(g);
-                this.msg.setText("ACHOU UM PONTO!");
+                this.msg.setText("ACHOU UM POLIGONO! " + poligono.getCorReta());
                 return;
             }
         }
-
+         
         //seleção linhaPoligonal
         for(LinhaPoligonalGr linhaPoligonal : arm.ArrayLinhaPoligonal){
             if(linhaPoligonal.linhaPoligonalSelect(aux)){
                 tipoSelecionado = "Poligono";
                 indiceSelecionado = arm.ArrayLinhaPoligonal.indexOf(linhaPoligonal);
-                linhaPoligonal.setCorLinhaPoligonal(Color.RED);
+                linhaPoligonal.setCorReta(Color.RED);
                 linhaPoligonal.desenharLinhaPoligonal(g);
-                this.msg.setText("ACHOU UM PONTO!");
+                this.msg.setText("ACHOU UMA LINHA POLIGONAL!");
                 return;
             }
         }
-
-        */
 
     }
     

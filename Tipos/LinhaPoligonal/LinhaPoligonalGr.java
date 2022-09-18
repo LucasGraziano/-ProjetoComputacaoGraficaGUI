@@ -1,6 +1,10 @@
 package Tipos.LinhaPoligonal;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+
+import Tipos.Ponto.Ponto;
+import Tipos.Reta.RetaGr;
 
 /**
  * Classe da Reta Grafica 
@@ -18,6 +22,8 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
     String nomeReta = ""; // nome do Reta
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
+
+    public ArrayList<RetaGr> retas = new ArrayList<RetaGr>();
 
 
     /**
@@ -166,11 +172,26 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
 
 
     public void desenharLinhaPoligonal(Graphics g){
-        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-        desenharReta(g, x1, y1, x2, y2);
+        for(RetaGr reta : retas){
+            reta.setCorReta(corReta);
+            reta.desenharReta(g);
+        }
+    }
+    
+    public void adicionarReta(Graphics g, Ponto p1, Ponto p2){
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
+        desenharLinhaPoligonal(g);
+    }
 
+    public boolean linhaPoligonalSelect(Ponto p){
+        for(RetaGr reta : retas){
+            if(reta.retaSelect(p)){
+                return true;
+            }
+        }
 
+        return false;
     }
 
     /**

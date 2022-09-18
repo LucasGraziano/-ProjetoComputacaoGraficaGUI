@@ -2,6 +2,9 @@ package Tipos.Poligono;
 import java.awt.Color;
 import java.awt.Graphics;
 import Tipos.Ponto.Ponto;
+import Tipos.Reta.RetaGr;
+
+import java.util.ArrayList;
 
 /**
  * Classe da Reta Grafica 
@@ -20,6 +23,7 @@ public class PoligonoGr extends Poligono {
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
 
+    public ArrayList<RetaGr> retas = new ArrayList<RetaGr>();
 
     /**
      * Construtor
@@ -167,11 +171,24 @@ public class PoligonoGr extends Poligono {
 
 
     public void desenharPoligono(Graphics g){
-        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-        desenharReta(g, x1, y1, x2, y2);
+        for(RetaGr reta : retas){
+            reta.setCorReta(corReta);
+            reta.desenharReta(g);
+        }
+    }
 
+    public void adicionarReta(Graphics g, Ponto p1, Ponto p2){
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
+        desenharPoligono(g);
+    }
 
+    public void adicionarRetaFinal(Graphics g){
+        Ponto p1 = retas.get(0).getP1();
+        Ponto p2 = retas.get(retas.size() - 1).getP2();
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
+        desenharPoligono(g);
     }
 
     /**
@@ -255,12 +272,14 @@ public class PoligonoGr extends Poligono {
         }
     }
 
-    public void poligonoSelect(Ponto p){
-        double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-        retaSelect(p, x1, y1, x2, y2);
+    public boolean poligonoSelect(Ponto p){
+        for(RetaGr reta : retas){
+            if(reta.retaSelect(p)){
+                return true;
+            }
+        }
 
-
+        return false;
     }
 
     public boolean retaSelect(Ponto p, double x1, double y1, double x2, double y2){

@@ -30,7 +30,7 @@ public class RetaGr extends Reta {
      * @param x2 - coordenada do x2
      * @param y2 - coordenada do y2
      */
-    RetaGr(int x1, int y1, int x2, int  y2){
+    public RetaGr(int x1, int y1, int x2, int  y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(Color.black);     
         setCorNomeReta(Color.black);     
@@ -46,7 +46,7 @@ public class RetaGr extends Reta {
      * @param y2 - coordenada do y2
      * @param cor - cor da Reta 
      */
-    RetaGr(int x1, int y1, int x2, int  y2, Color cor){
+    public RetaGr(int x1, int y1, int x2, int  y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorReta(cor);     
         setCorNomeReta(Color.black);     

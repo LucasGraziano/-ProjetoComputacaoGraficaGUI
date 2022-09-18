@@ -50,15 +50,11 @@ public class Armazenamento {
         indexLinhaPoligonal = 0;
 
         ArrayPonto = new ArrayList<PontoGr>();
-        ArrayReta = new ArrayList<RetaGr>();;
-        ArrayCirculo = new ArrayList<CircGr>();;
-        ArrayRetangulo = new ArrayList<RetanguloGr>();;
-        ArrayPoligono = new ArrayList<PoligonoGr>();;
-        ArrayLinhaPoligonal = new ArrayList<LinhaPoligonalGr>();;
-
-        
-        //PontoNeutro.setX(-1);
-        //PontoNeutro.setY(-1);
+        ArrayReta = new ArrayList<RetaGr>();
+        ArrayCirculo = new ArrayList<CircGr>();
+        ArrayRetangulo = new ArrayList<RetanguloGr>();
+        ArrayPoligono = new ArrayList<PoligonoGr>();
+        ArrayLinhaPoligonal = new ArrayList<LinhaPoligonalGr>();
 
         PontosNeutro.setX1(-1);
         PontosNeutro.setY1(-1);

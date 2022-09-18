@@ -5,6 +5,7 @@ import ED.Armazenamento;
 import Tipos.Circulo.CircGr;
 import Tipos.LinhaPoligonal.LinhaPoligonalGr;
 import Tipos.Poligono.PoligonoGr;
+import Tipos.Ponto.Ponto;
 import Tipos.Ponto.PontoGr;
 import Tipos.Reta.RetaGr;
 import Tipos.Retangulo.RetanguloGr;
@@ -15,6 +16,9 @@ import Tipos.Retangulo.RetanguloGr;
  */
 public class FiguraPontos {
         static Armazenamento arm = new Armazenamento();
+
+        static int poligono_aux = -1;
+        static boolean poligono_fim = false;
         /**
          * Funcao responsavel para o desenho da reta 
          *
@@ -83,16 +87,35 @@ public class FiguraPontos {
         }
         
         public static void desenharPoligono(Graphics g, int x1, int y1, int x2, int y2, int diametro, Color cor) {
-                PoligonoGr p = new PoligonoGr(x1, y1, x2, y2, cor, diametro);
-                arm.setArrayPoligono(p);
-                p.desenharPoligono(g);
+                if(poligono_aux == -1){
+                        PoligonoGr p = new PoligonoGr(x1, y1, x2, y2, cor, diametro);
+                        poligono_aux = arm.ArrayPoligono.size();
+                        arm.setArrayPoligono(p);
+                        p.desenharPoligono(g);
+                }else if(poligono_fim == true){
+                        PoligonoGr p = arm.ArrayPoligono.get(poligono_aux);
+                        p.adicionarRetaFinal(g);
+                        poligono_aux = -1;
+                        poligono_fim = false;
+                }else{
+                        PoligonoGr p = arm.ArrayPoligono.get(poligono_aux);
+                        p.adicionarReta(g, new Ponto(x1, y1), new Ponto(x2, y2));
+                }
         }
 
         public static void desenharLinhaPoligonal(Graphics g, int x1, int y1, int x2, int y2, int diametro, Color cor) {
-                
-                LinhaPoligonalGr p = new LinhaPoligonalGr(x1, y1, x2, y2, cor, diametro);
-                arm.setArrayLinhaPoligonal(p);
-                p.desenharLinhaPoligonal(g);
+                if(poligono_aux == -1){
+                        LinhaPoligonalGr p = new LinhaPoligonalGr(x1, y1, x2, y2, cor, diametro);
+                        poligono_aux = arm.ArrayLinhaPoligonal.size();
+                        arm.setArrayLinhaPoligonal(p);
+                        p.desenharLinhaPoligonal(g);
+                }else if(poligono_fim == true){
+                        poligono_aux = -1;
+                        poligono_fim = false;
+                }else{
+                        LinhaPoligonalGr p = arm.ArrayLinhaPoligonal.get(poligono_aux);
+                        p.adicionarReta(g, new Ponto(x1, y1), new Ponto(x2, y2));
+                }      
         }
 
         /**

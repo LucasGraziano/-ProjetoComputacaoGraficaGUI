@@ -25,7 +25,11 @@ public class Gui extends JFrame {
     
 
     // mensagens
+    JPanel barraSul = new JPanel();
+    
+    
     private JLabel msg = new JLabel("Msg: ");
+    private JLabel info = new JLabel();
     
     //botoes
     private JButton jbPontos = new JButton("Pontos");
@@ -38,6 +42,7 @@ public class Gui extends JFrame {
     private JButton jbCarregar = new JButton("Redesenhar");
     private JButton jbLimpar = new JButton("Limpar");
     private JButton jbSelecionar = new JButton("Selecionar");
+    private JButton jbApagar = new JButton("Apagar");
 
     //implementacao da barra de deslize
     static final int sMin = 0;
@@ -73,12 +78,17 @@ public class Gui extends JFrame {
         setSize(larg, alt);
         setVisible(true);
         setResizable(false);
+        barraSul.setLayout(new BorderLayout());
 
         // Adicionando os componentes
         adicionarBotoes();
         add(barraComandos, BorderLayout.NORTH);                
-        add(areaDesenho, BorderLayout.CENTER);                
-        add(msg, BorderLayout.SOUTH);
+        add(areaDesenho, BorderLayout.CENTER);      
+        add(barraSul, BorderLayout.SOUTH);          
+        barraSul.add(msg, BorderLayout.WEST);
+        barraSul.add(info, BorderLayout.EAST);
+        
+        //add(info, BorderLayout.SOUTH);
 
         //eventos dos botoes
         evento();
@@ -127,6 +137,7 @@ public class Gui extends JFrame {
         jbCarregar.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
         jbSelecionar.addActionListener(eventos);
+        jbApagar.addActionListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
     /**
@@ -144,16 +155,14 @@ public class Gui extends JFrame {
         barraComandos.add(jbCor);
         barraComandos.add(jbCarregar);
         barraComandos.add(jbSelecionar);
+        barraComandos.add(jbApagar);
         barraComandos.add(jbLimpar);
-        barraComandos.add(espessura);
+        barraComandos.add(espessura);    
     }
-
     
 
     
     private class Eventos implements ActionListener, ChangeListener{
-
-        
         TiposPrimitivos tipo;
         
         /**
@@ -166,25 +175,34 @@ public class Gui extends JFrame {
 
         public void actionPerformed(ActionEvent event) {
             
-            
-
             if (event.getSource() == jbPontos){ //fazer pontos 
                 tipo = TiposPrimitivos.PONTOS;
 
             } else if(event.getSource() == jbReta) { //fazer reta
                 tipo = TiposPrimitivos.RETAS;
+
             } else if(event.getSource() == jbCirc) { //fazer circulo
                 tipo = TiposPrimitivos.CIRCULOS;
+
             }else if(event.getSource() == jbRetangulo) { //fazer circulo
                 tipo = TiposPrimitivos.RETANGULO;
+
             }  else if(event.getSource() == jbPoligono) { //fazer circulo
                 tipo = TiposPrimitivos.POLIGONO;
+                
             } else if(event.getSource() == jbLinhaPoligonal) { //fazer circulo
                 tipo = TiposPrimitivos.LINHAPOLIGONAL;
+
             }else if(event.getSource() == jbCor) { //fazer circulo
                 tipo = TiposPrimitivos.COR;
+
             }else if(event.getSource() == jbSelecionar) { //fazer circulo
                 tipo = TiposPrimitivos.SELECIONAR;
+
+                //info.setText("tecla 'Delete' para apagar");
+            }else if(event.getSource() == jbSelecionar) { //fazer circulo
+                tipo = TiposPrimitivos.APAGAR;
+
             } else if(event.getSource() == jbCarregar) { //limpar a tela
                 tipo = TiposPrimitivos.CARREGAR;
                 repaint();
