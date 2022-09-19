@@ -7,14 +7,8 @@ import Tipos.Reta.RetaGr;
 import java.util.ArrayList;
 
 /**
- * Classe da Reta Grafica 
+ * Classe do Poligono Grafico 
  * 
- * @author
- * MA4B
- * Julio Cesar Barboza - RA00297586
- * Lucas Costa Pessoa Graziano - RA00297851
- * Gustavo Scacchetti - RA00301499
- * @version 09/08/2022
  */
 public class PoligonoGr extends Poligono {
     
@@ -23,7 +17,7 @@ public class PoligonoGr extends Poligono {
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
 
-    public ArrayList<RetaGr> retas = new ArrayList<RetaGr>();
+    public ArrayList<RetaGr> retas = new ArrayList<RetaGr>(); //Cria um array list para armazenar as retas que formam o poligono
 
     /**
      * Construtor
@@ -170,6 +164,10 @@ public class PoligonoGr extends Poligono {
     }
 
 
+    /**
+     * desenha o poligono
+     * @param g - conteudo grafico
+     */
     public void desenharPoligono(Graphics g){
         for(RetaGr reta : retas){
             reta.setCorReta(corReta);
@@ -177,12 +175,22 @@ public class PoligonoGr extends Poligono {
         }
     }
 
+    /**
+     *  adiciona uma reta para compor o poligono
+     * @param g - conteudo grafico
+     * @param p1 - coordenada do ponto 1
+     * @param p2 - coordenada do ponto 2
+     */
     public void adicionarReta(Graphics g, Ponto p1, Ponto p2){
         RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
         retas.add(reta_aux);
         desenharPoligono(g);
     }
 
+    /**
+     * Adiciona a ultima reta
+     * @param g - conteudo grafico
+     */
     public void adicionarRetaFinal(Graphics g){
         Ponto p1 = retas.get(0).getP1();
         Ponto p2 = retas.get(retas.size() - 1).getP2();
@@ -191,15 +199,14 @@ public class PoligonoGr extends Poligono {
         desenharPoligono(g);
     }
 
+   
     /**
-     * desenha um Reta utilizando o oval 
-     * 
-     * @param g contexto grafico
-     * @param cor
-     * @param y2
-     * @param x2
-     * @param y1
-     * @param x1
+     * Desenha uma reta atraves de circulos
+     * @param g - conteudo grafico
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
      */
     public void desenharReta(Graphics g, double x1, double y1, double x2, double y2){
         g.setColor(getCorReta());

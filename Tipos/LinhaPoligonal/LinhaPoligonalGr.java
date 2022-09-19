@@ -7,14 +7,7 @@ import Tipos.Ponto.Ponto;
 import Tipos.Reta.RetaGr;
 
 /**
- * Classe da Reta Grafica 
- * 
- * @author
- * MA4B
- * Julio Cesar Barboza - RA00297586
- * Lucas Costa Pessoa Graziano - RA00297851
- * Gustavo Scacchetti - RA00301499
- * @version 09/08/2022
+ * Classe da Linha Poligonal Grafica 
  */
 public class LinhaPoligonalGr extends LinhaPoligonal {
     
@@ -171,6 +164,10 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
     }
 
 
+    /**
+     * Desenha a linha poligonal
+     * @param g conteudo grafico
+     */
     public void desenharLinhaPoligonal(Graphics g){
         for(RetaGr reta : retas){
             reta.setCorReta(corReta);
@@ -178,12 +175,23 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
         }
     }
     
+    /**
+     * Adiciona a reta em uma lista auxiliar
+     * @param g conteudo grafico
+     * @param p1 - coordenada do ponto 1
+     * @param p2 - coordenada do ponto 2
+     */
     public void adicionarReta(Graphics g, Ponto p1, Ponto p2){
         RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
         retas.add(reta_aux);
         desenharLinhaPoligonal(g);
     }
 
+    /**
+     * Seleciona uma linha poligonal
+     * @param p - coordenada de um ponto
+     * @return true ou false
+     */
     public boolean linhaPoligonalSelect(Ponto p){
         for(RetaGr reta : retas){
             if(reta.retaSelect(p)){
@@ -194,15 +202,14 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
         return false;
     }
 
+    
     /**
-     * desenha um Reta utilizando o oval 
-     * 
-     * @param g contexto grafico
-     * @param cor
-     * @param y2
-     * @param x2
-     * @param y1
-     * @param x1
+     *  desenha a reta
+     * @param g - conteudo grafico
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
      */
     public void desenharReta(Graphics g, double x1, double y1, double x2, double y2){
         g.setColor(getCorReta());

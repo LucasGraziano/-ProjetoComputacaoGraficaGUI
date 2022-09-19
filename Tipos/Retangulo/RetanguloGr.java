@@ -162,9 +162,6 @@ public class RetanguloGr extends Retangulo {
     public void desenharRetangulo(Graphics g){
         g.setColor(getCorPto());
         double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-            //acho q n vou usar saporra
-        //diagonal = ((xMaior - xMenor)^2 + (yMaior - yMenor)^2) / diametro // Pitagoras: c^2 = a^2 + b^2 -> c = (a^2 + b^2) / c
 
         //Construindo as 4 retas do retangulo. 
         //primeira reta -> (x1,y1), (x2,y1) 
@@ -182,7 +179,17 @@ public class RetanguloGr extends Retangulo {
 
     }   
     
-    
+   
+    /**
+     * 
+     * Desenha as retas do retangulo
+     *
+     * @param g - conteudo grafico
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     */
     public void desenharReta(Graphics g, double x1, double y1, double x2, double y2){
         g.setColor(getCorPto());
 
@@ -253,12 +260,15 @@ public class RetanguloGr extends Retangulo {
         }
     }
 
+    /**
+     * Verifica se o ponto clicado na tela pertece ao retangulo
+     *
+     * @param p - coordenada do ponto
+     * @return - true ou false
+     */
     public boolean retanguloSelect(Ponto p){
         boolean pVeri = false, pVeri1 = false, pVeri2 = false, pVeri3 = false, pVeri4 = false;
         double x1 = getP1().getX(), x2 = getP2().getX(), y1 = getP1().getY(), y2 = getP2().getY();
-        
-            //acho q n vou usar saporra
-        //diagonal = ((xMaior - xMenor)^2 + (yMaior - yMenor)^2) / diametro // Pitagoras: c^2 = a^2 + b^2 -> c = (a^2 + b^2) / c
 
         //Construindo as 4 retas do retangulo. 
         //primeira reta -> (x1,y1), (x2,y1) 
@@ -279,7 +289,16 @@ public class RetanguloGr extends Retangulo {
         return pVeri;
     }   
     
-    
+    /**
+     * Verifica se o ponto clicado na tela pertence a uma das retas do triangulo
+     *
+     * @param p - coordenada do ponto
+     * @param x1 - coordenada do x1
+     * @param y1 - coordenada do y1
+     * @param x2 - coordenada do x2
+     * @param y2 - coordenada do y2
+     * @return - true ou false
+     */
     public boolean retaSelect(Ponto p, double x1, double y1, double x2, double y2){
 
         double Dx=0, Dy=0;// Delta x; Delata y

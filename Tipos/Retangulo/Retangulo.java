@@ -2,6 +2,9 @@ package Tipos.Retangulo;
 
 import Tipos.Ponto.Ponto;
 
+/**
+ * classe
+ */
 public class Retangulo {
     // Atributos da reta
     private Ponto p1, p2, p3, p4;
@@ -24,6 +27,8 @@ public class Retangulo {
     public Retangulo(RetanguloGr p2d) {
     }
 
+
+    //setters e getters
 
     /**
      * 
@@ -69,7 +74,7 @@ public class Retangulo {
     }
 
     /**
-     * 
+     * Calcula o coeficiente angular
      * @param Dy - delta y
      * @param Dx - delta x
      */
@@ -80,7 +85,7 @@ public class Retangulo {
     }
 
     /**
-     * 
+     * Calcula a constante
      * @param m - coeficiente 
      */
      public double calcularB(double m){

@@ -16,11 +16,11 @@ import Tipos.LinhaPoligonal.*;
 public class Armazenamento {
     //Indexadores da lista
     public int indexPonto;
-    int indexReta;
-    int indexCirculo;
-    int indexRetangulo;
-    int indexPoligono;
-    int indexLinhaPoligonal;
+    public int indexReta;
+    public int indexCirculo;
+    public int indexRetangulo;
+    public int indexPoligono;
+    public int indexLinhaPoligonal;
 
     //Ponto criado para indentificar o final da lista
     //PontoGr PontoNeutro = new PontoGr();

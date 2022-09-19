@@ -3,14 +3,7 @@ package Tipos.Poligono;
 import Tipos.Ponto.Ponto;
 
 /**
- * Classe da Reta Matematica
- * 
- * @author
- * MA4B
- * Julio Cesar Barboza - RA00297586
- * Lucas Costa Pessoa Graziano - RA00297851
- * Gustavo Scacchetti - RA00301499
- * @version 09/08/2022
+ * Classe do Poligono Matematico
  */
 public class Poligono {
  

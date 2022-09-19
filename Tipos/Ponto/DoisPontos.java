@@ -1,6 +1,7 @@
 package Tipos.Ponto;
 import java.awt.*;
 
+
 public class DoisPontos {
     private double x1;
     private double y1;
