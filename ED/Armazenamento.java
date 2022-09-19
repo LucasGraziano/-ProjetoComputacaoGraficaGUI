@@ -15,7 +15,7 @@ import Tipos.LinhaPoligonal.*;
  */
 public class Armazenamento {
     //Indexadores da lista
-    int indexPonto;
+    public int indexPonto;
     int indexReta;
     int indexCirculo;
     int indexRetangulo;

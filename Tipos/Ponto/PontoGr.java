@@ -190,7 +190,6 @@ public class PontoGr extends Ponto {
     public void desenharPonto(Graphics g){
         // desenha ponto como um oval
         g.setColor(getCorPto());
-        System.out.print("Cor: " + getCorPto());
         g.fillOval((int)getX() -(getDiametro()/2), (int)getY() - (getDiametro()/2), getDiametro(), getDiametro());
 
         // desenha nome do ponto

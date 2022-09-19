@@ -257,6 +257,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         else if (tipo == TiposPrimitivos.SELECIONAR){
             SelectFormas(g, xMouse, yMouse);
         }
+        else if (tipo == TiposPrimitivos.APAGAR){
+            //ApagarFormas(g, xMouse, yMouse);
+        }
         //opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
             if(verificar == false) verificar = true;
@@ -289,57 +292,80 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      */
     public void carregarFormas(Graphics g){
         
-        PontoGr ponto;
-        RetaGr reta;
-        CircGr circulo;
-        RetanguloGr retangulo;
-        PoligonoGr poligono;
-        LinhaPoligonalGr linhaPoligonal;
+        // PontoGr ponto;
+        // RetaGr reta;
+        // CircGr circulo;
+        // RetanguloGr retangulo;
+        // PoligonoGr poligono;
+        // LinhaPoligonalGr linhaPoligonal;
 
 
-        do{//Desenha todos os pontos
-           ponto = arm.getArrayPonto();
-           if(ponto != null){
-                ponto.desenharPonto(g);
-           }
+        // do{//Desenha todos os pontos
+        //    ponto = arm.getArrayPonto();
+        //    if(ponto != null){
+        //         ponto.desenharPonto(g);
+        //    }
            
-        }while(ponto != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        // }while(ponto != null);//Ponto neutro(controle para verificar se chegou no final do arforma
+        for(PontoGr forma : arm.ArrayPonto){
+            forma.desenharPonto(g);
+        }
 
-        do{//Desenha todas as retas
-            reta = arm.getArrayReta();
-           if(reta != null){
-                reta.desenharReta(g);
-           }
-        }while(reta != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        for(RetaGr forma : arm.ArrayReta){
+            forma.desenharReta(g);
+        }
 
-        do{//Desenha todos os circulos
-            circulo = arm.getArrayCirculo();
-           if(circulo != null){
-                circulo.desenharCirc(g);
-           }
-        }while(circulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        for(CircGr forma : arm.ArrayCirculo){
+            forma.desenharCirc(g);
+        }
+        
+        for(RetanguloGr forma : arm.ArrayRetangulo){
+            forma.desenharRetangulo(g);
+        }
 
-        do{//Desenha todos os retangulos
-            retangulo = arm.getArrayRetangulo();
-           if(retangulo != null){
-                retangulo.desenharRetangulo(g);
-           }
-        }while(retangulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        for(PoligonoGr forma : arm.ArrayPoligono){
+            forma.desenharPoligono(g);
+        }
 
-        do{//Desenha todos os poligonos
-            poligono = arm.getArrayPoligono();
-           if(poligono != null){
-                poligono.desenharPoligono(g);
-           }
-        }while(poligono != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        for(LinhaPoligonalGr forma : arm.ArrayLinhaPoligonal){
+            forma.desenharLinhaPoligonal(g);
+        }
 
-        do{//Desenha todas as linhas poligonais
-            linhaPoligonal = arm.getArrayLinhaPoligonal();
-           if(linhaPoligonal != null){
-                linhaPoligonal.desenharLinhaPoligonal(g);
-            }
-        }while(linhaPoligonal != null);//Ponto neutro(controle para verificar se chegou no final do array)
-        FiguraPontos.zerar();
+        // do{//Desenha todas as retas
+        //     reta = arm.getArrayReta();
+        //    if(reta != null){
+        //         reta.desenharReta(g);
+        //    }
+        // }while(reta != null);//Ponto neutro(controle para verificar se chegou no final do array)
+
+        // do{//Desenha todos os circulos
+        //     circulo = arm.getArrayCirculo();
+        //    if(circulo != null){
+        //         circulo.desenharCirc(g);
+        //    }
+        // }while(circulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
+
+        // do{//Desenha todos os retangulos
+        //     retangulo = arm.getArrayRetangulo();
+        //    if(retangulo != null){
+        //         retangulo.desenharRetangulo(g);
+        //    }
+        // }while(retangulo != null);//Ponto neutro(controle para verificar se chegou no final do array)
+
+        // do{//Desenha todos os poligonos
+        //     poligono = arm.getArrayPoligono();
+        //    if(poligono != null){
+        //         poligono.desenharPoligono(g);
+        //    }
+        // }while(poligono != null);//Ponto neutro(controle para verificar se chegou no final do array)
+
+        // do{//Desenha todas as linhas poligonais
+        //     linhaPoligonal = arm.getArrayLinhaPoligonal();
+        //    if(linhaPoligonal != null){
+        //         linhaPoligonal.desenharLinhaPoligonal(g);
+        //     }
+        // }while(linhaPoligonal != null);//Ponto neutro(controle para verificar se chegou no final do array)
+        //FiguraPontos.zerar();
     }
 
     String tipoSelecionado = "";
@@ -430,6 +456,113 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
 
     }
+
+    /**
+     * Redesenha as formas
+     * @param g - parte grafica
+     */
+    public void ApagarFormas(){
+
+        switch(tipoSelecionado){
+            case "Ponto":
+                arm.indexPonto--;
+                arm.ArrayPonto.remove(indiceSelecionado);
+                
+                //Graphics g = getGraphics();
+                //paint(g);
+
+                //repaint();
+                tipoSelecionado = "";
+                break;
+        }
+        // //ponto que foi clicado
+        // Ponto aux = new Ponto(x, y);
+
+        // //seleção do ponto
+        // for(PontoGr ponto : arm.ArrayPonto){
+        //     //System.out.println("Distancia: " + ponto.calcularDistancia(aux));
+        //     if(ponto.calcularDistancia(aux) < 10){
+        //         tipoSelecionado = "Ponto";
+        //         indiceSelecionado = arm.ArrayPonto.indexOf(ponto);
+        //         ponto.setCorPto(Color.WHITE);
+        //         ponto.desenharPonto(g);
+        //         arm.indexPonto--;
+        //         arm.ArrayPonto.remove(ponto);
+                
+        //         //Gui.repaint();
+                
+                
+
+        //         this.msg.setText("ACHOU UM PONTO");
+        //         return;
+        //     }
+        // }
+        
+        // // //seleção da reta
+        // // for(RetaGr reta : arm.ArrayReta){
+        // //     if(reta.retaSelect(aux)){
+        // //         tipoSelecionado = "Reta";
+        // //         indiceSelecionado = arm.ArrayReta.indexOf(reta);
+        // //         reta.setCorReta(Color.RED);
+        // //         reta.desenharReta(g);
+        // //         this.msg.setText("ACHOU UM RETA!");
+        // //         return;
+        // //     }
+        // // }
+
+        // // //seleção da circulo
+        // // for(CircGr circulo : arm.ArrayCirculo){
+        // //     if(circulo.circSelect(aux)){
+        // //         tipoSelecionado = "Circulo";
+        // //         indiceSelecionado = arm.ArrayCirculo.indexOf(circulo);
+        // //         circulo.setCorCirc(Color.RED);
+        // //         circulo.desenharCirc(g);
+        // //         this.msg.setText("ACHOU UM CIRCULO!");
+        // //         return;
+        // //     }
+        // // }
+
+        // // //seleção retangulo
+        // // for(RetanguloGr retangulo : arm.ArrayRetangulo){
+            
+        // //     if(retangulo.retanguloSelect(aux)){
+        // //         tipoSelecionado = "Retangulo";
+        // //         indiceSelecionado = arm.ArrayRetangulo.indexOf(retangulo);
+        // //         retangulo.setCorPto(Color.RED);
+        // //         retangulo.desenharRetangulo(g);
+        // //         this.msg.setText("ACHOU UM RETANGULO!");
+        // //         return;
+        // //     }
+        // // }
+
+        
+        // // //seleção poligono
+        // // for(PoligonoGr poligono : arm.ArrayPoligono){
+        // //     if(poligono.poligonoSelect(aux)){
+        // //         tipoSelecionado = "Poligono";
+        // //         indiceSelecionado = arm.ArrayPoligono.indexOf(poligono);
+        // //         poligono.setCorReta(Color.RED);
+        // //         poligono.desenharPoligono(g);
+        // //         this.msg.setText("ACHOU UM POLIGONO! " + poligono.getCorReta());
+        // //         return;
+        // //     }
+        // // }
+         
+        // // //seleção linhaPoligonal
+        // // for(LinhaPoligonalGr linhaPoligonal : arm.ArrayLinhaPoligonal){
+        // //     if(linhaPoligonal.linhaPoligonalSelect(aux)){
+        // //         tipoSelecionado = "Poligono";
+        // //         indiceSelecionado = arm.ArrayLinhaPoligonal.indexOf(linhaPoligonal);
+        // //         linhaPoligonal.setCorReta(Color.RED);
+        // //         linhaPoligonal.desenharLinhaPoligonal(g);
+        // //         this.msg.setText("ACHOU UMA LINHA POLIGONAL!");
+        // //         return;
+        // //     }
+        // // }
+
+        // // carregarFormas(g);
+    
+    }
     
     //setters e getters para pegar a cor
     public Color getCurrentColor() {
@@ -443,3 +576,5 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     
     
 }
+
+

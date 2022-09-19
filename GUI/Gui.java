@@ -75,6 +75,10 @@ public class Gui extends JFrame {
          */
         super("Testa Primitivos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Coloca cor de fundo branco
+        getContentPane().setBackground(Color.white);
+        //getContentPane().setForeground(GuiUtils.getForeground());
+ 
         setSize(larg, alt);
         setVisible(true);
         setResizable(false);
@@ -200,8 +204,10 @@ public class Gui extends JFrame {
                 tipo = TiposPrimitivos.SELECIONAR;
 
                 //info.setText("tecla 'Delete' para apagar");
-            }else if(event.getSource() == jbSelecionar) { //fazer circulo
-                tipo = TiposPrimitivos.APAGAR;
+            }else if(event.getSource() == jbApagar) { //fazer circulo
+                tipo = TiposPrimitivos.CARREGAR;
+                areaDesenho.ApagarFormas();
+                repaint();
 
             } else if(event.getSource() == jbCarregar) { //limpar a tela
                 tipo = TiposPrimitivos.CARREGAR;
