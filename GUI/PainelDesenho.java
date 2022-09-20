@@ -2,11 +2,9 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Graphics;
-//import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-//import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.JColorChooser;
@@ -36,10 +34,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     JLabel msg; // mensagem na interface
     int valorEsp; //espessura
     TiposPrimitivos tipo; // tipos primitivos
-    int xMouse = 0, yMouse = 0;// pega as coordenadas quando clicar o botao do mouse
+    int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
     boolean primeiraVez = true; //verificador de primeiro clique
     Color currentColor = Color.BLACK; //cor
+    
 
     boolean primeiroPonto = true; //verificador do primeiro ponto
     int xMouseInicial, yMouseInicial; //coordenadas iniciais do mouse (x,y)
@@ -97,10 +96,21 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      * acao de clicar no botao do mouse
      */
     public void mousePressed(MouseEvent e) {
-        // logica da reta, circulo e retangulo. ele captura dois pontos no clique do
-        // mouse
+        // logica da reta, circulo e retangulo. ele captura dois pontos no clique do mouse
         if (tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS || tipo == TiposPrimitivos.RETANGULO) {
-            if (primeiraVez == true) {
+            //primeiro ponto da reta 
+            if (primeiroPonto == true) {
+                xMouseInicial = e.getX(); // coordenada incial x
+                yMouseInicial = e.getY(); // coordenada incial y
+
+                //coloca todas as coordenada em uma coordenada
+                xMouse = e.getX();
+                yMouse = e.getY();
+                xMouse2 = e.getX();
+                yMouse2 = e.getY();
+                primeiroPonto = false;
+            }
+            else if (primeiraVez == true) {
                 // ao clicar com o mouse, pegara o x1 e o y1
                 xMouse = e.getX();
                 yMouse = e.getY();
@@ -115,8 +125,8 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         } else if (tipo == TiposPrimitivos.POLIGONO || tipo == TiposPrimitivos.LINHAPOLIGONAL) {
 
             if (primeiroPonto == true) {
-                xMouseInicial = e.getX();// coordenada incial
-                yMouseInicial = e.getY();
+                xMouseInicial = e.getX(); // coordenada incial x
+                yMouseInicial = e.getY(); // coordenada incial y
                 xMouse = e.getX();
                 yMouse = e.getY();
                 xMouse2 = e.getX();
@@ -216,9 +226,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
 
         // opcao de desenhar retas
         else if (tipo == TiposPrimitivos.RETAS) {
-
-            FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
-
+            if(primeiraVez == false) FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
 
         // opcao de desenhar circulos
