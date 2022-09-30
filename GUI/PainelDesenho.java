@@ -11,6 +11,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 
 import ED.Armazenamento;
+import PersistenciaArquivos.Persistencia;
+import TrasformacoesGeometricas.Translacao;
 
 import Tipos.Ponto.*;
 import Tipos.Reta.*;
@@ -30,24 +32,23 @@ import Tipos.LinhaPoligonal.*;
  * @version 09/08/2022
  */
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
-    private static final long serialVersionUID = 1L;  
+    private static final long serialVersionUID = 1L;
     JLabel msg; // mensagem na interface
-    int valorEsp; //espessura
+    int valorEsp; // espessura
     TiposPrimitivos tipo; // tipos primitivos
     int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
-    boolean primeiraVez = true; //verificador de primeiro clique
-    Color currentColor = Color.BLACK; //cor
-    
+    boolean primeiraVez = true; // verificador de primeiro clique
+    Color currentColor = Color.BLACK; // cor
+    PontoGr aux2 = new PontoGr();
+    boolean primeiroPonto = true; // verificador do primeiro ponto
+    int xMouseInicial, yMouseInicial; // coordenadas iniciais do mouse (x,y)
+    FiguraPontos fg; // variavel de classe (figura pontos)
 
-    boolean primeiroPonto = true; //verificador do primeiro ponto
-    int xMouseInicial, yMouseInicial; //coordenadas iniciais do mouse (x,y)
-    FiguraPontos fg; //variavel de classe (figura pontos)
+    Armazenamento arm; // variavel de classe (armazenador)
+    boolean verificar = false; // verificador
 
-    Armazenamento arm; //variavel de classe (armazenador)
-    boolean verificar = false; //verificador
-
-    String tipoSelecionado = ""; //tipo da seleção
+    String tipoSelecionado = ""; // tipo da seleção
     int indiceSelecionado = 0; // indice da seleção
 
     /**
@@ -96,21 +97,21 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      * acao de clicar no botao do mouse
      */
     public void mousePressed(MouseEvent e) {
-        // logica da reta, circulo e retangulo. ele captura dois pontos no clique do mouse
+        // logica da reta, circulo e retangulo. ele captura dois pontos no clique do
+        // mouse
         if (tipo == TiposPrimitivos.RETAS || tipo == TiposPrimitivos.CIRCULOS || tipo == TiposPrimitivos.RETANGULO) {
-            //primeiro ponto da reta 
+            // primeiro ponto da reta
             if (primeiroPonto == true) {
                 xMouseInicial = e.getX(); // coordenada incial x
                 yMouseInicial = e.getY(); // coordenada incial y
 
-                //coloca todas as coordenada em uma coordenada
+                // coloca todas as coordenada em uma coordenada
                 xMouse = e.getX();
                 yMouse = e.getY();
                 xMouse2 = e.getX();
                 yMouse2 = e.getY();
                 primeiroPonto = false;
-            }
-            else if (primeiraVez == true) {
+            } else if (primeiraVez == true) {
                 // ao clicar com o mouse, pegara o x1 e o y1
                 xMouse = e.getX();
                 yMouse = e.getY();
@@ -210,7 +211,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         this.msg.setText("(" + e.getX() + ", " + e.getY() + ")");
 
     }
-    
+
     /**
      * Desenha o que for selecionado pelo tipo primitivo
      * 
@@ -221,12 +222,13 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         if (tipo == TiposPrimitivos.PONTOS) {
 
             FiguraPontos.desenharPonto(g, xMouse, yMouse, "p", valorEsp, currentColor);
-        
+
         }
 
         // opcao de desenhar retas
         else if (tipo == TiposPrimitivos.RETAS) {
-            if(primeiraVez == false) FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
+            if (primeiraVez == false)
+                FiguraPontos.desenharReta(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
 
         // opcao de desenhar circulos
@@ -235,35 +237,45 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             FiguraPontos.desenharCirc(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
 
         }
-        
+
         // opcao de desenhar Retangulos
         else if (tipo == TiposPrimitivos.RETANGULO) {
 
             FiguraPontos.desenharRetangulo(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
 
         }
-        
+
         // opcao de desenhar Poligono
         else if (tipo == TiposPrimitivos.POLIGONO) {
 
             FiguraPontos.desenharPoligono(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
-        
+
         // opcao de desenhar LinhaPoligonal
         else if (tipo == TiposPrimitivos.LINHAPOLIGONAL) {
 
             FiguraPontos.desenharLinhaPoligonal(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
 
-        // opcao de redesenhar formas 
+        // opcao de redesenhar formas
         else if (tipo == TiposPrimitivos.CARREGAR) {
             carregarFormas(g);
         } else if (tipo == TiposPrimitivos.COR) {
+
             currentColor = JColorChooser.showDialog(null, "Escolha uma cor", currentColor);
+
         } else if (tipo == TiposPrimitivos.SELECIONAR) {
+
             SelectFormas(g, xMouse, yMouse);
-        } 
-        
+
+        } else if (tipo == TiposPrimitivos.SALVAR) {
+            Persistencia.salvarArquivo();
+            //repaint();
+        }
+        else if (tipo == TiposPrimitivos.LER) {
+            Persistencia.lerArquivo();
+            //repaint();
+        }
         // opcao de nenhuma seleção
         else if (tipo == TiposPrimitivos.NENHUM) {
             if (verificar == false)
@@ -296,35 +308,33 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
      * @param g - parte grafica
      */
     public void carregarFormas(Graphics g) {
-
         // carrega as formas
-
-        //pega todos os pontos que estão na estrutura de dados
+        // pega todos os pontos que estão na estrutura de dados
         for (PontoGr forma : arm.ArrayPonto) {
             forma.desenharPonto(g);
         }
-        
-        //pega todas as retas que estão na estrutura de dados
+
+        // pega todas as retas que estão na estrutura de dados
         for (RetaGr forma : arm.ArrayReta) {
             forma.desenharReta(g);
         }
 
-        //pega todas os circulos que estão na estrutura de dados
+        // pega todas os circulos que estão na estrutura de dados
         for (CircGr forma : arm.ArrayCirculo) {
             forma.desenharCirc(g);
         }
 
-        //pega todos os retangulos que estão na estrutura de dados 
+        // pega todos os retangulos que estão na estrutura de dados
         for (RetanguloGr forma : arm.ArrayRetangulo) {
             forma.desenharRetangulo(g);
         }
 
-        //pega todos os poligonos que estão na estrutura de dados 
+        // pega todos os poligonos que estão na estrutura de dados
         for (PoligonoGr forma : arm.ArrayPoligono) {
             forma.desenharPoligono(g);
         }
 
-        //pega todas as linhas poligonais que estão na estrutura de dados 
+        // pega todas as linhas poligonais que estão na estrutura de dados
         for (LinhaPoligonalGr forma : arm.ArrayLinhaPoligonal) {
             forma.desenharLinhaPoligonal(g);
         }
@@ -341,8 +351,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     public void SelectFormas(Graphics g, int x, int y) {
 
         // ponto que foi clicado
+        
+        
         Ponto aux = new Ponto(x, y);
+       
 
+        
         // seleção do ponto
         for (PontoGr ponto : arm.ArrayPonto) {
             if (ponto.calcularDistancia(aux) < 10) {
@@ -426,43 +440,88 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     public void ApagarFormas() {
 
         switch (tipoSelecionado) {
-            //caso para apagar o objeto ponto
+            // caso para apagar o objeto ponto
             case "Ponto":
                 arm.indexPonto--;
                 arm.ArrayPonto.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
-            //caso para apagar o objeto reta
+            // caso para apagar o objeto reta
             case "Reta":
                 arm.indexReta--;
                 arm.ArrayReta.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
-            //caso para apagar o objeto circulo
+            // caso para apagar o objeto circulo
             case "Circulo":
                 arm.indexCirculo--;
                 arm.ArrayCirculo.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
-            //caso para apagar o objeto retangulo
+            // caso para apagar o objeto retangulo
             case "Retangulo":
                 arm.indexRetangulo--;
                 arm.ArrayRetangulo.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
-            //caso para apagar o objeto poligono
+            // caso para apagar o objeto poligono
             case "Poligono":
                 arm.indexPoligono--;
                 arm.ArrayPoligono.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
-            //caso para apagar o objeto Linha Poligonal
+            // caso para apagar o objeto Linha Poligonal
             case "LinhaPoligonal":
                 arm.indexLinhaPoligonal--;
                 arm.ArrayLinhaPoligonal.remove(indiceSelecionado);
                 tipoSelecionado = "";
                 break;
 
+        }
+    }
+
+    public void PainelTranslacao(double xT, double yT) {
+        switch (tipoSelecionado) {
+            // caso para apagar o objeto ponto
+            case "Ponto":
+                Translacao p = new Translacao(arm.ArrayPonto.get(indiceSelecionado), xT, yT);
+                p.GerarTranslacao();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto reta
+            case "Reta":
+                Translacao r = new Translacao(arm.ArrayReta.get(indiceSelecionado), xT, yT);
+                r.GerarTranslacao();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto circulo
+            case "Circulo":
+                Translacao c = new Translacao(arm.ArrayCirculo.get(indiceSelecionado), xT, yT);
+                c.GerarTranslacao();
+                arm.ArrayCirculo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto retangulo
+            case "Retangulo":
+                Translacao rt = new Translacao(arm.ArrayRetangulo.get(indiceSelecionado), xT, yT);
+                rt.GerarTranslacao();
+                arm.ArrayRetangulo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto poligono
+            case "Poligono":
+                Translacao pl = new Translacao(arm.ArrayPoligono.get(indiceSelecionado), xT, yT);
+                pl.GerarTranslacao();
+                arm.ArrayPoligono.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto Linha Poligonal
+            case "LinhaPoligonal":
+                Translacao lp = new Translacao(arm.ArrayLinhaPoligonal.get(indiceSelecionado), xT, yT);
+                lp.GerarTranslacao();
+                arm.ArrayLinhaPoligonal.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
         }
     }
 

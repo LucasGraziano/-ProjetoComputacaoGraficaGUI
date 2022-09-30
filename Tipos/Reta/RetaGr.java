@@ -14,6 +14,7 @@ public class RetaGr extends Reta {
     String nomeReta = ""; // nome do Reta
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
+    private double x1, x2, y1, y2;
 
 
     /**
@@ -26,6 +27,10 @@ public class RetaGr extends Reta {
      */
     public RetaGr(int x1, int y1, int x2, int  y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
         setCorReta(Color.black);     
         setCorNomeReta(Color.black);     
         setNomeReta("");     
@@ -42,6 +47,10 @@ public class RetaGr extends Reta {
      */
     public RetaGr(int x1, int y1, int x2, int  y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
         setNomeReta("");     
@@ -59,6 +68,10 @@ public class RetaGr extends Reta {
      */
     public RetaGr(int x1, int y1, int x2, int  y2, Color corReta, int diametro){
         this(x1, y1, x2, y2, corReta);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
         setDiametro(diametro);
     }
 
@@ -75,6 +88,10 @@ public class RetaGr extends Reta {
      */
     public RetaGr(int x1, int y1, int x2, int  y2, Color corReta, String nomeReta, int diametro){
         this(x1, y1, x2, y2, corReta, diametro);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
         setNomeReta(nomeReta);
     }
 
@@ -90,6 +107,10 @@ public class RetaGr extends Reta {
      */
     RetaGr(int x1, int y1, int x2, int  y2, Color cor, String str){
         super((double)x1, (double)y1, (double)x2, (double)y2);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
         setNomeReta(str);     
@@ -102,12 +123,46 @@ public class RetaGr extends Reta {
      * @param cor - cor da reta
      */
     RetaGr(RetaGr p2d, Color cor){
+        
         super(p2d);     
         setCorReta(cor);     
         setCorNomeReta(Color.black);     
         setNomeReta("");     
     }
 
+
+
+    public void setX1(double x1){
+        this.x1 = x1;
+    }
+
+    public void setX2(double x2){
+        this.x2 = x2;
+    }
+
+    public void setY1(double y1){
+        this.y1 = y1;
+    }
+
+    public void setY2(double y2){
+        this.y2 = y2;
+    }
+
+    public double getX1() {
+        return this.x1;
+    }
+
+    public double getX2() {
+        return this.x2;
+    }
+
+    public double getY1() {
+        return this.y1;
+    }
+
+    public double getY2() {
+        return this.y2;
+    }
 
     /**
      * retorna a cor da reta
@@ -310,7 +365,7 @@ public class RetaGr extends Reta {
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
-                var dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
+                double dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
                 if(dist <= 10){
                     return true;
                 }
@@ -319,7 +374,7 @@ public class RetaGr extends Reta {
         }else if(Dy == 0){ //Neste caso, a reta será horizontal
             for(double i = c1; i <= c2; i++){
 
-                var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
+                double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
                 if(dist <= 10){
                     return true;
                 }
@@ -331,13 +386,13 @@ public class RetaGr extends Reta {
             for(double i = c1; i <= c2; i++){
                 if(Dx > Dy){
                     y = i*m + b; //equacao reduzida da reta
-                    var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
+                    double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
                     if(dist <= 10){
                         return true;
                     }
                 }else{
                     x = (i - b)/m;// equacao reduzida da reta com o x isolado
-                    var dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
+                    double dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
                     if(dist <= 10){
                         return true;
                     }

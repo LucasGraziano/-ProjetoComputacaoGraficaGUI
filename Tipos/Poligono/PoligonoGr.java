@@ -155,6 +155,17 @@ public class PoligonoGr extends Poligono {
         return diametro;
     }
 
+    public ArrayList<Ponto> getPontos(){
+        ArrayList<Ponto> aux = new ArrayList<Ponto>();
+
+        for(RetaGr reta : retas){
+            aux.add(reta.getP1());
+            aux.add(reta.getP2());
+        }
+
+        return aux;
+    }
+
     /**
      * define o diametro 
      * @param diametro the diametro to set
@@ -187,6 +198,11 @@ public class PoligonoGr extends Poligono {
         desenharPoligono(g);
     }
 
+    public void adicionarReta(Ponto p1, Ponto p2){
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
+    }
+
     /**
      * Adiciona a ultima reta
      * @param g - conteudo grafico
@@ -197,6 +213,13 @@ public class PoligonoGr extends Poligono {
         RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
         retas.add(reta_aux);
         desenharPoligono(g);
+    }
+
+    public void adicionarRetaFinal(){
+        Ponto p1 = retas.get(0).getP1();
+        Ponto p2 = retas.get(retas.size() - 1).getP2();
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
     }
 
    
@@ -334,7 +357,7 @@ public class PoligonoGr extends Poligono {
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
 
-                var dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
+                double dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
                 if(dist <= 10){
                     return true;
                 }
@@ -343,7 +366,7 @@ public class PoligonoGr extends Poligono {
         }else if(Dy == 0){ //Neste caso, a reta será horizontal
             for(double i = c1; i <= c2; i++){
 
-                var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
+                double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
                 if(dist <= 10){
                     return true;
                 }
@@ -355,13 +378,13 @@ public class PoligonoGr extends Poligono {
             for(double i = c1; i <= c2; i++){
                 if(Dx > Dy){
                     y = i*m + b; //equacao reduzida da reta
-                    var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
+                    double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
                     if(dist <= 10){
                         return true;
                     }
                 }else{
                     x = (i - b)/m;// equacao reduzida da reta com o x isolado
-                    var dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
+                    double dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
                     if(dist <= 10){
                         return true;
                     }

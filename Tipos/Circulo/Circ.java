@@ -15,7 +15,6 @@ import Tipos.Ponto.Ponto;
 public class Circ {
     // Atributos da reta
     private Ponto p1, p2;
-
     /**
      * Construtor dos objetos da classe Circ
      * @param x - coordenada do x

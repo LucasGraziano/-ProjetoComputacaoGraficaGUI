@@ -25,7 +25,7 @@ public class PontoGr extends Ponto {
      * @param x - coordenada x
      * @param y - coordenada y
      */
-    PontoGr(int x, int y){
+   public PontoGr(int x, int y){
         super((double)x, (double)y);
         setCorPto(Color.black);     
         setCorNomePto(Color.black);     
@@ -44,7 +44,7 @@ public class PontoGr extends Ponto {
      * @param y - coordenada y
      * @param cor - cor do ponto
      */
-    PontoGr(int x, int y, Color cor){
+   public PontoGr(int x, int y, Color cor){
         super((double)x, (double)y);
         setCorPto(cor);     
         setCorNomePto(Color.black);     
@@ -110,7 +110,7 @@ public class PontoGr extends Ponto {
     /**
      * Construtor 
      */
-    PontoGr(){
+   public PontoGr(){
         super();     
         setCorPto(Color.black);     
         setCorNomePto(Color.black);     

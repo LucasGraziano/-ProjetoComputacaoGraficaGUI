@@ -11,7 +11,7 @@ public class RetanguloGr extends Retangulo {
     String nomePto = ""; // nome do ponto
     Color corNomePto  = Color.BLACK; // cor do nome (string) do ponto  
     int diametro = 1; // diametro do ponto, default = 1
-
+    private double x1, x2, y1, y2;
     
     
     /**
@@ -23,7 +23,11 @@ public class RetanguloGr extends Retangulo {
     public RetanguloGr(int x1, int y1, int x2, int  y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);    
         setCorNomePto(Color.black);     
-        setNomePto("");     
+        setNomePto(""); 
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);      
     }
 
     /**
@@ -37,7 +41,11 @@ public class RetanguloGr extends Retangulo {
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorPto(cor);     
         setCorNomePto(cor);     
-        setNomePto("");     
+        setNomePto("");
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);       
     }
 
     /**
@@ -51,6 +59,10 @@ public class RetanguloGr extends Retangulo {
     public RetanguloGr(int x1, int y1, int x2, int  y2, Color corPonto, int diametro) {
         this(x1, y1, x2, y2, corPonto);
         setDiametro(diametro);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);  
     }
     
     /**
@@ -65,6 +77,10 @@ public class RetanguloGr extends Retangulo {
     public RetanguloGr(int x1, int y1, int x2, int  y2, Color corPonto, String nomePonto, int diametro){
         this(x1, y1, x2, y2, corPonto, diametro);
         setNomePto(nomePonto);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);  
     }
     
     /**
@@ -79,7 +95,11 @@ public class RetanguloGr extends Retangulo {
         super((double)x1, (double)y1, (double)x2, (double)y2);
         setCorPto(cor);     
         setCorNomePto(cor);     
-        setNomePto(str);     
+        setNomePto(str);
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);       
     }
 
     /**
@@ -92,10 +112,44 @@ public class RetanguloGr extends Retangulo {
         super(p2d);     
         setCorPto(cor);     
         setCorNomePto(cor);     
-        setNomePto("");     
+        setNomePto(""); 
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);      
     }
 
+    public void setX1(double x1){
+        this.x1 = x1;
+    }
 
+    public void setX2(double x2){
+        this.x2 = x2;
+    }
+
+    public void setY1(double y1){
+        this.y1 = y1;
+    }
+
+    public void setY2(double y2){
+        this.y2 = y2;
+    }
+
+    public double getX1() {
+        return this.x1;
+    }
+
+    public double getX2() {
+        return this.x2;
+    }
+
+    public double getY1() {
+        return this.y1;
+    }
+
+    public double getY2() {
+        return this.y2;
+    }
 
     /**
      * @return the corPto
@@ -344,7 +398,7 @@ public class RetanguloGr extends Retangulo {
         //delta x for igual a 0
         if(Dx == 0){
             for(double i = c1; i <= c2; i++){
-                var dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
+                double dist = Math.sqrt(((xP - x1) * (xP - x1)) + ((yP - i) * (yP - i)));
                 if(dist <= 10){
                     return true;
                 }
@@ -352,7 +406,7 @@ public class RetanguloGr extends Retangulo {
         //delta y for igual a 0
         }else if(Dy == 0){ //Neste caso, a reta será horizontal
             for(double i = c1; i <= c2; i++){
-                var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
+                double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y1) * (yP - y1)));
                 if(dist <= 10){
                     return true;
                 }
@@ -364,13 +418,13 @@ public class RetanguloGr extends Retangulo {
             for(double i = c1; i <= c2; i++){
                 if(Dx > Dy){
                     y = i*m + b; //equacao reduzida da reta
-                    var dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
+                    double dist = Math.sqrt(((xP - i) * (xP - i)) + ((yP - y) * (yP - y)));
                     if(dist <= 10){
                         return true;
                     }
                 }else{
                     x = (i - b)/m;// equacao reduzida da reta com o x isolado
-                    var dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
+                    double dist = Math.sqrt(((xP - x) * (xP - x)) + ((yP - i) * (yP - i)));
                     if(dist <= 10){
                         return true;
                     }

@@ -155,6 +155,17 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
         return diametro;
     }
 
+    public ArrayList<Ponto> getPontos(){
+        ArrayList<Ponto> aux = new ArrayList<Ponto>();
+
+        for(RetaGr reta : retas){
+            aux.add(reta.getP1());
+            aux.add(reta.getP2());
+        }
+
+        return aux;
+    }
+
     /**
      * define o diametro 
      * @param diametro the diametro to set
@@ -185,6 +196,11 @@ public class LinhaPoligonalGr extends LinhaPoligonal {
         RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
         retas.add(reta_aux);
         desenharLinhaPoligonal(g);
+    }
+
+    public void adicionarReta(Ponto p1, Ponto p2){
+        RetaGr reta_aux = new RetaGr((int) p1.getX(),(int) p1.getY(),(int)  p2.getX(),(int)  p2.getY(), corReta, "", diametro);
+        retas.add(reta_aux);
     }
 
     /**

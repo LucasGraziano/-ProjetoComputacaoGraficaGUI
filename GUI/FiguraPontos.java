@@ -15,7 +15,7 @@ import Tipos.Retangulo.RetanguloGr;
  * Classe de controle dos pontos
  */
 public class FiguraPontos {
-        static Armazenamento arm = new Armazenamento();
+        public static Armazenamento arm = new Armazenamento();
 
         static int poligono_aux = -1;
         static boolean poligono_fim = false;
@@ -69,15 +69,15 @@ public class FiguraPontos {
         }
 
         /**
-         * Funcao responsavel para o desenho da reta 
+         * Funcao responsavel para o desenho do retangulo 
          * 
          * @param g - conteudo grafico
          * @param x1 - primeiro x da coordenada
          * @param y1 - primeiro y da coordenada
          * @param x2 - segundo x da coordenada
          * @param y2 - segundo y da coordenada
-         * @param nome - nome dos pontos da reta
-         * @param diametro - diametro da bolinha
+         * @param diametro - diametro
+         * @param color - cor da reta
          */
         public static void desenharRetangulo(Graphics g, int x1, int y1, int x2, int y2, int diametro, Color cor) {
                 
@@ -85,7 +85,17 @@ public class FiguraPontos {
                 arm.setArrayRetangulo(p);
                 p.desenharRetangulo(g);
         }
-        
+        /**
+         * Funcao responsavel para o desenho do retangulo 
+         * 
+         * @param g - conteudo grafico
+         * @param x1 - primeiro x da coordenada
+         * @param y1 - primeiro y da coordenada
+         * @param x2 - segundo x da coordenada
+         * @param y2 - segundo y da coordenada
+         * @param diametro - diametro
+         * @param color - cor da reta
+         */
         public static void desenharPoligono(Graphics g, int x1, int y1, int x2, int y2, int diametro, Color cor) {
                 if(poligono_aux == -1){
                         PoligonoGr p = new PoligonoGr(x1, y1, x2, y2, cor, diametro);
@@ -102,7 +112,17 @@ public class FiguraPontos {
                         p.adicionarReta(g, new Ponto(x1, y1), new Ponto(x2, y2));
                 }
         }
-
+        /**
+         * Funcao responsavel para o desenho do retangulo 
+         * 
+         * @param g - conteudo grafico
+         * @param x1 - primeiro x da coordenada
+         * @param y1 - primeiro y da coordenada
+         * @param x2 - segundo x da coordenada
+         * @param y2 - segundo y da coordenada
+         * @param diametro - diametro da bolinha
+         * @param color - cor da reta
+         */
         public static void desenharLinhaPoligonal(Graphics g, int x1, int y1, int x2, int y2, int diametro, Color cor) {
                 if(poligono_aux == -1){
                         LinhaPoligonalGr p = new LinhaPoligonalGr(x1, y1, x2, y2, cor, diametro);

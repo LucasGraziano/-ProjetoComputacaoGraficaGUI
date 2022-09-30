@@ -8,6 +8,7 @@ import Tipos.Ponto.Ponto;
 public class Retangulo {
     // Atributos da reta
     private Ponto p1, p2, p3, p4;
+    private double x1, x2, y1, y2;
 
     /**
      * Construtor dos objetos da classe Retangulo
@@ -21,10 +22,18 @@ public class Retangulo {
         setP2(new Ponto(x2, y2)); //segundo ponto (vertice superior direito)
         setP3 (new Ponto (x1, y2)); //essa coordenada representa o vertice superior esquerdo
         setP4 (new Ponto (x2, y1)); //essa coordenada representa o vertice inferior direito  
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
     }
     
 
     public Retangulo(RetanguloGr p2d) {
+        setX1(x1);
+        setX2(x2);
+        setY1(y1);
+        setY2(y2);
     }
 
 
@@ -71,6 +80,38 @@ public class Retangulo {
 
     public Ponto getP4() {
         return this.p4;
+    }
+
+public void setX1(double x1){
+        this.x1 = x1;
+    }
+
+    public void setX2(double x2){
+        this.x2 = x2;
+    }
+
+    public void setY1(double y1){
+        this.y1 = y1;
+    }
+
+    public void setY2(double y2){
+        this.y2 = y2;
+    }
+    
+    public double getX1() {
+        return this.x1;
+    }
+
+    public double getX2() {
+        return this.x2;
+    }
+
+    public double getY1() {
+        return this.y1;
+    }
+
+    public double getY2() {
+        return this.y2;
     }
 
     /**

@@ -16,6 +16,7 @@ public class Reta {
  
     // Atributos da reta
     private Ponto p1, p2;
+    
 
    
     /**
@@ -40,6 +41,8 @@ public class Reta {
         setP2(p2);
 
     }
+
+
     
     /**
      * construtor de objetos da classe Reta
@@ -47,10 +50,13 @@ public class Reta {
      * @param r - reta
      */
     public Reta (Reta r){
+        
         setP1(r.getP1());
         setP2(r.getP2());
     }
 
+
+    
     /**
      * 
      * @param p - ponto 1

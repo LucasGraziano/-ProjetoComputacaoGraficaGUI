@@ -54,6 +54,8 @@ public class Ponto {
         setNome(nome);
         setEspessura(espessura);
     }
+
+
     /**
      * @return retorna o valor de x
      */

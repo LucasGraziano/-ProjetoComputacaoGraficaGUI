@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Hashtable;
@@ -39,11 +40,20 @@ public class Gui extends JFrame {
     private JButton jbPoligono = new JButton("Poligono");
     private JButton jbLinhaPoligonal = new JButton("LinhaPoligonal");
     private JButton jbCor = new JButton("Cor");
-    private JButton jbCarregar = new JButton("Redesenhar");
+    private JButton jbCarregar = new JButton("Carregar");
     private JButton jbLimpar = new JButton("Limpar");
     private JButton jbSelecionar = new JButton("Selecionar");
+    private String options [] = { "Nenhum" ,"Apagar", "Translacao" , "Rotacao", "Escala"};
+    //private JComboBox<String> boxSelect = new JComboBox(options);
+    private JButton jbTranslacao = new JButton("Translacao");
+    private JButton jbRotacao = new JButton("Rotacao"); 
     private JButton jbApagar = new JButton("Apagar");
+    private JButton jbSalvar = new JButton("Salvar");
+    private JButton jbLer = new JButton("Ler");
+    
 
+    
+    
     //implementacao da barra de deslize
     static final int sMin = 0;
     static final int sMax = 30;
@@ -77,7 +87,7 @@ public class Gui extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Coloca cor de fundo branco
         getContentPane().setBackground(Color.white);
-        //getContentPane().setForeground(GuiUtils.getForeground());
+        
  
         setSize(larg, alt);
         setVisible(true);
@@ -92,7 +102,7 @@ public class Gui extends JFrame {
         barraSul.add(msg, BorderLayout.WEST);
         barraSul.add(info, BorderLayout.EAST);
         
-        //add(info, BorderLayout.SOUTH);
+    
 
         //eventos dos botoes
         evento();
@@ -141,7 +151,12 @@ public class Gui extends JFrame {
         jbCarregar.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
         jbSelecionar.addActionListener(eventos);
+        jbSalvar.addActionListener(eventos);
+        jbLer.addActionListener(eventos);
+        jbTranslacao.addActionListener(eventos);
+        jbRotacao.addActionListener(eventos);
         jbApagar.addActionListener(eventos);
+        //boxSelect.addItemListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
     /**
@@ -159,15 +174,54 @@ public class Gui extends JFrame {
         barraComandos.add(jbCor);
         barraComandos.add(jbCarregar);
         barraComandos.add(jbSelecionar);
+        //barraComandos.add(boxSelect); 
+        barraComandos.add(jbTranslacao);
+        barraComandos.add(jbRotacao);
         barraComandos.add(jbApagar);
+        barraComandos.add(jbSalvar);
+        barraComandos.add(jbLer); 
         barraComandos.add(jbLimpar);
-        barraComandos.add(espessura);    
+        barraComandos.add(espessura); 
+
+        //Pegar a opcao do boxSelect
+        //boxSelect.getSelectedItem().toString();
+          
     }
     
 
     
     private class Eventos implements ActionListener, ChangeListener{
         TiposPrimitivos tipo;
+        //função que representa a jComboBox
+       /*  public void itemStateChanged(ItemEvent itemEvent){
+            String opcao = boxSelect.getSelectedItem().toString();
+            switch(opcao){
+                case  "Nenhum":
+                 
+                break;
+
+                case "Apagar":
+                
+                break;
+
+                case "Translacao":
+                    tipo = TiposPrimitivos.TRANSLACAO;
+                    JFrame f = new JFrame();
+                    String xT = JOptionPane.showInputDialog(f,"Enter X");
+                    String yT = JOptionPane.showInputDialog(f,"Enter Y");
+                    areaDesenho.PainelTranslacao(Double.parseDouble(xT), Double.parseDouble(yT));
+                
+                break;
+
+                case "Rotacao":
+                
+                break;
+
+                case "Escala":
+                
+                break;   
+            }
+        }
         
         /**
          * construtor responsavel pela espessura
@@ -176,6 +230,7 @@ public class Gui extends JFrame {
             valorEsp = espessura.getValue();
             areaDesenho.setEspessura(valorEsp);
         }
+
 
         public void actionPerformed(ActionEvent event) {
             
@@ -188,42 +243,63 @@ public class Gui extends JFrame {
             } else if(event.getSource() == jbCirc) { //fazer circulo
                 tipo = TiposPrimitivos.CIRCULOS;
 
-            }else if(event.getSource() == jbRetangulo) { //fazer circulo
+            }else if(event.getSource() == jbRetangulo) { // fazer retangulo
                 tipo = TiposPrimitivos.RETANGULO;
 
-            }  else if(event.getSource() == jbPoligono) { //fazer circulo
+            }  else if(event.getSource() == jbPoligono) { // fazer poligono
                 tipo = TiposPrimitivos.POLIGONO;
                 
-            } else if(event.getSource() == jbLinhaPoligonal) { //fazer circulo
+            } else if(event.getSource() == jbLinhaPoligonal) { // fazer linha poligonal
                 tipo = TiposPrimitivos.LINHAPOLIGONAL;
 
-            }else if(event.getSource() == jbCor) { //fazer circulo
+            }else if(event.getSource() == jbCor) {  // mudar a cor
                 tipo = TiposPrimitivos.COR;
 
-            }else if(event.getSource() == jbSelecionar) { //fazer circulo
+            }else if(event.getSource() == jbSelecionar) { //selecionar um primitivo
                 tipo = TiposPrimitivos.SELECIONAR;
 
-                //info.setText("tecla 'Delete' para apagar");
-            }else if(event.getSource() == jbApagar) { //fazer circulo
+
+            }else if(event.getSource() == jbTranslacao) { //translacao nos primitivos
+                tipo = TiposPrimitivos.TRANSLACAO;
+                JFrame f = new JFrame();
+                String xT = JOptionPane.showInputDialog(f,"Enter X");
+                String yT = JOptionPane.showInputDialog(f,"Enter Y");
+                areaDesenho.PainelTranslacao(Double.parseDouble(xT), Double.parseDouble(yT));
+                //repaint();
+                
+            }
+            else if(event.getSource() == jbRotacao) { //rotacao nos prmitivos
+                tipo = TiposPrimitivos.ROTACAO;
+
+            }
+            else if(event.getSource() == jbApagar) { //apagar prmitivos
                 tipo = TiposPrimitivos.CARREGAR;
                 areaDesenho.ApagarFormas();
                 repaint();
 
-            } else if(event.getSource() == jbCarregar) { //limpar a tela
+            } else if(event.getSource() == jbCarregar) { //carregar
                 tipo = TiposPrimitivos.CARREGAR;
+                repaint();
+            }
+            else if(event.getSource() == jbSalvar) { //salvar
+                tipo = TiposPrimitivos.SALVAR;
+                repaint();
+            }
+            else if(event.getSource() == jbLer) { //ler
+                tipo = TiposPrimitivos.LER;
                 repaint();
             } 
             else if(event.getSource() == jbLimpar) { //limpar a tela
                 tipo = TiposPrimitivos.NENHUM;
                 repaint();
 
-            } 
+            }  
 
 
             // Enviando a Forma a ser desenhada e a cor da linha
             areaDesenho.setTipo(tipo);
-            
-            
+
+
         }
 
         
