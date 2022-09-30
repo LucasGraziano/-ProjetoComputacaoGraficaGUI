@@ -14,21 +14,20 @@ public class Escala {
 
 
     //reposicionar um objeto
-    public Escala(RetaGr O, double xT, double yT){
+    public Escala(RetaGr O, double mult){
         this.O = O;
         this.xT = xT;
         this.yT = yT;
         tipo = TiposPrimitivos.RETAS;
     }
 
-    public Escala(PontoGr O, double xT, double yT){
+    public Escala(PontoGr O, double mult){
         this.O = O;
         this.xT = xT;
         this.yT = yT;
         tipo = TiposPrimitivos.PONTOS;
-    }
-    
-    public Escala(CircGr O, double xT, double yT){
+    } como q ta? me manda foto no whats
+    public Escala(CircGr O, double mult){
         this.O = O;
         this.xT = xT;
         this.yT = yT;
@@ -63,15 +62,18 @@ public class Escala {
 
         }else if(tipo == TiposPrimitivos.RETAS){
             RetaGr R = (RetaGr)O;
-            
+            R.getP1().x = R.getP1().x * mult;
+            R.getP1().y = R.getP1().y * mult;
+            R.getP2().x = R.getP2().x * mult;
+            R.getP2().y = R.getP2().y * mult;
         
         chegou a pizza ja volto 
         }else if(tipo == TiposPrimitivos.CIRCULOS){
             CircGr C = (CircGr)O;
-            C.getP1().x = C.getP1().x + xT;
-            C.getP1().y = C.getP1().y + yT;
-            C.getP2().x = C.getP2().x + xT;
-            C.getP2().y = C.getP2().y + yT;
+            C.getP1().x = C.getP1().x * mult; 
+            C.getP1().y = C.getP1().y * mult;
+            C.getP2().x = C.getP2().x * mult;
+            C.getP2().y = C.getP2().y * mult;
         }else if(tipo == TiposPrimitivos.RETANGULO){
             RetanguloGr Ret = (RetanguloGr)O;
             Ret.getP1().x = Ret.getP1().x + xT;

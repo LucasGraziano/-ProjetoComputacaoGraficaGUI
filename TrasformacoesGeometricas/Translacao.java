@@ -3,6 +3,7 @@ package TrasformacoesGeometricas;
 import GUI.TiposPrimitivos;
 import Tipos.Circulo.CircGr;
 import Tipos.LinhaPoligonal.LinhaPoligonal;
+import Tipos.LinhaPoligonal.LinhaPoligonalGr;
 import Tipos.Poligono.PoligonoGr;
 import Tipos.Ponto.PontoGr;
 import Tipos.Ponto.Ponto;
@@ -99,14 +100,14 @@ public class Translacao {
                 R.getP2().x = R.getP2().x + xT;
                 R.getP2().y = R.getP2().y + yT; 
             }
-        /* }else if(tipo == TiposPrimitivos.LINHAPOLIGONAL){
+        }else if(tipo == TiposPrimitivos.LINHAPOLIGONAL){
             LinhaPoligonalGr LinhaPoli = (LinhaPoligonalGr)O;
             for(RetaGr R : LinhaPoli.retas){
                 R.getP1().x = R.getP1().x + xT;
-                R.getP1().y = R.getP1().y + yT;
+                R.getP1().y = R.getP1().y + yT; 
                 R.getP2().x = R.getP2().x + xT;
                 R.getP2().y = R.getP2().y + yT; 
-            }/* */
+            }
         } 
 
 
