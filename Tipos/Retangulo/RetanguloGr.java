@@ -347,7 +347,7 @@ public class RetanguloGr extends Retangulo {
         //quarta reta -> (x1,y2), (x1,y1)
         desenharReta(g, (int) x3, (int) y3, (int) x1, (int) y1);
 
-        System.out.println(x1 + " " + y1 + " - " + x2 + " " + y2 + " - " + x3 + " " + y3 + " - " + x4 + " " + y4);
+        
 
     }   
     

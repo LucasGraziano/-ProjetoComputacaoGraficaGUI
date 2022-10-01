@@ -61,12 +61,12 @@ public class Translacao {
     Ponto p2 = new Ponto();
  
         
-        if(tipo == TiposPrimitivos.PONTOS){
+        if(tipo == TiposPrimitivos.PONTOS){  //ponto
             PontoGr P = (PontoGr)O;
             P.x = P.x + xT;
             P.y = P.y + yT;
             //E um repaint na classe Gui
-        }else if(tipo == TiposPrimitivos.RETAS){
+        }else if(tipo == TiposPrimitivos.RETAS){ //reta
             RetaGr R = (RetaGr)O;
             
             x = R.getP1().x + xT;
@@ -80,19 +80,19 @@ public class Translacao {
             p2.setX(x);
             p2.setY(y);
             R.setP2(p2);
-        }else if(tipo == TiposPrimitivos.CIRCULOS){
+        }else if(tipo == TiposPrimitivos.CIRCULOS){ //circulo
             CircGr C = (CircGr)O;
             C.getP1().x = C.getP1().x + xT;
             C.getP1().y = C.getP1().y + yT;
             C.getP2().x = C.getP2().x + xT;
             C.getP2().y = C.getP2().y + yT;
-        }else if(tipo == TiposPrimitivos.RETANGULO){
+        }else if(tipo == TiposPrimitivos.RETANGULO){ //retangulo
             RetanguloGr Ret = (RetanguloGr)O;
             Ret.getP1().x = Ret.getP1().x + xT;
             Ret.getP1().y = Ret.getP1().y + yT;
             Ret.getP2().x = Ret.getP2().x + xT;
             Ret.getP2().y = Ret.getP2().y + yT;
-        }else if(tipo == TiposPrimitivos.POLIGONO){
+        }else if(tipo == TiposPrimitivos.POLIGONO){ //poligono
             PoligonoGr Poli = (PoligonoGr)O;
             for(RetaGr R : Poli.retas){
                 R.getP1().x = R.getP1().x + xT;
@@ -100,7 +100,7 @@ public class Translacao {
                 R.getP2().x = R.getP2().x + xT;
                 R.getP2().y = R.getP2().y + yT; 
             }
-        }else if(tipo == TiposPrimitivos.LINHAPOLIGONAL){
+        }else if(tipo == TiposPrimitivos.LINHAPOLIGONAL){ //linha poligonal
             LinhaPoligonalGr LinhaPoli = (LinhaPoligonalGr)O;
             for(RetaGr R : LinhaPoli.retas){
                 R.getP1().x = R.getP1().x + xT;
