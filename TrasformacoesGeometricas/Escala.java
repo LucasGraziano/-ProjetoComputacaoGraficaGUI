@@ -1,60 +1,56 @@
-/*import GUI.TiposPrimitivos;
+package TrasformacoesGeometricas;
+
+import GUI.TiposPrimitivos;
 import Tipos.Circulo.CircGr;
 import Tipos.LinhaPoligonal.LinhaPoligonal;
+import Tipos.LinhaPoligonal.LinhaPoligonalGr;
 import Tipos.Poligono.PoligonoGr;
 import Tipos.Ponto.PontoGr;
-import Tipos.Ponto.Ponto;
 import Tipos.Reta.RetaGr;
 import Tipos.Retangulo.RetanguloGr;
 
 public class Escala {
     Object O;
-    double xT, yT, x, y;
+    double mult;
     TiposPrimitivos tipo = TiposPrimitivos.NENHUM;
 
 
     //reposicionar um objeto
     public Escala(RetaGr O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.RETAS;
     }
 
     public Escala(PontoGr O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.PONTOS;
-    } como q ta? me manda foto no whats
+    } 
     public Escala(CircGr O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.CIRCULOS;
     }
-    public Escala(RetanguloGr O, double xT, double yT){
+    public Escala(RetanguloGr O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.RETANGULO;
     }
-    public Escala(PoligonoGr O, double xT, double yT){
+    public Escala(PoligonoGr O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.POLIGONO;
     }
-    public Escala(LinhaPoligonal O, double xT, double yT){
+    public Escala(LinhaPoligonal O, double mult){
         this.O = O;
-        this.xT = xT;
-        this.yT = yT;
+        this.mult = mult;
         tipo = TiposPrimitivos.LINHAPOLIGONAL;
     }
    public void GerarEscala(){
 
-    Ponto p1 = new Ponto();
-    Ponto p2 = new Ponto();
+    //Ponto p1 = new Ponto();
+    //Ponto p2 = new Ponto();
  
         
         if(tipo == TiposPrimitivos.PONTOS){
@@ -67,7 +63,6 @@ public class Escala {
             R.getP2().x = R.getP2().x * mult;
             R.getP2().y = R.getP2().y * mult;
         
-        chegou a pizza ja volto 
         }else if(tipo == TiposPrimitivos.CIRCULOS){
             CircGr C = (CircGr)O;
             C.getP1().x = C.getP1().x * mult; 
@@ -76,28 +71,26 @@ public class Escala {
             C.getP2().y = C.getP2().y * mult;
         }else if(tipo == TiposPrimitivos.RETANGULO){
             RetanguloGr Ret = (RetanguloGr)O;
-            Ret.getP1().x = Ret.getP1().x + xT;
-            Ret.getP1().y = Ret.getP1().y + yT;
-            Ret.getP2().x = Ret.getP2().x + xT;
-            Ret.getP2().y = Ret.getP2().y + yT;
+            Ret.getP1().x = Ret.getP1().x * mult;
+            Ret.getP1().y = Ret.getP1().y * mult;
+            Ret.getP2().x = Ret.getP2().x * mult;
+            Ret.getP2().y = Ret.getP2().y * mult;
         }else if(tipo == TiposPrimitivos.POLIGONO){
             PoligonoGr Poli = (PoligonoGr)O;
             for(RetaGr R : Poli.retas){
-                R.getP1().x = R.getP1().x + xT;
-                R.getP1().y = R.getP1().y + yT;
-                R.getP2().x = R.getP2().x + xT;
-                R.getP2().y = R.getP2().y + yT; 
+                R.getP1().x = R.getP1().x * mult;
+                R.getP1().y = R.getP1().y * mult;
+                R.getP2().x = R.getP2().x * mult;
+                R.getP2().y = R.getP2().y * mult; 
             }
         }else if(tipo == TiposPrimitivos.LINHAPOLIGONAL){
-            LinhaPoligonalGr LinhaPoli = (LinhaPoligonalGr)O;
+            LinhaPoligonalGr LinhaPoli = (LinhaPoligonalGr) O;
             for(RetaGr R : LinhaPoli.retas){
-                R.getP1().x = R.getP1().x + xT;
-                R.getP1().y = R.getP1().y + yT;
-                R.getP2().x = R.getP2().x + xT;
-                R.getP2().y = R.getP2().y + yT; 
+                R.getP1().x = R.getP1().x * mult;
+                R.getP1().y = R.getP1().y * mult;
+                R.getP2().x = R.getP2().x * mult;
+                R.getP2().y = R.getP2().y * mult; 
             }
         }
-
-        
     }
-}*/ 
+}

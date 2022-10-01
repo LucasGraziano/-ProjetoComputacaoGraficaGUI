@@ -11,6 +11,7 @@ import Tipos.Ponto.Ponto;
 public class RetaGr extends Reta {
     
     Color corReta = Color.BLACK; // cor do Reta
+    Color corInicial = Color.BLACK;
     String nomeReta = ""; // nome do Reta
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
@@ -51,7 +52,8 @@ public class RetaGr extends Reta {
         setX2(x2);
         setY1(y1);
         setY2(y2);
-        setCorReta(cor);     
+        setCorReta(cor);
+        corInicial = cor;
         setCorNomeReta(Color.black);     
         setNomeReta("");     
     }
@@ -400,6 +402,10 @@ public class RetaGr extends Reta {
             }         
         }
         return false;
+    }
+
+    public void resetCor(){
+        corReta = corInicial;
     }
 }
 

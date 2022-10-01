@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 
 import ED.Armazenamento;
 import PersistenciaArquivos.Persistencia;
+import TrasformacoesGeometricas.Escala;
+import TrasformacoesGeometricas.Rotacao;
 import TrasformacoesGeometricas.Translacao;
 
 import Tipos.Ponto.*;
@@ -49,7 +51,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     boolean verificar = false; // verificador
 
     String tipoSelecionado = ""; // tipo da seleção
-    int indiceSelecionado = 0; // indice da seleção
+    int indiceSelecionado = -1; // indice da seleção
 
     /**
      * Construtor do painel desenho
@@ -354,12 +356,15 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         
         
         Ponto aux = new Ponto(x, y);
-       
+        
 
         
         // seleção do ponto
         for (PontoGr ponto : arm.ArrayPonto) {
             if (ponto.calcularDistancia(aux) < 10) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "Ponto";
                 indiceSelecionado = arm.ArrayPonto.indexOf(ponto);
                 ponto.setCorPto(Color.RED);
@@ -372,6 +377,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         // seleção da reta
         for (RetaGr reta : arm.ArrayReta) {
             if (reta.retaSelect(aux)) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "Reta";
                 indiceSelecionado = arm.ArrayReta.indexOf(reta);
                 reta.setCorReta(Color.RED);
@@ -384,6 +392,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         // seleção da circulo
         for (CircGr circulo : arm.ArrayCirculo) {
             if (circulo.circSelect(aux)) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "Circulo";
                 indiceSelecionado = arm.ArrayCirculo.indexOf(circulo);
                 circulo.setCorCirc(Color.RED);
@@ -397,6 +408,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         for (RetanguloGr retangulo : arm.ArrayRetangulo) {
 
             if (retangulo.retanguloSelect(aux)) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "Retangulo";
                 indiceSelecionado = arm.ArrayRetangulo.indexOf(retangulo);
                 retangulo.setCorPto(Color.RED);
@@ -409,6 +423,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         // seleção poligono
         for (PoligonoGr poligono : arm.ArrayPoligono) {
             if (poligono.poligonoSelect(aux)) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "Poligono";
                 indiceSelecionado = arm.ArrayPoligono.indexOf(poligono);
                 poligono.setCorReta(Color.RED);
@@ -421,6 +438,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         // seleção linhaPoligonal
         for (LinhaPoligonalGr linhaPoligonal : arm.ArrayLinhaPoligonal) {
             if (linhaPoligonal.linhaPoligonalSelect(aux)) {
+                if(indiceSelecionado != -1){
+                    deselecionarForma(g);
+                }
                 tipoSelecionado = "LinhaPoligonal";
                 indiceSelecionado = arm.ArrayLinhaPoligonal.indexOf(linhaPoligonal);
                 linhaPoligonal.setCorReta(Color.RED);
@@ -430,6 +450,46 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             }
         }
 
+        if(indiceSelecionado != -1){
+            deselecionarForma(g);
+        }
+
+    }
+
+    public void deselecionarForma(Graphics g){
+        switch (tipoSelecionado) {
+            // caso para apagar o objeto ponto
+            case "Ponto":
+                arm.ArrayPonto.get(indiceSelecionado).resetCor();
+                arm.ArrayPonto.get(indiceSelecionado).desenharPonto(g);
+                break;
+            // caso para apagar o objeto reta
+            case "Reta":
+                arm.ArrayReta.get(indiceSelecionado).resetCor();
+                arm.ArrayReta.get(indiceSelecionado).desenharReta(g);
+                break;
+            // caso para apagar o objeto circulo
+            case "Circulo":
+                arm.ArrayCirculo.get(indiceSelecionado).resetCor();
+                arm.ArrayCirculo.get(indiceSelecionado).desenharCirc(g);
+                break;
+            // caso para apagar o objeto retangulo
+            case "Retangulo":
+                arm.ArrayRetangulo.get(indiceSelecionado).resetCor();
+                arm.ArrayRetangulo.get(indiceSelecionado).desenharRetangulo(g);
+                break;
+            // caso para apagar o objeto poligono
+            case "Poligono":
+                arm.ArrayPoligono.get(indiceSelecionado).resetCor();
+                arm.ArrayPoligono.get(indiceSelecionado).desenharPoligono(g);
+                break;
+            // caso para apagar o objeto Linha Poligonal
+            case "LinhaPoligonal":
+                arm.ArrayLinhaPoligonal.get(indiceSelecionado).resetCor();
+                arm.ArrayLinhaPoligonal.get(indiceSelecionado).desenharLinhaPoligonal(g);
+                break;
+        }
+        indiceSelecionado = -1;
     }
 
     /**
@@ -519,6 +579,96 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             case "LinhaPoligonal":
                 Translacao lp = new Translacao(arm.ArrayLinhaPoligonal.get(indiceSelecionado), xT, yT);
                 lp.GerarTranslacao();
+                arm.ArrayLinhaPoligonal.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+        }
+    }
+
+    public void PainelRotacao(double mult) {
+        switch (tipoSelecionado) {
+            // caso para apagar o objeto ponto
+            case "Ponto":
+                Rotacao p = new Rotacao(arm.ArrayPonto.get(indiceSelecionado), mult);
+                p.GerarRotacao();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto reta
+            case "Reta":
+                Rotacao r = new Rotacao(arm.ArrayReta.get(indiceSelecionado), mult);
+                r.GerarRotacao();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto circulo
+            case "Circulo":
+                Rotacao c = new Rotacao(arm.ArrayCirculo.get(indiceSelecionado), mult); 
+                c.GerarRotacao();
+                arm.ArrayCirculo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto retangulo
+            case "Retangulo":
+                Rotacao rt = new Rotacao(arm.ArrayRetangulo.get(indiceSelecionado), mult);
+                rt.GerarRotacao();
+                arm.ArrayRetangulo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto poligono
+            case "Poligono":
+                Rotacao pl = new Rotacao(arm.ArrayPoligono.get(indiceSelecionado), mult);
+                pl.GerarRotacao();
+                arm.ArrayPoligono.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto Linha Poligonal
+            case "LinhaPoligonal":
+                Rotacao lp = new Rotacao(arm.ArrayLinhaPoligonal.get(indiceSelecionado), mult);
+                lp.GerarRotacao();
+                arm.ArrayLinhaPoligonal.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+        }
+    }
+
+    public void PainelEscala(double mult) {
+        switch (tipoSelecionado) {
+            // caso para apagar o objeto ponto
+            case "Ponto":
+                Escala p = new Escala(arm.ArrayPonto.get(indiceSelecionado), mult);
+                p.GerarEscala();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto reta
+            case "Reta":
+                Escala r = new Escala(arm.ArrayReta.get(indiceSelecionado), mult);
+                r.GerarEscala();
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto circulo
+            case "Circulo":
+                Escala c = new Escala(arm.ArrayCirculo.get(indiceSelecionado), mult);
+                c.GerarEscala();
+                arm.ArrayCirculo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto retangulo
+            case "Retangulo":
+                Escala rt = new Escala(arm.ArrayRetangulo.get(indiceSelecionado), mult);
+                rt.GerarEscala();
+                arm.ArrayRetangulo.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto poligono
+            case "Poligono":
+                Escala pl = new Escala(arm.ArrayPoligono.get(indiceSelecionado), mult);
+                pl.GerarEscala();
+                arm.ArrayPoligono.get(indiceSelecionado);
+                tipoSelecionado = "";
+                break;
+            // caso para apagar o objeto Linha Poligonal
+            case "LinhaPoligonal":
+                Escala lp = new Escala(arm.ArrayLinhaPoligonal.get(indiceSelecionado), mult);
+                lp.GerarEscala();
                 arm.ArrayLinhaPoligonal.get(indiceSelecionado);
                 tipoSelecionado = "";
                 break;

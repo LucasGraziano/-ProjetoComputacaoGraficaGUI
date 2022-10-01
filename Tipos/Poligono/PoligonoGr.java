@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class PoligonoGr extends Poligono {
     
     Color corReta = Color.BLACK; // cor do Reta
+    Color corInicial = Color.BLACK;
     String nomeReta = ""; // nome do Reta
     Color corNomeReta  = Color.BLACK; // cor do nome (string) do Reta  
     int diametro = 1; // diametro do Reta, default = 1
@@ -45,9 +46,14 @@ public class PoligonoGr extends Poligono {
      */
     PoligonoGr(int x1, int y1, int x2, int  y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorReta(cor);     
+        setCorReta(cor);
+        corInicial = cor;
         setCorNomeReta(Color.black);     
         setNomeReta("");     
+    }
+
+    public void resetCor(){
+        corReta = corInicial;
     }
 
     /**

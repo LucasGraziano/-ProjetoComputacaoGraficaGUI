@@ -9,6 +9,7 @@ import Tipos.Ponto.Ponto;
 public class CircGr extends Circ {
 
     Color corCirc = Color.BLACK; // cor do ponto
+    Color corInicial = Color.BLACK;
     String nomeCirc = ""; // nome do ponto
     Color corNomeCirc  = Color.BLACK; // cor do nome (string) do ponto  
     int diametro = 1; // diametro do ponto, default = 1
@@ -23,7 +24,7 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorCirc(Color.black);     
+        setCorCirc(Color.black);
         setCorNomeCirc(Color.black);     
         setNomeCirc("");  
         setX1(x1);
@@ -41,14 +42,20 @@ public class CircGr extends Circ {
      */
     public CircGr(int x1, int y1, int x2, int y2, Color cor){
         super((double)x1, (double)y1, (double)x2, (double)y2);
-        setCorCirc(cor);     
+        setCorCirc(cor);
+        corInicial = cor;
         setCorNomeCirc(Color.black);     
-        setNomeCirc("");  
+        setNomeCirc("");
         setX1(x1);
         setX2(x2);
         setY1(y1);
         setY2(y2);   
     }
+
+    public void resetCor(){
+        corCirc = corInicial;
+    }
+
 
     /**
      * Construtor

@@ -47,6 +47,7 @@ public class Gui extends JFrame {
     //private JComboBox<String> boxSelect = new JComboBox(options);
     private JButton jbTranslacao = new JButton("Translacao");
     private JButton jbRotacao = new JButton("Rotacao"); 
+    private JButton jbEscala = new JButton("Escala"); 
     private JButton jbApagar = new JButton("Apagar");
     private JButton jbSalvar = new JButton("Salvar");
     private JButton jbLer = new JButton("Ler");
@@ -155,6 +156,7 @@ public class Gui extends JFrame {
         jbLer.addActionListener(eventos);
         jbTranslacao.addActionListener(eventos);
         jbRotacao.addActionListener(eventos);
+        jbEscala.addActionListener(eventos);
         jbApagar.addActionListener(eventos);
         //boxSelect.addItemListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
@@ -177,6 +179,7 @@ public class Gui extends JFrame {
         //barraComandos.add(boxSelect); 
         barraComandos.add(jbTranslacao);
         barraComandos.add(jbRotacao);
+        barraComandos.add(jbEscala); 
         barraComandos.add(jbApagar);
         barraComandos.add(jbSalvar);
         barraComandos.add(jbLer); 
@@ -270,6 +273,15 @@ public class Gui extends JFrame {
             }
             else if(event.getSource() == jbRotacao) { //rotacao nos prmitivos
                 tipo = TiposPrimitivos.ROTACAO;
+                JFrame f = new JFrame();
+                String g = JOptionPane.showInputDialog(f,"Enter Graus");
+                areaDesenho.PainelRotacao(Double.parseDouble(g));
+
+            }else if(event.getSource() == jbEscala) { //rotacao nos prmitivos
+                tipo = TiposPrimitivos.ROTACAO;
+                JFrame f = new JFrame();
+                String e = JOptionPane.showInputDialog(f,"Enter Multiplicador de Escala");
+                areaDesenho.PainelEscala(Double.parseDouble(e));
 
             }
             else if(event.getSource() == jbApagar) { //apagar prmitivos

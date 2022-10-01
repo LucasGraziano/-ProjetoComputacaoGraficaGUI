@@ -15,7 +15,7 @@ import GUI.Gui;
  */
 public class App {
     public static void main(String args[]) {
-       new Gui(1000, 600); // define dimensao da janela (em pixels)
+       new Gui(1300, 800); // define dimensao da janela (em pixels)
     }
     
 }

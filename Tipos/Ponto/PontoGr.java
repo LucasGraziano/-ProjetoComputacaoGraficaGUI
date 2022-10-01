@@ -16,6 +16,7 @@ import java.awt.Graphics;
  */
 public class PontoGr extends Ponto {
     Color corPto = Color.BLACK; // cor do ponto
+    Color corInicial = Color.BLACK;
     String nomePto = ""; // nome do ponto
     Color corNomePto  = Color.BLACK; // cor do nome (string) do ponto  
     int diametro = 1; // diametro do ponto, default = 1
@@ -28,7 +29,7 @@ public class PontoGr extends Ponto {
    public PontoGr(int x, int y){
         super((double)x, (double)y);
         setCorPto(Color.black);     
-        setCorNomePto(Color.black);     
+        setCorNomePto(Color.black);
         setNomePto("");     
     }
 
@@ -46,7 +47,8 @@ public class PontoGr extends Ponto {
      */
    public PontoGr(int x, int y, Color cor){
         super((double)x, (double)y);
-        setCorPto(cor);     
+        setCorPto(cor);
+        corInicial = cor;
         setCorNomePto(Color.black);     
         setNomePto("");     
     }
@@ -140,6 +142,10 @@ public class PontoGr extends Ponto {
      */
     public String getNomePto() {
         return nomePto;
+    }
+
+    public void resetCor(){
+        corPto = corInicial;
     }
 
     /**

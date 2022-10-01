@@ -2,21 +2,14 @@ package PersistenciaArquivos;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.awt.Color;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
 import javax.swing.JOptionPane;
-
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.json.JSONArray;
-
 import ED.Armazenamento;
 import GUI.FiguraPontos;
 import Tipos.Circulo.CircGr;
@@ -26,127 +19,159 @@ import Tipos.Ponto.Ponto;
 import Tipos.Ponto.PontoGr;
 import Tipos.Reta.RetaGr;
 import Tipos.Retangulo.RetanguloGr;
-
 import org.json.JSONException;
 
+/*
+ * construtor para salvar e ler arquivo em json
+ */
 public class Persistencia {
 
+    /**
+     * salva um arquivo em json
+     */
     public static void salvarArquivo() {
         
-        JSONObject jsonPai = new JSONObject();
-        JSONArray pontos = new JSONArray();
-        JSONArray retas = new JSONArray();
-        JSONArray circulos = new JSONArray();
-        JSONArray retangulos = new JSONArray();
-        JSONArray poligonos = new JSONArray();
-        JSONArray linhaspoligonais = new JSONArray();
+        //objects e arrays do json
+        JSONObject jsonPai = new JSONObject(); //objeto principal
+        JSONArray pontos = new JSONArray(); //array onde armazena os pontos
+        JSONArray retas = new JSONArray(); //array onde armazena as retas
+        JSONArray circulos = new JSONArray(); //array onde armazena os circulos
+        JSONArray retangulos = new JSONArray(); //array onde armazena os retangulos
+        JSONArray poligonos = new JSONArray(); //array onde armazena os poligonos
+        JSONArray linhaspoligonais = new JSONArray(); //array onde armazena as linhas poligonais
         
-        Armazenamento arm = FiguraPontos.arm;
+        Armazenamento arm = FiguraPontos.arm; //armazenamento
         try {
             // pega todos os pontos que estão na estrutura de dados
             //percorre a lista dos pontos
             for (PontoGr forma : arm.ArrayPonto) {
                 JSONObject pontoObj = new JSONObject();
-
+                
+                //adicionando p1
                 JSONObject p1 = new JSONObject();
-                p1.put("x", forma.getX()/1000);
-                p1.put("y", forma.getY()/600);
-
+                p1.put("x", forma.getX()/1300);
+                p1.put("y", forma.getY()/800);
+                
+                //adicicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorPto().getRed());
                 cor.put("g", forma.getCorPto().getGreen());
                 cor.put("b", forma.getCorPto().getBlue());
 
+                //colocando informacoes no pontoObj
                 pontoObj.put("p1", p1);
                 pontoObj.put("cor", cor);
 
+                //colocando informacoes em pontos
                 pontos.put(pontoObj);
             }
+            
+            //colocando no Objeto pai
             jsonPai.put("ponto", pontos);
 
             // pega todas as retas que estão na estrutura de dados
             for (RetaGr forma : arm.ArrayReta) {
                 JSONObject retaObj = new JSONObject();
 
+                //adicionando p1
                 JSONObject p1 = new JSONObject();
-                p1.put("x", forma.getX1()/1000);
-                p1.put("y", forma.getY1()/600);
+                p1.put("x", forma.getX1()/1300);
+                p1.put("y", forma.getY1()/800);
 
+                //adicionando p2
                 JSONObject p2 = new JSONObject();
-                p2.put("x", forma.getX2()/1000);
-                p2.put("y", forma.getY2()/600);
+                p2.put("x", forma.getX2()/1300);
+                p2.put("y", forma.getY2()/800);
 
+                //adicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorReta().getRed());
                 cor.put("g", forma.getCorReta().getGreen());
                 cor.put("b", forma.getCorReta().getBlue());
 
+                //colocando informacoes na retaObj
                 retaObj.put("p1", p1);
                 retaObj.put("p2", p2);
                 retaObj.put("cor", cor);
 
+                //colocando informacoes em retas
                 retas.put(retaObj);
             }
+            //colocando no Objeto pai
             jsonPai.put("reta", retas);
 
             // pega todas os circulos que estão na estrutura de dados
             for (CircGr forma : arm.ArrayCirculo) {
                 JSONObject circObj = new JSONObject();
-
+                
+                //adicionando p1
                 JSONObject p1 = new JSONObject();
-                p1.put("x", forma.getX1()/1000);
-                p1.put("y", forma.getY1()/600);
+                p1.put("x", forma.getX1()/1300);
+                p1.put("y", forma.getY1()/800);
 
+                //adicionando p2
                 JSONObject p2 = new JSONObject();
-                p2.put("x", forma.getX2()/1000);
-                p2.put("y", forma.getY2()/600);
+                p2.put("x", forma.getX2()/1300);
+                p2.put("y", forma.getY2()/800);
 
+                //adicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorCirc().getRed());
                 cor.put("g", forma.getCorCirc().getGreen());
                 cor.put("b", forma.getCorCirc().getBlue());
 
+                //colocando informacoes no circObj
                 circObj.put("p1", p1);
                 circObj.put("p2", p2);
                 circObj.put("cor", cor);
 
+                //colocando informacoes em circulo
                 circulos.put(circObj);
             }
+            //colocando no Objeto pai
             jsonPai.put("circulo", circulos);
 
             // pega todos os retangulos que estão na estrutura de dados
             for (RetanguloGr forma : arm.ArrayRetangulo) {
                 JSONObject retanguloObj = new JSONObject();
 
+                //adicionando p1
                 JSONObject p1 = new JSONObject();
-                p1.put("x", forma.getX1()/1000);
-                p1.put("y", forma.getY1()/600);
+                p1.put("x", forma.getX1()/1300);
+                p1.put("y", forma.getY1()/800);
 
+                //adicionando p2
                 JSONObject p2 = new JSONObject();
-                p2.put("x", forma.getX2()/1000);
-                p2.put("y", forma.getY1()/600);
+                p2.put("x", forma.getX2()/1300);
+                p2.put("y", forma.getY2()/800);
 
+                //adicionando p3
                 JSONObject p3 = new JSONObject();
-                p3.put("x", forma.getX1()/1000);
-                p3.put("y", forma.getY2()/600);
+                p3.put("x", forma.getX3()/1300);
+                p3.put("y", forma.getY3()/800);
 
+                //adicionando p4
                 JSONObject p4 = new JSONObject();
-                p4.put("x", forma.getX2()/1000);
-                p4.put("y", forma.getY2()/600);
+                p4.put("x", forma.getX4()/1300);
+                p4.put("y", forma.getY4()/800);
 
+                //adicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorPto().getRed());
                 cor.put("g", forma.getCorPto().getGreen());
                 cor.put("b", forma.getCorPto().getBlue());
 
+                //colocando informacoes no retanguloObj
                 retanguloObj.put("p1", p1);
                 retanguloObj.put("p2", p2);
                 retanguloObj.put("p3", p3);
                 retanguloObj.put("p4", p4);
                 retanguloObj.put("cor", cor);
 
+                //colocando informacoes em retangulo
                 retangulos.put(retanguloObj);
             }
+            //colocando no Objeto pai
             jsonPai.put("retangulo", retangulos);
 
             // pega todos os poligonos que estão na estrutura de dados
@@ -155,6 +180,7 @@ public class Persistencia {
 
                 JSONArray ponto = new JSONArray();
 
+                //adiciona todos os pontos do poligono
                 for(Ponto p : forma.getPontos()){
                     JSONObject objPonto = new JSONObject();
 
@@ -164,16 +190,20 @@ public class Persistencia {
                     ponto.put(objPonto);
                 }
                 
-
+                //adicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorReta().getRed());
                 cor.put("g", forma.getCorReta().getGreen());
                 cor.put("b", forma.getCorReta().getBlue());
 
+                //colocando informacoes no poligonoObj
                 poligonoObj.put("ponto", ponto);
                 poligonoObj.put("cor", cor);
+
+                //colocando informacoes em poligonos
                 poligonos.put(poligonoObj);
             }
+            //colocando no Objeto pai
             jsonPai.put("poligono", poligonos);
 
             // pega todas as linhas poligonais que estão na estrutura de dados
@@ -181,7 +211,7 @@ public class Persistencia {
                 JSONObject linhapoligonalObj = new JSONObject();
 
                 JSONArray ponto = new JSONArray();
-                
+                //adiciona todos os pontos da linha poligonal
                 for(Ponto p : forma.getPontos()){
                     JSONObject objPonto = new JSONObject();
 
@@ -190,17 +220,21 @@ public class Persistencia {
 
                     ponto.put(objPonto);
                 }
-                
+
+                //adicionando cor
                 JSONObject cor = new JSONObject();
                 cor.put("r", forma.getCorReta().getRed());
                 cor.put("g", forma.getCorReta().getGreen());
                 cor.put("b", forma.getCorReta().getBlue());
                 
+                //colocando informacoes na linhapoligonalObj
                 linhapoligonalObj.put("ponto", ponto);
                 linhapoligonalObj.put("cor", cor);
 
+                //colocando informacoes em linha poligonal
                 linhaspoligonais.put(linhapoligonalObj);
             }
+            //colocando no Objeto pai
             jsonPai.put("linha poligonal", linhaspoligonais);
 
             System.out.println(jsonPai);
@@ -266,7 +300,7 @@ public class Persistencia {
             int g = cor.getInt("g");
             int b = cor.getInt("b");
 
-            arm.ArrayPonto.add(new PontoGr((int) (x * 1000), (int) (y * 600), new Color(r, g, b), "p", 15));
+            arm.ArrayPonto.add(new PontoGr((int) (x * 1300), (int) (y * 800), new Color(r, g, b), "p", 15));
         }
 
         //adiciona as retas
@@ -287,7 +321,7 @@ public class Persistencia {
             int g = cor.getInt("g");
             int b = cor.getInt("b");
 
-            arm.ArrayReta.add(new RetaGr((int) (x1 * 1000), (int) (y1 * 600), (int) (x2 * 1000), (int) (y2 * 600), new Color(r, g, b), 15));
+            arm.ArrayReta.add(new RetaGr((int) (x1 * 1300), (int) (y1 * 800), (int) (x2 * 1300), (int) (y2 * 800), new Color(r, g, b), 15));
         }
 
         //adiciona os circulos
@@ -308,7 +342,7 @@ public class Persistencia {
             int g = cor.getInt("g");
             int b = cor.getInt("b");
 
-            arm.ArrayCirculo.add(new CircGr((int) (x1 * 1000), (int) (y1 * 600), (int) (x2 * 1000), (int) (y2 * 600), new Color(r, g, b), 15));
+            arm.ArrayCirculo.add(new CircGr((int) (x1 * 1300), (int) (y1 * 800), (int) (x2 * 1300), (int) (y2 * 800), new Color(r, g, b), 15));
         }
 
         //adiciona os retangulos
@@ -320,16 +354,24 @@ public class Persistencia {
             double x1 = p1.getDouble("x");
             double y1 = p1.getDouble("y");
 
+            JSONObject p2 = retanguloObj.getJSONObject("p2");
+            double x2 = p2.getDouble("x");
+            double y2 = p2.getDouble("y");
+
+            JSONObject p3 = retanguloObj.getJSONObject("p3");
+            double x3 = p3.getDouble("x");
+            double y3 = p3.getDouble("y");
+
             JSONObject p4 = retanguloObj.getJSONObject("p4");
-            double x2 = p4.getDouble("x");
-            double y2 = p4.getDouble("y");
+            double x4 = p4.getDouble("x");
+            double y4 = p4.getDouble("y");
 
             JSONObject cor = retanguloObj.getJSONObject("cor");
             int r = cor.getInt("r");
             int g = cor.getInt("g");
             int b = cor.getInt("b");
 
-            arm.ArrayRetangulo.add(new RetanguloGr((int) (x1 * 1000), (int) (y1 * 600), (int) (x2 * 1000), (int) (y2 * 600), new Color(r, g, b), 15));
+            arm.ArrayRetangulo.add(new RetanguloGr((int) (x1 * 1300), (int) (y1 * 800), (int) (x2 * 1300), (int) (y2 * 800), (int) (x3 * 1300), (int) (y3 * 800), (int) (x4 * 1300), (int) (y4 * 800), new Color(r, g, b)));
         }
 
         JSONArray poligonos = jObj.getJSONArray("poligono");
@@ -382,9 +424,5 @@ public class Persistencia {
                 arm.ArrayLinhaPoligonal.get(indexPol).adicionarReta(new Ponto(x1, y1), new Ponto(x2, y2));
             }
         }
-
-        
-
-        System.out.println(jObj.toString());
     }
 }
