@@ -43,8 +43,6 @@ public class Gui extends JFrame {
     private JButton jbCarregar = new JButton("Carregar");
     private JButton jbLimpar = new JButton("Limpar");
     private JButton jbSelecionar = new JButton("Selecionar");
-    private String options [] = { "Nenhum" ,"Apagar", "Translacao" , "Rotacao", "Escala"};
-    //private JComboBox<String> boxSelect = new JComboBox(options);
     private JButton jbTranslacao = new JButton("Translacao");
     private JButton jbRotacao = new JButton("Rotacao"); 
     private JButton jbEscala = new JButton("Escala"); 
@@ -158,7 +156,6 @@ public class Gui extends JFrame {
         jbRotacao.addActionListener(eventos);
         jbEscala.addActionListener(eventos);
         jbApagar.addActionListener(eventos);
-        //boxSelect.addItemListener(eventos);
         espessura.addChangeListener((ChangeListener)eventos);
     }
     /**
@@ -176,7 +173,6 @@ public class Gui extends JFrame {
         barraComandos.add(jbCor);
         barraComandos.add(jbCarregar);
         barraComandos.add(jbSelecionar);
-        //barraComandos.add(boxSelect); 
         barraComandos.add(jbTranslacao);
         barraComandos.add(jbRotacao);
         barraComandos.add(jbEscala); 
@@ -185,9 +181,6 @@ public class Gui extends JFrame {
         barraComandos.add(jbLer); 
         barraComandos.add(jbLimpar);
         barraComandos.add(espessura); 
-
-        //Pegar a opcao do boxSelect
-        //boxSelect.getSelectedItem().toString();
           
     }
     
@@ -195,36 +188,6 @@ public class Gui extends JFrame {
     
     private class Eventos implements ActionListener, ChangeListener{
         TiposPrimitivos tipo;
-        //função que representa a jComboBox
-       /*  public void itemStateChanged(ItemEvent itemEvent){
-            String opcao = boxSelect.getSelectedItem().toString();
-            switch(opcao){
-                case  "Nenhum":
-                 
-                break;
-
-                case "Apagar":
-                
-                break;
-
-                case "Translacao":
-                    tipo = TiposPrimitivos.TRANSLACAO;
-                    JFrame f = new JFrame();
-                    String xT = JOptionPane.showInputDialog(f,"Enter X");
-                    String yT = JOptionPane.showInputDialog(f,"Enter Y");
-                    areaDesenho.PainelTranslacao(Double.parseDouble(xT), Double.parseDouble(yT));
-                
-                break;
-
-                case "Rotacao":
-                
-                break;
-
-                case "Escala":
-                
-                break;   
-            }
-        }
         
         /**
          * construtor responsavel pela espessura

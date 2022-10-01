@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import Tipos.Ponto.Ponto;
 import Tipos.Ponto.PontoGr;
-import Tipos.Reta.RetaGr;
 
 
 
@@ -153,9 +152,6 @@ public class RetanguloGr extends Retangulo {
         setCorPto(cor);     
         setCorNomePto(cor);     
         setNomePto(""); 
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
         this.y2 = y1;
         x3 = x1;
         y3 = y2;
