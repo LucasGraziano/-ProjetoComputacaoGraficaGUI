@@ -4,9 +4,6 @@ import GUI.Gui;
  * Classe App
  * 
  * @author
- * MA4A
- * Igor Masson Calille - ra00297594
- * 
  * MA4B
  * Gustavo Scacchetti de Sousa - ra00301499
  * Julio Cesar Barboza Filho - ra00297586

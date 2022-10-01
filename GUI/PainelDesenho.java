@@ -456,6 +456,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
 
     }
 
+    /**
+     * tira a seleçao da forma
+     * @param g - conteudo grafico
+     */
     public void deselecionarForma(Graphics g){
         switch (tipoSelecionado) {
             // caso para apagar o objeto ponto
@@ -540,6 +544,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Respontavel por fazer a translacao
+     * @param xT - coordenada de xT
+     * @param yT - coordenada de yT
+     */
     public void PainelTranslacao(double xT, double yT) {
         switch (tipoSelecionado) {
             // caso para apagar o objeto ponto
@@ -585,6 +594,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Responsavel pela rotação
+     * @param mult - graus
+     */
     public void PainelRotacao(double mult) {
         switch (tipoSelecionado) {
             // caso para apagar o objeto ponto
@@ -630,6 +643,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Responsavel por fazer a escala
+     * @param mult - multiplicacao
+     */
     public void PainelEscala(double mult) {
         switch (tipoSelecionado) {
             // caso para apagar o objeto ponto
