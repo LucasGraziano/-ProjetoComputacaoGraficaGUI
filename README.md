@@ -51,6 +51,6 @@ Gustavo Scacchetti de Sousa RA: 00301499
 
   
 - Além dos primitivos, o projeto também fornece opções de "cor", "carregar", "selecionar", "translação", "rotação", "escala", "apagar", "salvar", "ler", "limpar":
-  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;
-  -Em contrução...
+  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;    
+  - Em contrução...
 
