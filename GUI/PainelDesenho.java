@@ -68,7 +68,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         this.addMouseMotionListener(this);
 
     }
-
+        //
     /**
      * 
      * @param tipo - da o set do tipo primitivo
