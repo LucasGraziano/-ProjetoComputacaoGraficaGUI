@@ -10,7 +10,7 @@ Igor Masson Calille RA: 00297594
 Gustavo Scacchetti de Sousa RA: 00301499  
 
 
--Este projeto está sendo confeccionado por meio de programação em Visual Studio, em união com BlueJ, toda a programação é única e exclusivamente em Java.
+- Este projeto está sendo confeccionado por meio de programação em Visual Studio, em união com BlueJ, toda a programação é única e exclusivamente em Java.
 
 - O projeto funciona como um App para gerar diversos tipos primitivos gráficos a partir de pontos, somente com conceitos e funções básicas, a fim de aumentar o aprendizado ao invés de ir direto para funções de otimização mais avançadas que simplificam o trabalho, são eles: 
   - Ponto;
@@ -50,7 +50,46 @@ Gustavo Scacchetti de Sousa RA: 00301499
   - A linha Poligonal possui um funcionamento similar ao polígono, a diferença principal é que ela não é fechada, logo, novamente o usuário realiza uma sequência de cliques com o botão esquerdo em vários pontos da tela, mas ao clicar com o direito desta vez, se encerra a criação da linha poligonal, já que nesse caso não se fecha a figura;
 
   
-- Além dos primitivos, o projeto também fornece opções de "cor", "carregar", "selecionar", "translação", "rotação", "escala", "apagar", "salvar", "ler", "limpar":
-  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;    
-  - Em contrução...
-
+- Além dos primitivos, o projeto também fornece opções de:
+  - Cor;
+  - Carregar;
+  - Selecionar;
+  - Translação;
+  - Rotação;
+  - Escala;
+  - Apagar
+  - Salvar;
+  - Ler;
+  - Limpar;  
+  
+  
+- **Cor**:
+  - A opção da cor, ao ser selecionada, mostra um menu para o usuário (seguindo a biblioteca Jcolor) onde se pode alterar a cor dos diversos desenhos do projeto;  
+      
+- **Carregar**:
+  - Esta opção, como o próprio nome diz, carrega uma tela que antes teve seus primitivos gráficos retirados com a opção "limpar";
+  
+- **Selecionar**:
+  - A opção de selecionar destaca um primitivo gráfico de escolha do usuário, esta opção é utilizada para que o usuário escolha qual primitivo irá apagar ou transformar geometricamente;
+  
+- **Translação**:
+  - Esta opção realiza a transformação geométrica de translação; 
+  
+- **Rotação**:
+  - Esta opção realiza a transformação geométrica de rotação; 
+  
+- **Escala**:
+  - Esta opção realiza a transformação geométrica de escala;
+  
+- **Apagar**:
+  - Esta opção apaga o primitivo gráfico selecionado;
+  
+- **Salvar**:
+  - A opção de salvar está relacionada à persistência de arquivos, ao selecionar esta opção, um arquivo .json é criado com todos os primitivos que foram desenhados;
+  
+- **Ler**:
+  - A opção de ler serve para ler outros arquivos .json que seguem o mesmo padrão determinado pela implementação;
+  
+- **Limpar**:
+  - A opção de limpar retira todos os primitivos gráficos da tela, sem apagá-los, para que seja possível visualizar novamente na opção "carregar";
+        
