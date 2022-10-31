@@ -227,7 +227,7 @@ public class CircGr extends Circ {
         g.setColor(getCorCirc());
         double x = getP1().getX(), y = getP1().getY(); // x e y do clique
         double x2 = getP2().getX(), y2 = getP2().getY(); // x e y do clique
-        double ang = 0.0; // angulo a ser encrementado
+        double ang = 0.0; // angulo a ser incrementado
         double xP = 0, yP = 0; // x e y a serem pintados
         double catAd, catOp; //cateto adjacente e cateto oposto
         double raio = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2) * 1.0); // raio do circulo (distancia entre os pontos dos cliques)
@@ -263,7 +263,7 @@ public class CircGr extends Circ {
     public boolean circSelect(Ponto p){
         double x = getP1().getX(), y = getP1().getY(); // x e y do clique
         double x2 = getP2().getX(), y2 = getP2().getY(); // x e y do clique
-        double ang = 0.0; // angulo a ser encrementado
+        double ang = 0.0; // angulo a ser incrementado
         double xP = 0, yP = 0; // x e y a serem pintados
         double catAd, catOp; //cateto adjacente e cateto oposto
         double raio = Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2) * 1.0); // raio do circulo (distancia entre os pontos dos cliques)

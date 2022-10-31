@@ -9,6 +9,7 @@ import Tipos.Ponto.Ponto;
 import Tipos.Ponto.PontoGr;
 import Tipos.Reta.RetaGr;
 import Tipos.Retangulo.RetanguloGr;
+import Tipos.Cubo.CuboGr;
 
 
 /**
@@ -136,6 +137,24 @@ public class FiguraPontos {
                         LinhaPoligonalGr p = arm.ArrayLinhaPoligonal.get(poligono_aux);
                         p.adicionarReta(g, new Ponto(x1, y1), new Ponto(x2, y2));
                 }      
+        }
+
+        /**
+         * Funcao responsavel para o desenho o cubo 
+         * 
+         * @param g - conteudo grafico
+         * @param x1 - primeiro x da coordenada
+         * @param y1 - primeiro y da coordenada
+         * @param diametro - diametro da bolinha
+         * @param color - cor da reta
+         */
+        public static void desenharCubo(Graphics g, int x1, int y1, double aresta, int diametro, Color cor) {
+                
+                CuboGr p = new CuboGr(x1, y1, (int)aresta, cor, diametro);
+                //cubo_aux = arm.ArrayLinhaPoligonal.size();
+                //arm.setArrayCubo(p);
+                p.desenharCubo(g);
+                
         }
 
         /**

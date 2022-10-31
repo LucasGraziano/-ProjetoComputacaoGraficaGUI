@@ -39,6 +39,7 @@ public class Gui extends JFrame {
     private JButton jbRetangulo = new JButton("Retangulo");
     private JButton jbPoligono = new JButton("Poligono");
     private JButton jbLinhaPoligonal = new JButton("LinhaPoligonal");
+    private JButton jbCubo = new JButton("Cubo");
     private JButton jbCor = new JButton("Cor");
     private JButton jbCarregar = new JButton("Carregar");
     private JButton jbLimpar = new JButton("Limpar");
@@ -146,6 +147,7 @@ public class Gui extends JFrame {
         jbRetangulo.addActionListener(eventos);
         jbPoligono.addActionListener(eventos);
         jbLinhaPoligonal.addActionListener(eventos);
+        jbCubo.addActionListener(eventos);
         jbCor.addActionListener(eventos);
         jbCarregar.addActionListener(eventos);
         jbLimpar.addActionListener(eventos);
@@ -170,6 +172,7 @@ public class Gui extends JFrame {
         barraComandos.add(jbRetangulo);
         barraComandos.add(jbPoligono);
         barraComandos.add(jbLinhaPoligonal);
+        barraComandos.add(jbCubo);
         barraComandos.add(jbCor);
         barraComandos.add(jbCarregar);
         barraComandos.add(jbSelecionar);
@@ -217,6 +220,12 @@ public class Gui extends JFrame {
                 
             } else if(event.getSource() == jbLinhaPoligonal) { // fazer linha poligonal
                 tipo = TiposPrimitivos.LINHAPOLIGONAL;
+
+            } else if(event.getSource() == jbCubo) { // fazer cubo
+                tipo = TiposPrimitivos.CUBO;
+                JFrame f = new JFrame();
+                String c = JOptionPane.showInputDialog(f,"Tamanho da aresta:");
+                areaDesenho.setAresta(Double.parseDouble(c));
 
             }else if(event.getSource() == jbCor) {  // mudar a cor
                 tipo = TiposPrimitivos.COR;

@@ -240,7 +240,7 @@ public class Persistencia {
             System.out.println(jsonPai);
             try {
                 FileWriter file = new FileWriter(
-                        "C:/Users/lucas/Desktop/Teste8000/PersistenciaArquivos/Json/teste.json");
+                        "C:/Users/ra00297851/Desktop/-ProjetoComputacaoGraficaGUI/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
                 file.write(jsonPai.toString());
                 file.close();
             } catch (IOException e) {
@@ -259,7 +259,7 @@ public class Persistencia {
         FileReader fr = null;
         
         //caminho do arquivo
-        file = new File("C:/Users/lucas/Desktop/Teste8000/PersistenciaArquivos/Json/teste.json");
+        file = new File("C:/Users/ra00297851/Desktop/-ProjetoComputacaoGraficaGUI/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
         if (!file.exists()) { //testa para ver se o arquivo existe
             JOptionPane.showInputDialog("Arquivo inexistente");
         }
@@ -274,6 +274,7 @@ public class Persistencia {
                 teste += teste1;
                 System.out.println(teste1);
             }
+            
 
         } catch(FileNotFoundException ex) {
             JOptionPane.showInputDialog("Arquivo inexistente:");

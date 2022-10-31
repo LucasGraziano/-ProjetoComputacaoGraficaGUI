@@ -11,7 +11,6 @@ import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 
 import ED.Armazenamento;
-import PersistenciaArquivos.Persistencia;
 import TrasformacoesGeometricas.Escala;
 import TrasformacoesGeometricas.Rotacao;
 import TrasformacoesGeometricas.Translacao;
@@ -40,6 +39,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     TiposPrimitivos tipo; // tipos primitivos
     int xMouse, yMouse;// pega as coordenadas quando clicar o botao do mouse
     int xMouse2, yMouse2; // pega as coordenadas quando soltar o botao do mouse
+    double aresta; //aresta do cobo
     boolean primeiraVez = true; // verificador de primeiro clique
     Color currentColor = Color.BLACK; // cor
     PontoGr aux2 = new PontoGr();
@@ -92,6 +92,14 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         if (!primeiraVez) {
             desenharPrimitivos(g);
         }
+    }
+
+    public void setAresta(double aresta){
+        this.aresta = aresta;
+    }
+    
+    public double getAresta() {
+        return this.aresta;
     }
 
     // Capturando os Eventos com o mouse
@@ -259,6 +267,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             FiguraPontos.desenharLinhaPoligonal(g, xMouse, yMouse, xMouse2, yMouse2, valorEsp, currentColor);
         }
 
+        else if (tipo == TiposPrimitivos.CUBO) {
+
+            FiguraPontos.desenharCubo(g, xMouse, yMouse, getAresta(), valorEsp, currentColor);
+        }
+
         // opcao de redesenhar formas
         else if (tipo == TiposPrimitivos.CARREGAR) {
             carregarFormas(g);
@@ -271,11 +284,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             SelectFormas(g, xMouse, yMouse);
 
         } else if (tipo == TiposPrimitivos.SALVAR) {
-            Persistencia.salvarArquivo();
+            PersistenciaArquivos.Persistencia.salvarArquivo();
             //repaint();
         }
         else if (tipo == TiposPrimitivos.LER) {
-            Persistencia.lerArquivo();
+            PersistenciaArquivos.Persistencia.lerArquivo();
+            carregarFormas(g);
             //repaint();
         }
         // opcao de nenhuma seleção
