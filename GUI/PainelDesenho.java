@@ -21,6 +21,7 @@ import Tipos.Circulo.*;
 import Tipos.Retangulo.*;
 import Tipos.Poligono.*;
 import Tipos.LinhaPoligonal.*;
+import Tipos.Cubo.*;
 
 /**
  * Classe do painel de desenhos
@@ -353,6 +354,13 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         // pega todas as linhas poligonais que estão na estrutura de dados
         for (LinhaPoligonalGr forma : arm.ArrayLinhaPoligonal) {
             forma.desenharLinhaPoligonal(g);
+        }
+
+        // pega todas os cubos que estão na estrutura de dados
+        for (CuboGr forma : arm.ArrayCubo){
+            System.out.print(forma.getP1().getX() + " - " + forma.getP1().getY());
+            forma.desenharCubo(g);
+            
         }
 
     }

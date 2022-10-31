@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Tipos.Ponto.*;
 import Tipos.Reta.*;
 import Tipos.Circulo.*;
+import Tipos.Cubo.CuboGr;
 import Tipos.Retangulo.*;
 import Tipos.Poligono.*;
 import Tipos.LinhaPoligonal.*;
@@ -21,6 +22,7 @@ public class Armazenamento {
     public int indexRetangulo;
     public int indexPoligono;
     public int indexLinhaPoligonal;
+    public int indexCubo;
 
     //Ponto criado para indentificar o final da lista
     //PontoGr PontoNeutro = new PontoGr();
@@ -36,6 +38,7 @@ public class Armazenamento {
     public ArrayList<RetanguloGr> ArrayRetangulo;
     public ArrayList<PoligonoGr> ArrayPoligono;
     public ArrayList<LinhaPoligonalGr> ArrayLinhaPoligonal;
+    public ArrayList<CuboGr> ArrayCubo;
     
     /**
      * Quando a classe for instanciada os indexadores e as listas serão inicializados
@@ -48,6 +51,7 @@ public class Armazenamento {
         indexRetangulo = 0;
         indexPoligono = 0;
         indexLinhaPoligonal = 0;
+        indexCubo = 0;
 
         ArrayPonto = new ArrayList<PontoGr>();
         ArrayReta = new ArrayList<RetaGr>();
@@ -55,6 +59,7 @@ public class Armazenamento {
         ArrayRetangulo = new ArrayList<RetanguloGr>();
         ArrayPoligono = new ArrayList<PoligonoGr>();
         ArrayLinhaPoligonal = new ArrayList<LinhaPoligonalGr>();
+        ArrayCubo = new ArrayList<CuboGr>();
 
         PontosNeutro.setX1(-1);
         PontosNeutro.setY1(-1);
@@ -220,11 +225,44 @@ public class Armazenamento {
         return valor;
     }
 
+    public void setArrayCubo(CuboGr cubo){
+        ArrayCubo.add(cubo);
+        indexCubo++;
+        setIndexCubo(indexCubo);
+    }
+
+     /**
+     * busca uma linha poligonal na lista
+     * @return valor - valor referido na lista
+     */
+    public CuboGr getArrayCubo(){
+        indexCubo--;
+        setIndexCubo(indexCubo);
+        CuboGr valor;
+        if(indexCubo >= 0){//Controle para verificar se existem dados no array
+            valor = ArrayCubo.get(getIndexCubo());
+            ArrayCubo.remove(indexCubo);
+        }else valor = null;
+
+        return valor;
+    }
+    
+
     //setters e getters
     /**
     * pega o contador do IndexPonto
     * @return indexPonto
     */
+    public int getIndexCubo() {
+        return this.indexCubo;
+    }
+    /**
+     * seta o contador do IndexPonto
+     */
+    public void setIndexCubo(int indexCubo) {
+        this.indexCubo = indexCubo;
+    }
+
     public int getIndexPonto() {
         return this.indexPonto;
     }

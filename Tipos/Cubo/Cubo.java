@@ -8,6 +8,7 @@ import Tipos.Ponto.Ponto_3D;
 public class Cubo {
     // Atributos da reta
     private Ponto_3D p1, p2, p3, p4, p5, p6, p7, p8;
+    double aresta;
     /**
      * Construtor dos objetos da classe Circ
      * @param x - coordenada do x
@@ -181,6 +182,22 @@ public class Cubo {
      */
     public Ponto_3D getP8(){
         return this.p8;
+    }
+
+    /**
+     * 
+     * @param p - aresta
+     */
+    public void setAresta(double aresta){
+        this.aresta = aresta;
+    }
+    
+    /**
+     * 
+     * @return ponto
+     */
+    public double getAresta(){
+        return this.aresta;
     }
 
 }

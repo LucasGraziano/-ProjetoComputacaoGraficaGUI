@@ -31,7 +31,8 @@ public class CuboGr extends Cubo {
         setX1(x1);
         setY1(y1);
         setZ1(0);
-        setAresta(aresta);   
+        setAresta(aresta);  
+        setDiametro(10); 
     }
 
     /**
@@ -49,7 +50,9 @@ public class CuboGr extends Cubo {
         setNomeCubo("");
         setX1(x1);
         setY1(y1);
-        setAresta(aresta);   
+        setZ1(0);
+        setAresta(aresta);
+        setDiametro(10);
     }
 
     public void resetCor(){
@@ -70,7 +73,9 @@ public class CuboGr extends Cubo {
         setDiametro(diametro);
         setX1(x1);
         setY1(y1);
+        setZ1(0);
         setAresta(aresta);
+        setDiametro(10);
     }
     
     /**
@@ -87,7 +92,9 @@ public class CuboGr extends Cubo {
         setNomeCubo(nomePonto);
         setX1(x1);
         setY1(y1);
+        setZ1(0);
         setAresta(aresta);
+        setDiametro(10);
     }
     
     /**
@@ -105,7 +112,9 @@ public class CuboGr extends Cubo {
         setNomeCubo(str); 
         setX1(x1);
         setY1(y1);
-        setAresta(aresta);    
+        setZ1(0);
+        setAresta(aresta);
+        setDiametro(10);
     }
 
     /**
@@ -121,6 +130,7 @@ public class CuboGr extends Cubo {
         setNomeCubo(""); 
         setX1(x1);
         setY1(y1);
+        setZ1(0);
         setAresta(aresta);    
     }
 
@@ -224,10 +234,13 @@ public class CuboGr extends Cubo {
      * @param y2 - coordenada do raio
      */
     public void desenharCubo(Graphics g){
+        System.out.println("Desenhando cubo: " + getX1() + " " + getY1() + " " + getAresta());
+
         g.setColor(getCorCubo());
         double x1 = getX1(), y1 = getY1(), z1 = getZ1(); // x e y do clique, ponto inicial do cubo (esquerda inferior)
         double aresta = getAresta();
         Cubo cubo = new Cubo(x1, y1, z1);
+        cubo.setAresta(aresta);
         Ponto_3D novoPonto = new Ponto_3D();
        
        //Quadrado Frente

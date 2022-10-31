@@ -151,8 +151,7 @@ public class FiguraPontos {
         public static void desenharCubo(Graphics g, int x1, int y1, double aresta, int diametro, Color cor) {
                 
                 CuboGr p = new CuboGr(x1, y1, (int)aresta, cor, diametro);
-                //cubo_aux = arm.ArrayLinhaPoligonal.size();
-                //arm.setArrayCubo(p);
+                arm.setArrayCubo(p);
                 p.desenharCubo(g);
                 
         }
@@ -167,5 +166,6 @@ public class FiguraPontos {
                 arm.setIndexReta(0);
                 arm.setIndexPoligono(0);
                 arm.setIndexLinhaPoligonal(0);
+                arm.setIndexCubo(0);
         }
 }

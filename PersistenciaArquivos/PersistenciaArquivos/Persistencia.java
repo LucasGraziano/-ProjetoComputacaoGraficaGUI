@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import ED.Armazenamento;
 import GUI.FiguraPontos;
 import Tipos.Circulo.CircGr;
+import Tipos.Cubo.CuboGr;
 import Tipos.LinhaPoligonal.LinhaPoligonalGr;
 import Tipos.Poligono.PoligonoGr;
 import Tipos.Ponto.Ponto;
@@ -39,6 +40,7 @@ public class Persistencia {
         JSONArray retangulos = new JSONArray(); //array onde armazena os retangulos
         JSONArray poligonos = new JSONArray(); //array onde armazena os poligonos
         JSONArray linhaspoligonais = new JSONArray(); //array onde armazena as linhas poligonais
+        JSONArray cubo = new JSONArray(); //array onde armazena as linhas poligonais
         
         Armazenamento arm = FiguraPontos.arm; //armazenamento
         try {
@@ -174,6 +176,84 @@ public class Persistencia {
             //colocando no Objeto pai
             jsonPai.put("retangulo", retangulos);
 
+            for (CuboGr forma : arm.ArrayCubo) {
+                JSONObject cuboObj = new JSONObject();
+
+                //adicionando p1
+                JSONObject p1 = new JSONObject();
+                p1.put("x", forma.getP1().getX()/1300);
+                p1.put("y", forma.getP1().getY()/800);
+                p1.put("z", forma.getP1().getZ());
+
+                //adicionando p2
+               /* JSONObject p2 = new JSONObject();
+                p2.put("x", forma.getP2().getX()/1300);
+                p2.put("y", forma.getP2().getY()/800);
+                p2.put("z", forma.getP2().getZ());
+
+                //adicionando p3
+                JSONObject p3 = new JSONObject();
+                p3.put("x", forma.getP3().getX()/1300);
+                p3.put("y", forma.getP3().getY()/800);
+                p3.put("z", forma.getP3().getZ());
+
+                //adicionando p4
+                JSONObject p4 = new JSONObject();
+                p4.put("x", forma.getP4().getX()/1300);
+                p4.put("y", forma.getP4().getY()/800);
+                p4.put("z", forma.getP4().getZ());
+                
+                JSONObject p5 = new JSONObject();
+                p5.put("x", forma.getP5().getX()/1300);
+                p5.put("y", forma.getP5().getY()/800);
+                p5.put("z", forma.getP5().getZ());
+                
+                JSONObject p6 = new JSONObject();
+                p6.put("x", forma.getP6().getX()/1300);
+                p6.put("y", forma.getP6().getY()/800);
+                p6.put("z", forma.getP6().getZ());
+                
+                JSONObject p7 = new JSONObject();
+                p7.put("x", forma.getP7().getX()/1300);
+                p7.put("y", forma.getP7().getY()/800);
+                p7.put("z", forma.getP7().getZ());
+
+                //adicionando p8
+                JSONObject p8 = new JSONObject();
+                p8.put("x", forma.getP8().getX()/1300);
+                p8.put("y", forma.getP8().getY()/800);
+                p8.put("z", forma.getP8().getZ());
+*/
+
+                //adicionando aresta
+                JSONObject aresta = new JSONObject();
+                aresta.put("aresta", forma.getAresta());
+                
+                //adicionando cor
+                JSONObject cor = new JSONObject();
+                cor.put("r", forma.getCorCubo().getRed());
+                cor.put("g", forma.getCorCubo().getGreen());
+                cor.put("b", forma.getCorCubo().getBlue());
+
+                //colocando informacoes no retanguloObj
+                cuboObj.put("p1", p1);
+                /*cuboObj.put("p2", p2);
+                cuboObj.put("p3", p3);
+                cuboObj.put("p4", p4);
+                cuboObj.put("p5", p5);
+                cuboObj.put("p6", p6);
+                cuboObj.put("p7", p7);
+                cuboObj.put("p8", p8);*/
+                cuboObj.put("aresta", aresta);
+                cuboObj.put("cor", cor);
+
+                //colocando informacoes em retangulo
+                cubo.put(cuboObj);
+            }
+            //colocando no Objeto pai
+            jsonPai.put("cubo", cubo);
+
+
             // pega todos os poligonos que estão na estrutura de dados
             for (PoligonoGr forma : arm.ArrayPoligono) {
                 JSONObject poligonoObj = new JSONObject();
@@ -240,7 +320,7 @@ public class Persistencia {
             System.out.println(jsonPai);
             try {
                 FileWriter file = new FileWriter(
-                        "C:/Users/ra00297851/Desktop/-ProjetoComputacaoGraficaGUI/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
+                        "C:/Users/lucas/Desktop/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
                 file.write(jsonPai.toString());
                 file.close();
             } catch (IOException e) {
@@ -259,7 +339,7 @@ public class Persistencia {
         FileReader fr = null;
         
         //caminho do arquivo
-        file = new File("C:/Users/ra00297851/Desktop/-ProjetoComputacaoGraficaGUI/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
+        file = new File("C:/Users/lucas/Desktop/-ProjetoComputacaoGraficaGUI/PersistenciaArquivos/Json/teste.json");
         if (!file.exists()) { //testa para ver se o arquivo existe
             JOptionPane.showInputDialog("Arquivo inexistente");
         }
@@ -274,7 +354,7 @@ public class Persistencia {
                 teste += teste1;
                 System.out.println(teste1);
             }
-            
+            br.close();
 
         } catch(FileNotFoundException ex) {
             JOptionPane.showInputDialog("Arquivo inexistente:");
@@ -424,6 +504,27 @@ public class Persistencia {
 
                 arm.ArrayLinhaPoligonal.get(indexPol).adicionarReta(new Ponto(x1, y1), new Ponto(x2, y2));
             }
+        }
+
+        JSONArray cubo = jObj.getJSONArray("cubo");
+        for (int i=0; i < cubo.length(); i++) {
+            JSONObject cuboObj = cubo.getJSONObject(i);
+
+            JSONObject p1 = cuboObj.getJSONObject("p1");
+            double x1 = p1.getDouble("x");
+            double y1 = p1.getDouble("y");
+
+            JSONObject aresta = cuboObj.getJSONObject("aresta");
+            double aresta1 = aresta.getDouble("aresta");
+
+            JSONObject cor = cuboObj.getJSONObject("cor");
+            int r = cor.getInt("r");
+            int g = cor.getInt("g");
+            int b = cor.getInt("b");
+
+            System.out.println(x1 + " " + y1);
+
+            arm.ArrayCubo.add(new CuboGr((int) (x1 * 1300), (int) (y1 * 800), (int)aresta1, new Color(r, g, b)));
         }
     }
 }
