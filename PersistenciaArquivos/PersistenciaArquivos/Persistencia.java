@@ -185,46 +185,6 @@ public class Persistencia {
                 p1.put("y", forma.getP1().getY()/800);
                 p1.put("z", forma.getP1().getZ());
 
-                //adicionando p2
-               /* JSONObject p2 = new JSONObject();
-                p2.put("x", forma.getP2().getX()/1300);
-                p2.put("y", forma.getP2().getY()/800);
-                p2.put("z", forma.getP2().getZ());
-
-                //adicionando p3
-                JSONObject p3 = new JSONObject();
-                p3.put("x", forma.getP3().getX()/1300);
-                p3.put("y", forma.getP3().getY()/800);
-                p3.put("z", forma.getP3().getZ());
-
-                //adicionando p4
-                JSONObject p4 = new JSONObject();
-                p4.put("x", forma.getP4().getX()/1300);
-                p4.put("y", forma.getP4().getY()/800);
-                p4.put("z", forma.getP4().getZ());
-                
-                JSONObject p5 = new JSONObject();
-                p5.put("x", forma.getP5().getX()/1300);
-                p5.put("y", forma.getP5().getY()/800);
-                p5.put("z", forma.getP5().getZ());
-                
-                JSONObject p6 = new JSONObject();
-                p6.put("x", forma.getP6().getX()/1300);
-                p6.put("y", forma.getP6().getY()/800);
-                p6.put("z", forma.getP6().getZ());
-                
-                JSONObject p7 = new JSONObject();
-                p7.put("x", forma.getP7().getX()/1300);
-                p7.put("y", forma.getP7().getY()/800);
-                p7.put("z", forma.getP7().getZ());
-
-                //adicionando p8
-                JSONObject p8 = new JSONObject();
-                p8.put("x", forma.getP8().getX()/1300);
-                p8.put("y", forma.getP8().getY()/800);
-                p8.put("z", forma.getP8().getZ());
-*/
-
                 //adicionando aresta
                 JSONObject aresta = new JSONObject();
                 aresta.put("aresta", forma.getAresta());
@@ -237,13 +197,6 @@ public class Persistencia {
 
                 //colocando informacoes no retanguloObj
                 cuboObj.put("p1", p1);
-                /*cuboObj.put("p2", p2);
-                cuboObj.put("p3", p3);
-                cuboObj.put("p4", p4);
-                cuboObj.put("p5", p5);
-                cuboObj.put("p6", p6);
-                cuboObj.put("p7", p7);
-                cuboObj.put("p8", p8);*/
                 cuboObj.put("aresta", aresta);
                 cuboObj.put("cor", cor);
 
@@ -506,6 +459,7 @@ public class Persistencia {
             }
         }
 
+        //adiciona cubo
         JSONArray cubo = jObj.getJSONArray("cubo");
         for (int i=0; i < cubo.length(); i++) {
             JSONObject cuboObj = cubo.getJSONObject(i);

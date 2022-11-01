@@ -131,7 +131,7 @@ public class CuboGr extends Cubo {
         setX1(x1);
         setY1(y1);
         setZ1(0);
-        setAresta(aresta);    
+        setAresta(aresta);  
     }
 
     public void setX1(double x1){
