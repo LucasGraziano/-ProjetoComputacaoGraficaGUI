@@ -93,3 +93,9 @@ Gustavo Scacchetti de Sousa RA: 00301499
 - **Limpar**:
   - A opção de limpar retira todos os primitivos gráficos da tela, sem apagá-los, para que seja possível visualizar novamente na opção "carregar";
         
+- **Segue abaixo um vídeo do projeto em funcionamento**:  
+  
+    
+
+https://user-images.githubusercontent.com/54064857/199346450-8e2f5088-2fce-41aa-a7f1-7500c2a1c49c.mp4
+
